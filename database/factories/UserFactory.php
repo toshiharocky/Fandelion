@@ -19,6 +19,7 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
+        'memstatus_id' => 1,
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => Hash::make('99999999'),
