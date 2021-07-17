@@ -16,14 +16,14 @@ class BookingTableSeeder extends Seeder
     {
         //
         
-        for ($i=1; $i<3001; $i++){
+        for ($i=1; $i<1001; $i++){
             
             // user_idはUser::all()ランダム
             $user = User::all()->random()->id;
             
             
             // gym_id=$i
-            $gym_id = rand(1,500);
+            $gym_id = rand(1,100);
             $gym_infos = Gym::where('id', $gym_id)->get();
             
             
@@ -35,7 +35,7 @@ class BookingTableSeeder extends Seeder
             $status_check_to = 2;
             while($status_check_from != 1 || $status_check_to != 1){
                 // 96スロットのうち、1~80のどれか1つを選択する（翌日分に行くのを防ぐため）⇨$r
-                $r = rand(37,1000);
+                $r = rand(1,500);
                 $q = $r + 1;
                 $status_check_from = $gym_schedule[$r]->status;
                 $status_check_to = $gym_schedule[$q]->status;
