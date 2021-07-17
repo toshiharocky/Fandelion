@@ -33,8 +33,8 @@ $factory->define(App\Gym::class, function (Faker $faker) {
         'pref' => "東京都",
         'addr' => $faker->city(),
         'strt' => $faker->streetAddress(),
-        'longitude' => $faker->longitude(139.6, 139.75) ,
-        'latitude' => $faker->latitude(35.5, 35.7) ,
+        'longitude' => $faker->longitude(139.65, 139.7) ,
+        'latitude' => $faker->latitude(35.55, 35.65) ,
         'area' => function() {
             return rand(1,5);
         },

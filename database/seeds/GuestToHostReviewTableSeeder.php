@@ -15,7 +15,7 @@ class GuestToHostReviewTableSeeder extends Seeder
     public function run()
     {
         //
-        for($i=1; $i<2001; $i++){
+        for($i=1; $i<301; $i++){
             $booking_id = $i;
             $equipment_stars = rand(3,5);
             $cleanliness_stars = rand(3,5);

@@ -32,11 +32,11 @@ class GymScheduleTableSeeder extends Seeder
         //         ]);
         // }
         
-        for ($i=1; $i<501; $i++){
-            $from_time = "2021-07-16 00:00";
-            $to_time = "2021-07-16 00:15";
+        for ($i=1; $i<101; $i++){
+            $from_time = "2021-07-18 00:00";
+            $to_time = "2021-07-18 00:15";
             // 今日に日付から30日間、from_time00:00からto_time00:15まで、15分ずつのpriceとstatusを作成
-            while (strtotime($from_time) < strtotime("2021-08-01 00:00")){
+            while (strtotime($from_time) < strtotime("2021-07-26 00:00")){
                 $price_array = array(50,100,150,200);
                 $r = array_rand($price_array);
                 $price = $price_array[$r];
