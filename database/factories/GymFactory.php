@@ -15,11 +15,12 @@ $factory->define(App\Gym::class, function (Faker $faker) {
         'cancel_policy_id' => function() {
             return rand(1,4);
         },
-        'gymstatus_id' => function(){
-            $gymstatus_id = array(1,4,7);
-            $r = array_rand($gymstatus_id);
-            return $gymstatus_id[$r];
-        },
+        // 'gymstatus_id' => function(){
+        //     $gymstatus_id = array(1,4,7);
+        //     $r = array_rand($gymstatus_id);
+        //     return $gymstatus_id[$r];
+        // },
+        'gymstatus_id' => 1;
         'gym_title' => function(){
             $gym_title_id = array("初心者におすすめ","充実した設備でトレーニングを！","リラックスできる空間で楽しくフィットネス！","駅から徒歩3分！","仕事帰りにフラッと立ち寄れます");
             $r = array_rand($gym_title_id);
@@ -27,10 +28,7 @@ $factory->define(App\Gym::class, function (Faker $faker) {
         },
         'gym_desc' => $faker->realText(400),
         'gymType_id' => function() {
-            $gym_types = array(5, 15, 25);
-            $r = rand(0,2);
-            return $gym_types[$r]; //heroku用
-            // return rand(1,3); //clooud9用
+            return rand(1,3);
         },
         'zip_code' => $faker->postcode(7),
         'pref' => "東京都",
@@ -45,7 +43,7 @@ $factory->define(App\Gym::class, function (Faker $faker) {
             // return rand(1,5); //clooud9用
         },
         'guest_gender' => function() {
-            return rand(1,5); //cloud9用
+            return rand(1,5); 
         },
         'superHost_flg' => function() {
             return rand(0,1);
