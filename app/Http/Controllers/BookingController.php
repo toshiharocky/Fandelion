@@ -172,7 +172,7 @@ class BookingController extends Controller
         // dd($schedule_ids);   
         
         $from_time = date("Y-m-d H:i", strtotime($date." ".$booking_from_time));
-        $to_time = date("Y-m-d H:i", strtotime('+15 minute',strtotime($from_time)));
+        $to_time = date("Y-m-d H:i", strtotime($date." ".$booking_to_time));
         // dd($from_time);
         
         // Bookingテーブルに作成

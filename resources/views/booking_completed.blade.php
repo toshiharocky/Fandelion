@@ -15,7 +15,7 @@
 				<i class="fa fa-check-circle"></i>
 				<h2 class="margin-top-30">Thanks for your booking!</h2>
 				<p>You'll receive a confirmation email at mail@example.com</p>
-				<a href="dashboard-invoice.html" class="button margin-top-30">View Invoice</a>
+				<a href="history" class="button margin-top-30">履歴に戻る</a>
 			</div>
 
 		</div>

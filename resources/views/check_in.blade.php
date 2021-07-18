@@ -16,7 +16,7 @@
 				<h2 class="margin-top-30">チェックインが完了しました！</h2>
 				<h3 class="margin-top-30">{{$user_name}}さん、良いトレーニングを!!</h3>
 				<p>You'll receive a confirmation email at mail@example.com</p>
-				<a href="dashboard-invoice.html" class="button margin-top-30">チェックアウトする</a>
+				<a href="history" class="button margin-top-30">チェックアウトする</a>
 			</div>
 
 		</div>

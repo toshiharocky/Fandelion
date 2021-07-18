@@ -86,8 +86,8 @@ class GymController extends Controller
         
         // guest_genderの希望を表示
         $guest_gender_flg  = $gym_infos[0]->guest_gender;
-        if($guest_gender_flg == "5"){ //heroku用
-        // if($guest_gender_flg == "1"){ //cloud9用
+        
+        if($guest_gender_flg == "1"){ 
            $guest_gender = ""; 
         } else {
            
@@ -529,6 +529,8 @@ class GymController extends Controller
              $gyms->area = $request->area;
              $gyms->guest_gender = $request->guest_gender;
              $gyms->guest_limit = $request->guest_limit;
+             $gyms->gymstatus_id = 1;
+             $gyms->superHost_flg = 0;
              $gyms->save(); 
              $gym_id = $gyms->id;
             //  dd($gyms);

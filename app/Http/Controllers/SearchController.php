@@ -79,6 +79,7 @@ class SearchController extends Controller
             ->where('longitude', '<', $longitude_to)
             ->get();
         
+        // dd($gyms);
         
         
         $search_amount = count($gyms);
