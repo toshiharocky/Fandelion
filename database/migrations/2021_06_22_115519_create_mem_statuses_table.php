@@ -14,7 +14,7 @@ class CreateMemStatusesTable extends Migration
     public function up()
     {
         Schema::create('mem_statuses', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->Integer('id');
             $table->string('status_name');
             $table->timestamps();
         });

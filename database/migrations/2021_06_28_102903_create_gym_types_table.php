@@ -14,7 +14,7 @@ class CreateGymTypesTable extends Migration
     public function up()
     {
         Schema::create('gym_types', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->Integer('id');
             $table->string('gym_type');
             $table->timestamps();
         });

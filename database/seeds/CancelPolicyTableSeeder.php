@@ -13,18 +13,22 @@ class CancelPolicyTableSeeder extends Seeder
     {
         \DB::table('cancel_policies')->insert([
         [
+            'id' => 1,
             'policy_name' => '柔軟',
             'policy_desc' => 'チェックイン（確認メールに記載の日時）の1時間前までは無料でキャンセルできます。',
          ],
         [
+            'id' => 2,
             'policy_name' => '普通',
             'policy_desc' => 'チェックイン（確認メールに記載の日時）の24時間前までは無料でキャンセルできます。',
          ],
         [
+            'id' => 3,
             'policy_name' => '厳格',
             'policy_desc' => 'チェックイン（確認メールに記載の日時）の3日前までは無料でキャンセルできます。',
          ],
         [
+            'id' => 4,
             'policy_name' => 'かなり厳格',
             'policy_desc' => 'チェックイン（確認メールに記載の日時）の7日前までは無料でキャンセルできます。',
          ],

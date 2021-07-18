@@ -27,7 +27,10 @@ $factory->define(App\Gym::class, function (Faker $faker) {
         },
         'gym_desc' => $faker->realText(400),
         'gymType_id' => function() {
-            return rand(1,3);
+            $gym_types = array(5, 15, 25);
+            $r = rand(0,2);
+            return $gym_types[$r]; //heroku用
+            // return rand(1,3); //clooud9用
         },
         'zip_code' => $faker->postcode(7),
         'pref' => "東京都",
@@ -36,12 +39,12 @@ $factory->define(App\Gym::class, function (Faker $faker) {
         'longitude' => $faker->longitude(139.65, 139.7) ,
         'latitude' => $faker->latitude(35.55, 35.65) ,
         'area' => function() {
-            return rand(1,5);
+            $gym_area = array(5, 15, 25, 35, 45);
+            $r = rand(0,4);
+            return $gym_area[$r]; //heroku用
+            // return rand(1,5); //clooud9用
         },
         'guest_gender' => function() {
-            // $gender_select = array(5, 15, 25, 35, 45);
-            // $r = rand(0,4);
-            // return $gender_select[$r]; //heroku用
             return rand(1,5); //cloud9用
         },
         'superHost_flg' => function() {

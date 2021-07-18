@@ -14,7 +14,7 @@ class CreateCancelPoliciesTable extends Migration
     public function up()
     {
         Schema::create('cancel_policies', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->Integer('id');
             $table->string('policy_name');
             $table->string('policy_desc');
             $table->timestamps();
