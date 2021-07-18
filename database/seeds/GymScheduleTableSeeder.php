@@ -32,8 +32,8 @@ class GymScheduleTableSeeder extends Seeder
         //         ]);
         // }
         
-        for($i=5; $i<2000; $i+=10){ //heroku用
-        // for($i=1; $i<201; $i++){ //cloud9用
+        // for($i=5; $i<2000; $i+=10){ //heroku用
+        for($i=1; $i<201; $i++){ //cloud9用
             $day_start_time = "2021-07-22 10:00";
             $from_time = $day_start_time;
             $to_time = date("Y-m-d H:i", strtotime('+15 minute',strtotime($from_time)));
