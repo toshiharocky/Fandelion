@@ -15,8 +15,8 @@ class BookingTableSeeder extends Seeder
     public function run()
     {
         //
-        
-        for ($i=1; $i<1001; $i++){
+        for ($i=5; $i<10005; $i+=10){ //cloud9用
+        // for ($i=1; $i<1001; $i++){ //cloud9用
             
             // user_idはUser::all()ランダム
             $user = User::all()->random()->id;
@@ -26,7 +26,7 @@ class BookingTableSeeder extends Seeder
             $gym_id = Gym::all()->random()->id;
             $gym_infos = Gym::where('id', $gym_id)->get();
             
-            
+            $booking_id = $i;
             
             // gym_schedulesから、gym_id=$gym_idのものを引っ張る
             $gym_schedule = GymSchedule::where('gym_id', $gym_id)->get();
@@ -35,7 +35,7 @@ class BookingTableSeeder extends Seeder
             $status_check_to = 2;
             while($status_check_from != 1 || $status_check_to != 1){
                 // 96スロットのうち、1~80のどれか1つを選択する（翌日分に行くのを防ぐため）⇨$r
-                $r = rand(1,500);
+                $r = rand(1,150);
                 $q = $r + 1;
                 $status_check_from = $gym_schedule[$r]->status;
                 $status_check_to = $gym_schedule[$q]->status;
@@ -140,10 +140,12 @@ class BookingTableSeeder extends Seeder
                     
             $from_schedule_status = GymSchedule::find($from_id);
             $from_schedule_status->status = '2';
+            $from_schedule_status->booking_id = $booking_id;
             $from_schedule_status->save();
             
             $to_schedule_status = GymSchedule::find($to_id);
             $to_schedule_status->status = '2';
+            $to_schedule_status->booking_id = $booking_id;
             $to_schedule_status->save();
             
             

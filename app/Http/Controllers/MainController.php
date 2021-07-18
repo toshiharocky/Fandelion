@@ -49,7 +49,7 @@ class MainController extends Controller
                             ->get()[0]->img_url;
                 
             }
-            
+            // dd($gym_id[0]);
             // dd($review_average[0]);
             // dd($gym_image_url[0]);
             

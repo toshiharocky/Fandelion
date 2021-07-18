@@ -478,6 +478,8 @@
 <!--<script src="{{ asset('js/〇〇.js') }}"></script>-->
 
 <script>
+	console.log({{$gym_id}});
+	console.log(review_user_name);
 	const guest_gender = '{{$guest_gender}}';
 	if(guest_gender != ""){
 		$(document).ready(function(){

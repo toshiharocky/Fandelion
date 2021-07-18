@@ -114,19 +114,27 @@ class GymController extends Controller
         // レビュー数をカウントする
         $review_count = count($reviews[0]);
         
-        // レビューユーザーとノートのの配列を取得する
-        for($i=0; $i<$review_count; $i++){
-            $review_user[] = $reviews[0][$i]->user_id;
-            $user_name[] = $reviews[0][$i]->name;
-            $booking_from_time = $reviews[0][$i]->booking_from_time;
-            $book_year_month[] = date("M Y", strtotime($booking_from_time));
-            $review_note[] = $reviews[0][$i]->note;
-            $user_total_stars[] = $reviews[0][$i]->total_stars;
+        if($review_count > 0){
+            // レビューユーザーとノートのの配列を取得する
+            for($i=0; $i<$review_count; $i++){
+                $review_user[] = $reviews[0][$i]->user_id;
+                $review_user_name[] = $reviews[0][$i]->name;
+                $booking_from_time = $reviews[0][$i]->booking_from_time;
+                $book_year_month[] = date("M Y", strtotime($booking_from_time));
+                $review_note[] = $reviews[0][$i]->note;
+                $user_total_stars[] = $reviews[0][$i]->total_stars;
+            }
+            // dd($review_user);
+            // dd($review_note);
+            // dd($reviews);
+        }else {
+            $review_user = 0;
+            $review_user_name = 0;
+            $booking_from_time = 0;
+            $book_year_month = 0;
+            $review_note = 0;
+            $user_total_stars = 0;
         }
-        // dd($review_user);
-        // dd($review_note);
-        // dd($reviews);
-        
         
         // レビューの年月を取得する
         
@@ -139,23 +147,32 @@ class GymController extends Controller
         $accuracy_stars = 0;
         $communication_stars = 0;
         
-        for($i=0; $i<$review_count; $i++){
-         $total_review += $reviews[0][$i]->total_stars;
-         $equipment_stars += $reviews[0][$i]->equipment_stars;
-         $cleanliness_stars += $reviews[0][$i]->cleanliness_stars;
-         $accuracy_stars += $reviews[0][$i]->accuracy_stars;
-         $communication_stars += $reviews[0][$i]->communication_stars;
+        if($review_count > 0){
+            for($i=0; $i<$review_count; $i++){
+             $total_review += $reviews[0][$i]->total_stars;
+             $equipment_stars += $reviews[0][$i]->equipment_stars;
+             $cleanliness_stars += $reviews[0][$i]->cleanliness_stars;
+             $accuracy_stars += $reviews[0][$i]->accuracy_stars;
+             $communication_stars += $reviews[0][$i]->communication_stars;
+            }
+            
+            $review_average  = round($total_review / $review_count, 3);
+            $equipment_stars_average  = round($equipment_stars / $review_count, 3);
+            $cleanliness_stars_average  = round($cleanliness_stars / $review_count, 3);
+            $accuracy_stars_average  = round($accuracy_stars / $review_count, 3);
+            $communication_stars_average  = round($communication_stars / $review_count, 3);
+            $review_check = array($review_average, $equipment_stars_average, $cleanliness_stars_average, $accuracy_stars_average, $communication_stars_average);
+            // dd($total_review);
+            // dd($review_average);
+            // dd($review_check);
+        }else {
+            $review_average  = 0;
+            $equipment_stars_average  = 0;
+            $cleanliness_stars_average  = 0;
+            $accuracy_stars_average  = 0;
+            $communication_stars_average  = 0;
+            $review_check = "";
         }
-        
-        $review_average  = round($total_review / $review_count, 3);
-        $equipment_stars_average  = round($equipment_stars / $review_count, 3);
-        $cleanliness_stars_average  = round($cleanliness_stars / $review_count, 3);
-        $accuracy_stars_average  = round($accuracy_stars / $review_count, 3);
-        $communication_stars_average  = round($communication_stars / $review_count, 3);
-        $review_check = array($review_average, $equipment_stars_average, $cleanliness_stars_average, $accuracy_stars_average, $communication_stars_average);
-        // dd($total_review);
-        // dd($review_average);
-        // dd($review_check);
         
         
         $superHost_flg  = $gym_infos[0]->superHost_flg;
@@ -180,6 +197,7 @@ class GymController extends Controller
                     ->where('gym_id',$gym_id)
                     ->get();
         $gym_schedule_count = count($gym_schedule);
+        // dd($gym_schedule);
         
         for($i=0; $i<$gym_schedule_count; $i++){
             $gym_from_times_str = [$gym_schedule[$i]->from_time][0];
@@ -277,7 +295,7 @@ class GymController extends Controller
                     'guest_gender' => $guest_gender,
                     'superHost_flg' => $superHost_flg,
                     'review_user_id' => $review_user,
-                    'review_user_name' => $user_name,
+                    'review_user_name' => $review_user_name,
                     'user_total_stars' => $user_total_stars,
                     'booking_from_time' => $booking_from_time,
                     'book_year_month' => $book_year_month,
@@ -324,7 +342,7 @@ class GymController extends Controller
                     'guest_gender' => $guest_gender,
                     'superHost_flg' => $superHost_flg,
                     'review_user_id' => $review_user,
-                    'review_user_name' => $user_name,
+                    'review_user_name' => $review_user_name,
                     'user_total_stars' => $user_total_stars,
                     'booking_from_time' => $booking_from_time,
                     'book_year_month' => $book_year_month,
@@ -371,7 +389,7 @@ class GymController extends Controller
                 'guest_gender' => $guest_gender,
                 'superHost_flg' => $superHost_flg,
                 'review_user_id' => $review_user,
-                'review_user_name' => $user_name,
+                'review_user_name' => $review_user_name,
                 'user_total_stars' => $user_total_stars,
                 'booking_from_time' => $booking_from_time,
                 'book_year_month' => $book_year_month,

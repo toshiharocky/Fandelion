@@ -607,6 +607,7 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 		let openingtimes = $.grep(gym_open_times, function(elem,index){
 			return (elem.date == date);
 		});
+		console.log(openingtimes);
 		
 		$("#action_suggest").empty();
 		$("#action_suggest").append(
