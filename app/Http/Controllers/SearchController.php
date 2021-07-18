@@ -79,10 +79,11 @@ class SearchController extends Controller
             ->where('longitude', '<', $longitude_to)
             ->get();
         
-        // dd($gyms);
+        
         
         $search_amount = count($gyms);
         // dd($search_amount);
+        
         
         foreach($gyms as $gym){
                 $gym_id[] = $gym->id;
@@ -144,7 +145,7 @@ class SearchController extends Controller
                 
             }
             
-            
+            // dd($reviews);
             // 各ジムのレビュー数をカウントする
                 $gym_count = count($gym_id);
                 
