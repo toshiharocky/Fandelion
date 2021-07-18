@@ -762,7 +762,7 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			// heroku用
 			let dev_class_amount = last_dev_class - first_dev_class + 10;
 			// cloud9用
-			let dev_class_amount = last_dev_class - first_dev_class + 1;
+			// let dev_class_amount = last_dev_class - first_dev_class + 1;
 			
 			
 			
