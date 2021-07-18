@@ -12,7 +12,7 @@ class GymTableSeeder extends Seeder
     public function run()
     {
         
-        $gyms = factory(App\Gym::class, 100)->create();
+        $gyms = factory(App\Gym::class, 200)->create();
     //     \DB::table('gyms')->insert([
     //     [
     //         'user_id' => '1',

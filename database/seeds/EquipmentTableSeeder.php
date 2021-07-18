@@ -15,7 +15,7 @@ class EquipmentTableSeeder extends Seeder
         //
         // $equipment = factory(App\Equipment::class, 1200)->create();
         
-        for($i=1; $i<101; $i++){
+        for($i=5; $i<995; $i+=5){
         
             // $gym_images = factory(App\GymImage::class, 600)->create();
             $equipment_array = array('ダンベル','バーベル','ベンチプレス','スクワットラック','スミスマシン','トレッドミル','エアロバイク');

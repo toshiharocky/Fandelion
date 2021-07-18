@@ -23,7 +23,7 @@ class BookingTableSeeder extends Seeder
             
             
             // gym_id=$i
-            $gym_id = rand(1,100);
+            $gym_id = Gym::all()->random()->id;
             $gym_infos = Gym::where('id', $gym_id)->get();
             
             
