@@ -13,12 +13,15 @@ class GymTypeTableSeeder extends Seeder
     {
         \DB::table('gym_types')->insert([
         [
+            'id' => 1,
             'gym_type' => '個室'
          ],
         [
+            'id' => 2,
             'gym_type' => '住宅全体'
          ],
         [
+            'id' => 3,
             'gym_type' => 'シェアスペース'
          ],
     ]);
