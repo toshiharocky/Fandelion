@@ -14,7 +14,7 @@ class CreateGuestGendersTable extends Migration
     public function up()
     {
         Schema::create('guest_genders', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->Integer('id');
             $table->string('guest_gender');
             $table->timestamps();
         });

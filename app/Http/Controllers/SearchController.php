@@ -53,17 +53,17 @@ class SearchController extends Controller
         // $menなし、$womenなし⇨guest_genderはすべて
         if($men != 0){
             if($women == 0){
-                $guest_gender_select = [5, 25, 45]; //heroku用
-                // $guest_gender_select = [1, 3, 5]; //cloud9用
+                // $guest_gender_select = [5, 25, 45]; //heroku用
+                $guest_gender_select = [1, 3, 5]; //cloud9用
             }else{
-                $guest_gender_select = [5, 35, 45]; //heroku用
-                // $guest_gender_select = [1, 4, 5]; //cloud9用
+                // $guest_gender_select = [5, 35, 45]; //heroku用
+                $guest_gender_select = [1, 4, 5]; //cloud9用
             }
         }else if($women != 0){
-                $guest_gender_select = [5, 15, 35]; //heroku用
-                // $guest_gender_select = [1, 2, 4]; //cloud9用
+                // $guest_gender_select = [5, 15, 35]; //heroku用
+                $guest_gender_select = [1, 2, 4]; //cloud9用
             }else{
-                $guest_gender_select = [5, 15, 25, 35, 45]; //heroku用
+                // $guest_gender_select = [5, 15, 25, 35, 45]; //heroku用
                 // $guest_gender_select = [1, 2, 3, 4, 5]; //cloud9用
             }
         
