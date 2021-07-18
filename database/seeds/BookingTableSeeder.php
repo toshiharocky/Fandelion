@@ -15,8 +15,8 @@ class BookingTableSeeder extends Seeder
     public function run()
     {
         //
-        // for ($i=5; $i<10005; $i+=10){ //heroku用
-        for ($i=1; $i<1001; $i++){ //cloud9用
+        for ($i=5; $i<10005; $i+=10){ //heroku用
+        // for ($i=1; $i<1001; $i++){ //cloud9用
             
             // user_idはUser::all()ランダム
             $user = User::all()->random()->id;

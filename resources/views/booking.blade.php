@@ -497,48 +497,26 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 		let gender_check = "OK";
 		
 		switch(guest_gender_flg){
-			<!--// heroku用-->
-			<!--	case 15:-->
-			<!--		if(men != 0){-->
-			<!--			gender_check = "NG";-->
-			<!--		}-->
-			<!--		break;-->
-			<!--	case 25:-->
-			<!--		if(women != 0){-->
-			<!--			gender_check = "NG";-->
-			<!--		}-->
-			<!--		break;-->
-			<!--	case 35:-->
-			<!--		if(men != 0 && women == 0){-->
-			<!--			gender_check = "NG";-->
-			<!--		}-->
-			<!--		break;-->
-			<!--	case 45:-->
-			<!--		if(women != 0 && men == 0){-->
-			<!--			gender_check = "NG";-->
-			<!--		}-->
-			<!--		break;-->
-			// cloud9用
-				case 2:
-					if(men != 0){
-						gender_check = "NG";
-					}
-					break;
-				case 3:
-					if(women != 0){
-						gender_check = "NG";
-					}
-					break;
-				case 4:
-					if(men != 0 && women == 0){
-						gender_check = "NG";
-					}
-					break;
-				case 5:
-					if(women != 0 && men == 0){
-						gender_check = "NG";
-					}
-					break;
+			case 2:
+				if(men != 0){
+					gender_check = "NG";
+				}
+				break;
+			case 3:
+				if(women != 0){
+					gender_check = "NG";
+				}
+				break;
+			case 4:
+				if(men != 0 && women == 0){
+					gender_check = "NG";
+				}
+				break;
+			case 5:
+				if(women != 0 && men == 0){
+					gender_check = "NG";
+				}
+				break;
 		}
 		
 		// genderの希望と合っていない時にアラート
