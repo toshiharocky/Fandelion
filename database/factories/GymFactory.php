@@ -39,7 +39,8 @@ $factory->define(App\Gym::class, function (Faker $faker) {
             return rand(1,5);
         },
         'guest_gender' => function() {
-            return rand(1,4);
+            return array_rand(5, 15, 25, 35, 45) //heroku用
+            // return rand(1,4); //cloud9用
         },
         'superHost_flg' => function() {
             return rand(0,1);
