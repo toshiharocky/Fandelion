@@ -12,7 +12,7 @@ class GymImageTableSeeder extends Seeder
     public function run()
     {
         //
-        for($i=5; $i<995; $i+=5){
+        for($i=5; $i<995; $i+=10){
         
             // $gym_images = factory(App\GymImage::class, 600)->create();
             $img_array = array(
