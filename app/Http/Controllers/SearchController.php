@@ -87,6 +87,13 @@ class SearchController extends Controller
         // 検索結果がゼロの場合、no_results.blade.phpへ
         if($search_amount == 0){
             if (Auth::check()){
+                $user = Auth::user()->id;
+                $user_name =  Auth::user()->name;
+                $status_names = DB::table('users')
+                                    ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
+                                    ->select('name', 'status_name')
+                                    ->get();
+                $status_name = $status_names[1]->status_name;
                 return view('no_results',[
                     'user_name'=>$user_name,
                     'status_name'=>$status_name,
