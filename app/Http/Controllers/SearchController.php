@@ -79,11 +79,22 @@ class SearchController extends Controller
             ->where('longitude', '<', $longitude_to)
             ->get();
         
-        // dd($gyms);
+        
         
         
         $search_amount = count($gyms);
-        // dd($search_amount);
+        
+        // 検索結果がゼロの場合、no_results.blade.phpへ
+        if($search_amount == 0){
+            if (Auth::check()){
+                return view('no_results',[
+                    'user_name'=>$user_name,
+                    'status_name'=>$status_name,
+                    ]);
+            }else {
+                return view('no_results');
+            }
+        }
         
         
         foreach($gyms as $gym){
