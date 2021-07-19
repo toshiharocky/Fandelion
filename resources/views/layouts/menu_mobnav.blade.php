@@ -423,12 +423,65 @@
 <main class="py-4">
     @yield('content')
 
+
 <!-- Copyrights -->
 <div class="col-md-12">
 	<div class="copyrights">© 2021 Fandelion. All Rights Reserved.</div>
 </div>
-</main>
+
 <!-- Copyrights / End-->
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+
+</div>
+
+<!-- Mobile Navigation -->
+<nav class="mobile-nav mmenu-trigger">
+	<div class="mmenu_icon">
+		<a href="/" class="mmenus">
+			<span class="material-icons-outlined " style="font-size: 42px; margin: auto; color: black; font-weight: bold;">
+				search
+			</span>
+			<p class="icon-disc" style="color: black; font-weight: bold;">さがす</p>
+		</a>
+	</div>
+	<div class="mmenu_icon">
+		<a href="#" class="mmenus">
+			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
+				favorite_border
+			</span>
+			<p class="icon-disc">お気に入り</p>
+		</a>
+	</div>
+	<div class="mmenu_icon">
+		<a href="#" class="mmenus">
+			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
+				fitness_center
+			</span>
+			<p class="icon-disc">トレーニング</p>
+		</a>
+	</div>
+	<div class="mmenu_icon">
+		<a href="#" class="mmenus">
+			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
+				chat_bubble_outline
+			</span>
+			<p class="icon-disc">メッセージ</p>
+		</a>
+	</div>
+	<div class="mmenu_icon">
+		<a href="#" class="mmenus">
+			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
+				account_circle
+			</span>
+			<p class="icon-disc">プロフィール</p>
+		</a>
+	</div>
+</nav>
+<!-- Mobile Navigation End-->
+</main>
 @stack('js')
 </body>
 </html>

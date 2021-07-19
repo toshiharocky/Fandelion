@@ -171,4 +171,41 @@ class MainController extends Controller
     {
         //
     }
+    
+    
+    public function does_not_exist()
+    {
+        //
+        if (Auth::check()){
+            $user = Auth::user()->id;
+            // dd($user);
+            // $gym_title = Gym::where('user_id',$user)->first()->title;
+            // $gym_title = DB::table('gyms')
+            //                 ->join('users', 'gyms.user_id', '=', 'users.id')
+            //                 // ->select('user_id','email','title', 'gym_desc')
+            //                 ->where('user_id', $user)
+            //                 ->first()->email;
+            // dd($gym_title);
+            $user_name =  Auth::user()->name;
+            // $user_memstatus_id = Auth::user()->memstatus_id;
+            $status_names = DB::table('users')
+                                ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
+                                ->select('name', 'status_name')
+                                ->get();
+            $status_name = $status_names[1]->status_name;
+            
+            // dd($status_name);
+            
+            
+            return view('pages-404',[
+                'user_name'=>$user_name,
+                'status_name'=>$status_name,
+                ]);
+            } else{
+            return view('pages-404');
+            }
+        
+        
+        
+    }
 }

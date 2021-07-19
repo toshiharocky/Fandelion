@@ -1,4 +1,4 @@
-@extends('layouts.menu')
+@extends('layouts.menu_mobnav')
 
 @push('css')
     <!--<link href="{{ asset('css/〇〇.css') }}" rel="stylesheet">-->
@@ -32,10 +32,6 @@
 </div>
 
 
-<!-- Copyrights -->
-<div class="col-md-12">
-	<div class="copyrights">© 2021 Listeo. All Rights Reserved.</div>
-</div>
 </div>
 
 
@@ -156,7 +152,8 @@ function future(){
                     				<div class="inner">
                     					<h3>${gym_title[$i]}</h3>
                     					<span>${addr[$i]}</span>
-                    					<form method="put" action="booked_gym_introduction">
+                    					<form method="post" action="booked_gym_introduction">
+                    					@csrf
                             		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                             		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
                         					<div style="text-align:center;">
@@ -204,12 +201,14 @@ function future(){
                     		if(now < cancel_limit){
                     		    $(cancel_id).append(
                     		        `
-                    		        <form method="put" action="booking_update">
+                    		        <form method="post" action="booking_update">
+                    		        @csrf
                         		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                         		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
                         		        <input type="submit" class="button gray" style="width:100%; height:35px;" value="予約の修正">
                     		        </from>
-                    		        <form method="put" action="booked_gym_introduction">
+                    		        <form method="post" action="booking_cancel">
+                    		        @csrf
                         		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                         		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
                             			<input type="submit" class="button gray" style="width:100%; height:35px;" value="予約のキャンセル">
@@ -347,7 +346,8 @@ function past(){
                     				<div class="inner">
                     					<h3>${gym_title[$i]}</h3>
                     					<span>${addr[$i]}</span>
-                    					<form method="put" action="booked_gym_introduction">
+                    					<form method="post" action="booked_gym_introduction">
+                    					@csrf
                             		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                             		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
                         					<div style="text-align:center;">

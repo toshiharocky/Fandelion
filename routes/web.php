@@ -74,7 +74,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 // ログインユーザーのみ、予約したジム情報の画面を表示する
 Route::group(['middleware' => 'auth'], function() {
-   Route::get('/booked_gym_introduction','GymController@index'); // コントローラー未作成
+   Route::post('/booked_gym_introduction','GymController@index'); // コントローラー未作成
 });
 
 
@@ -103,4 +103,15 @@ Route::group(['middleware' => 'auth'], function() {
 // ログインユーザーのみ、ブックマークを登録 or 削除する
 Route::group(['middleware' => 'auth'], function() {
    Route::post('/bookmark','BookmarkController@store'); // コントローラー未作成
+});
+
+// ログインユーザーのみ、予約を更新する
+Route::group(['middleware' => 'auth'], function() {
+   Route::post('/booking_update','MainController@does_not_exist'); // page404へ
+});
+
+
+// ログインユーザーのみ、予約を更新する
+Route::group(['middleware' => 'auth'], function() {
+   Route::post('/booking_cancel','MainController@does_not_exist'); // page404へ
 });
