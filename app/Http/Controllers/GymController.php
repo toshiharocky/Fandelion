@@ -268,12 +268,34 @@ class GymController extends Controller
                                 ->get();
             $status_name = $status_names[1]->status_name;
             
-            // dd($status_name);
+            // dd($booking_id);
+            
+            // ユーザーのbooking_idを取得
+            $user_booking = DB::table('users')
+                                ->join('bookings', 'users.id', '=', 'bookings.user_id')
+                                ->select('bookings.id')
+                                ->where('users.id',$user)
+                                ->get();
+            
+            
+            $user_booking_count = count($user_booking);
+            
+            $user_booking_id[] = "none";
+            
+            for($i=0; $i<$user_booking_count; $i++){
+                $user_booking_id[] = $user_booking[$i]->id;
+            }
+            // dd($user_booking_id);
+            
+            $booking_check = in_array($booking_id, $user_booking_id);
+            
+            // dd($booking_check);
+            
+            
             
             // //$booking_idが存在しない（＝予約がゼロ）場合はgym_introduction(緯度経度はprivacy)、ある場合はbooked_gym_introduction(緯度経度は本当の値、住所も記載)に渡す値を変える
-            if(isset($booking_id)){
-                
-                return view('booked_gym_introduction',[
+            if($booking_check){
+                return view('gym_introduction',[
                     'user_name'=>$user_name,
                     'status_name'=>$status_name,
                     'gym_id'=>$gym_id,
@@ -285,9 +307,7 @@ class GymController extends Controller
                     'gymstatus_id' => $gymstatus_id,
                     'gym_desc' => $gym_desc,
                     'gymType_id' => $gymType_id,
-                    'pref' => $pref,
                     'addr' => $addr,
-                    'strt' => $strt,
                     'longitude' =>$longitude, //緯度
                     'longitude_privacy' => $longitude_privacy,
                     'latitude' => $latitude, //緯度
@@ -320,8 +340,6 @@ class GymController extends Controller
                     ]);
             }else{
                 
-                
-                
                 return view('gym_introduction',[
                     'user_name'=>$user_name,
                     'status_name'=>$status_name,
@@ -334,7 +352,9 @@ class GymController extends Controller
                     'gymstatus_id' => $gymstatus_id,
                     'gym_desc' => $gym_desc,
                     'gymType_id' => $gymType_id,
+                    'pref' => $pref,
                     'addr' => $addr,
+                    'strt' => $strt,
                     'longitude' =>$longitude, //緯度
                     'longitude_privacy' => $longitude_privacy,
                     'latitude' => $latitude, //緯度

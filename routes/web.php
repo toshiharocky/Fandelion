@@ -40,7 +40,7 @@ Route::post('auth/register','Auth\RegisterController@create');
 Route::post('/add_gym','GymController@store');
 
 // ジム情報表示
-Route::post('/gym_introduction','GymController@index');
+Route::get('/gym_introduction','GymController@index');
 
 // 検索結果の表示
 Route::get('/search_results','SearchController@index');

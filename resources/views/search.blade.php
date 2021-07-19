@@ -121,7 +121,7 @@
 			
 			<!-- Listing Item -->
 			<div class="fw-carousel-item">
-				<form method="post" name="gym_select" action="gym_introduction">
+				<form method="get" name="gym_select" action="gym_introduction">
 				@csrf
 					
 					<a onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact" >
