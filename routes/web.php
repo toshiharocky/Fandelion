@@ -74,7 +74,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 // ログインユーザーのみ、予約したジム情報の画面を表示する
 Route::group(['middleware' => 'auth'], function() {
-   Route::post('/booked_gym_introduction','GymController@index'); // コントローラー未作成
+   Route::post('/booked_gym_introduction','GymController@booked_gym_index'); // コントローラー未作成
 });
 
 

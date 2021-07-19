@@ -293,9 +293,376 @@ class GymController extends Controller
             
             
             
-            // //$booking_idが存在しない（＝予約がゼロ）場合はgym_introduction(緯度経度はprivacy)、ある場合はbooked_gym_introduction(緯度経度は本当の値、住所も記載)に渡す値を変える
+            return view('gym_introduction',[
+                'user_name'=>$user_name,
+                'status_name'=>$status_name,
+                'gym_id'=>$gym_id,
+                'gym_infos'=>$gym_infos,
+                'gym_title' => $gym_title,
+                'host_user_id,' => $host_user_id,
+                'host_name' => $host_name,
+                'cancel_policy' => $cancel_policy,
+                'gymstatus_id' => $gymstatus_id,
+                'gym_desc' => $gym_desc,
+                'gymType_id' => $gymType_id,
+                'pref' => $pref,
+                'addr' => $addr,
+                'strt' => $strt,
+                'longitude' =>$longitude, //緯度
+                'longitude_privacy' => $longitude_privacy,
+                'latitude' => $latitude, //緯度
+                'latitude_privacy' => $latitude_privacy, //表示する緯度
+                'area' => $area,
+                'guest_gender' => $guest_gender,
+                'superHost_flg' => $superHost_flg,
+                'review_user_id' => $review_user,
+                'review_user_name' => $review_user_name,
+                'user_total_stars' => $user_total_stars,
+                'booking_from_time' => $booking_from_time,
+                'book_year_month' => $book_year_month,
+                'review_note' => $review_note,
+                'review_check' => $review_check,
+                'review_amount' => $review_amount,
+                'review_average' => $review_average,
+                'equipment_stars_average' => $equipment_stars_average,
+                'cleanliness_stars_average' => $cleanliness_stars_average,
+                'accuracy_stars_average' => $accuracy_stars_average,
+                'communication_stars_average' => $communication_stars_average,
+                'guest_limit' => $guest_limit,
+                'gym_image_url' => $gym_image_url,
+                'gym_images_count' => $gym_images_count,
+                'gym_type' => $gym_type,
+                'gym_schedule' => $gym_schedule,
+                'price_range' => $price_range,
+                'gym_equipment' => $gym_equipment,
+                'gym_equipment_count' => $gym_equipment_count,
+                'gym_open_times' => $gym_open_times,
+                ]);
+        }
+            
+            else{
+            
+            return view('gym_introduction',[
+                'gym_id'=>$gym_id,
+                'gym_infos'=>$gym_infos,
+                'gym_title' => $gym_title,
+                'host_user_id,' => $host_user_id,
+                'host_name' => $host_name,
+                'cancel_policy' => $cancel_policy,
+                'gymstatus_id' => $gymstatus_id,
+                'gym_desc' => $gym_desc,
+                'gymType_id' => $gymType_id,
+                'addr' => $addr,
+                'longitude' =>$longitude, //緯度
+                'longitude_privacy' => $longitude_privacy,
+                'latitude' => $latitude, //緯度
+                'latitude_privacy' => $latitude_privacy, //表示する緯度
+                'area' => $area,
+                'guest_gender' => $guest_gender,
+                'superHost_flg' => $superHost_flg,
+                'review_user_id' => $review_user,
+                'review_user_name' => $review_user_name,
+                'user_total_stars' => $user_total_stars,
+                'booking_from_time' => $booking_from_time,
+                'book_year_month' => $book_year_month,
+                'review_note' => $review_note,
+                'review_check' => $review_check,
+                'review_amount' => $review_amount,
+                'review_average' => $review_average,
+                'equipment_stars_average' => $equipment_stars_average,
+                'cleanliness_stars_average' => $cleanliness_stars_average,
+                'accuracy_stars_average' => $accuracy_stars_average,
+                'communication_stars_average' => $communication_stars_average,
+                'guest_limit' => $guest_limit,
+                'gym_image_url' => $gym_image_url,
+                'gym_images_count' => $gym_images_count,
+                'gym_type' => $gym_type,
+                'gym_schedule' => $gym_schedule,
+                'price_range' => $price_range,
+                'gym_equipment' => $gym_equipment,
+                'gym_equipment_count' => $gym_equipment_count,
+                'gym_open_times' => $gym_open_times,
+                ]);
+            }
+    }
+    
+    
+    
+    
+    
+    
+    public function booked_gym_index(Request $request)
+    {//
+        // dd($request->gym_id);
+        $request->session()->put('gym_id', $request->gym_id);
+        // dd($request->session()->get('gym_id'));
+        $gym_id = $request->session()->get('gym_id');
+        // dd($gym_id);
+        $booking_id = $request->booking_id;
+        // dd($booking_id);
+        // dd(isset($booking_id));
+        // session()-> put('gym_infos', Gym::where('id', $gym_id));
+        // $gym_infos = $req->session()->get('gym_infos');
+        $gym_infos = Gym::where('id', $gym_id)->get();
+        // dd($gym_infos);
+        
+        $gym_title = $gym_infos[0]->gym_title;
+        $host_user_id  = $gym_infos[0]->user_id;
+        // inner joinでホスト名を取得
+        $host_name_array = DB::table('gyms')
+                    ->join('users', 'gyms.user_id', '=', 'users.id')
+                    ->select('users.name')
+                    ->where('gyms.id',$gym_id)
+                    ->get();
+        $host_name = $host_name_array[0]->name;
+        
+        
+        $cancel_policy_id  = $gym_infos[0]->cancel_policy_id;
+         // inner joinでキャンセルポリシーを取得
+        $cancel_policy = DB::table('cancel_policies')
+                    ->join('gyms', 'cancel_policies.id', '=', 'gyms.cancel_policy_id')
+                    ->select('policy_name', 'policy_desc')
+                    ->where('gyms.id',$gym_id)
+                    ->get();
+        // 
+        
+        $gymstatus_id  = $gym_infos[0]->gymstatus_id;
+        $gym_desc  = $gym_infos[0]->gym_desc;
+        $gymType_id  = $gym_infos[0]->gymType_id;
+        $pref = $gym_infos[0]->pref;
+        $addr  = $gym_infos[0]->addr;
+        $strt = $gym_infos[0]->strt;
+        $longitude  = $gym_infos[0]->longitude; //緯度
+        $random_lon = rand(-100000, 100000);
+        $random_lon_float = $random_lon / 100000000;
+        $longitude_privacy = $longitude + $random_lon_float; //表示する緯度
+        $latitude  = $gym_infos[0]->latitude; //緯度
+        $random_lat = rand(-100000, 100000);
+        $random_lat_float = $random_lat / 100000000;
+        $latitude_privacy = $latitude + $random_lat_float;//表示する緯度
+        
+        // inner joinでarea情報を取得
+        $area = DB::table('gym_areas')
+                    ->join('gyms', 'gym_areas.id', '=', 'gyms.area')
+                    ->select('gym_area')
+                    ->where('gyms.id',$gym_id)
+                    ->get();
+        
+        
+        // $latitude_privacy = $latitude + $random_lat_float;
+        
+        // guest_genderの希望を表示
+        $guest_gender_flg  = $gym_infos[0]->guest_gender;
+        
+        if($guest_gender_flg == "1"){ 
+           $guest_gender = ""; 
+        } else {
+           
+            $guest_gender_title = DB::table('guest_genders')
+                        ->join('gyms', 'guest_genders.id', '=', 'gyms.guest_gender')
+                        ->select('guest_genders.guest_gender')
+                        ->where('gyms.id',$gym_id)
+                        ->get();
+            $guest_gender = $guest_gender_title[0]->guest_gender;
+        }
+        
+        
+        // innerjoinでbooking_id経由でtotal_starsを取得する
+        $reviews[] =  DB::table('bookings')
+                        ->join('gyms', 'gyms.id', '=', 'bookings.gym_id')
+                        ->join('guest_to_host_reviews', 'booking_id', '=', 'bookings.id')
+                        ->join('users', 'users.id', '=', 'bookings.user_id')
+                        ->select('booking_id', 'total_stars', 'equipment_stars', 'cleanliness_stars', 'accuracy_stars', 'communication_stars', 'note', 'booking_from_time', 'bookings.user_id', 'users.name')
+                        ->where('gyms.id',$gym_id)
+                        ->get();
+        
+        // dd($reviews[0][0]->total_stars);
+        // dd($reviews);
+        
+        // レビュー数をカウントする
+        $review_count = count($reviews[0]);
+        
+        if($review_count > 0){
+            // レビューユーザーとノートのの配列を取得する
+            for($i=0; $i<$review_count; $i++){
+                $review_user[] = $reviews[0][$i]->user_id;
+                $review_user_name[] = $reviews[0][$i]->name;
+                $booking_from_time = $reviews[0][$i]->booking_from_time;
+                $book_year_month[] = date("M Y", strtotime($booking_from_time));
+                $review_note[] = $reviews[0][$i]->note;
+                $user_total_stars[] = $reviews[0][$i]->total_stars;
+            }
+            // dd($review_user);
+            // dd($review_note);
+            // dd($reviews);
+        }else {
+            $review_user = 0;
+            $review_user_name = 0;
+            $booking_from_time = 0;
+            $book_year_month = 0;
+            $review_note = 0;
+            $user_total_stars = 0;
+        }
+        
+        // レビューの年月を取得する
+        
+        
+        
+        // レビュー実績を取得する
+        $total_review = 0;
+        $equipment_stars = 0;
+        $cleanliness_stars = 0;
+        $accuracy_stars = 0;
+        $communication_stars = 0;
+        
+        if($review_count > 0){
+            for($i=0; $i<$review_count; $i++){
+             $total_review += $reviews[0][$i]->total_stars;
+             $equipment_stars += $reviews[0][$i]->equipment_stars;
+             $cleanliness_stars += $reviews[0][$i]->cleanliness_stars;
+             $accuracy_stars += $reviews[0][$i]->accuracy_stars;
+             $communication_stars += $reviews[0][$i]->communication_stars;
+            }
+            
+            $review_average  = round($total_review / $review_count, 3);
+            $equipment_stars_average  = round($equipment_stars / $review_count, 3);
+            $cleanliness_stars_average  = round($cleanliness_stars / $review_count, 3);
+            $accuracy_stars_average  = round($accuracy_stars / $review_count, 3);
+            $communication_stars_average  = round($communication_stars / $review_count, 3);
+            $review_check = array($review_average, $equipment_stars_average, $cleanliness_stars_average, $accuracy_stars_average, $communication_stars_average);
+            // dd($total_review);
+            // dd($review_average);
+            // dd($review_check);
+        }else {
+            $review_average  = 0;
+            $equipment_stars_average  = 0;
+            $cleanliness_stars_average  = 0;
+            $accuracy_stars_average  = 0;
+            $communication_stars_average  = 0;
+            $review_check = "";
+        }
+        
+        
+        $superHost_flg  = $gym_infos[0]->superHost_flg;
+        $review_amount  = $review_count;
+        // $review_average  = $gym_infos[0]->review_average;
+        $guest_limit  = $gym_infos[0]->guest_limit;
+        
+        // inner joinで写真のURLを呼び出す
+        $gym_image_url = DB::table('gyms')
+                    ->join('gym_images', 'gyms.id', '=', 'gym_id')
+                    ->select('img_url')
+                    ->where('gym_id',$gym_id)
+                    ->get();
+        // 写真数をカウントする
+        $gym_images_count = count($gym_image_url);
+        // dd($gym_image_url[0]->img_url);
+        
+        // ジムのスケジュールを取得する
+        $gym_schedule = DB::table('gyms')
+                    ->join('gym_schedules', 'gyms.id', '=', 'gym_id')
+                    ->select('gym_id','from_time', 'to_time', 'price', 'status', 'day', 'booking_id')
+                    ->where('gym_id',$gym_id)
+                    ->get();
+        $gym_schedule_count = count($gym_schedule);
+        // dd($gym_schedule);
+        
+        for($i=0; $i<$gym_schedule_count; $i++){
+            $gym_from_times_str = [$gym_schedule[$i]->from_time][0];
+            $gym_to_times_str = [$gym_schedule[$i]->to_time][0];
+            if([$gym_schedule[$i]->booking_id][0] == ""){
+                $gym_status = "○";
+            }else{
+                $gym_status = "×";
+            }
+            
+            $gym_open_times[] = array('date' => date("m/d/Y", strtotime($gym_from_times_str)), 'from_time' => date("H:i", strtotime($gym_from_times_str))
+            , 'to_time' => date("H:i", strtotime($gym_to_times_str)), 'status' => $gym_status);
+        }
+        // dd($gym_open_times);
+        
+        
+        // dd($gym_schedule);
+        
+        // ジムの最低価格と最高価格を取得する
+        $max_price = $gym_schedule -> max('price');
+        $min_price = $gym_schedule -> min('price');
+        
+        //画面上に表示する価格レンジを定義する 
+        if($max_price == $min_price){
+            $price_range = $min_price . "円";
+        } else {
+            $price_range = $min_price . "円〜" . $max_price. "円";
+        }
+        // dd($min_price);
+        // dd($price_range);
+        
+        // ジムタイプを取得する
+        $gym_type = DB::table('gym_types')
+                    ->join('gyms', 'gym_types.id', '=', 'gyms.gymType_id')
+                    ->select('gym_type')
+                    ->where('gyms.id',$gym_id)
+                    ->get();
+        
+        // dd($gym_type[0]->gym_type);
+        
+        
+        // inner joinで写真のURLを呼び出す
+        $gym_equipment = DB::table('gyms')
+                    ->join('equipment', 'gyms.id', '=', 'gym_id')
+                    ->select('equipment_name', 'min_weight', 'max_weight', 'note')
+                    ->where('gym_id',$gym_id)
+                    ->get();
+        // 写真数をカウントする
+        $gym_equipment_count = count($gym_equipment);
+        // dd($gym_equipment[0]->equipment_name);
+        
+        if (Auth::check()){
+            $user = Auth::user()->id;
+            // dd($user);
+            // $gym_title = Gym::where('user_id',$user)->first()->title;
+            // $gym_title = DB::table('gyms')
+            //                 ->join('users', 'gyms.user_id', '=', 'users.id')
+            //                 // ->select('user_id','email','title', 'gym_desc')
+            //                 ->where('user_id', $user)
+            //                 ->first()->email;
+            // dd($gym_title);
+            $user_name =  Auth::user()->name;
+            // $user_memstatus_id = Auth::user()->memstatus_id;
+            $status_names = DB::table('users')
+                                ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
+                                ->select('name', 'status_name')
+                                ->get();
+            $status_name = $status_names[1]->status_name;
+            
+            // dd($booking_id);
+            
+            // ユーザーのbooking_idを取得
+            $user_booking = DB::table('users')
+                                ->join('bookings', 'users.id', '=', 'bookings.user_id')
+                                ->select('bookings.id')
+                                ->where('users.id',$user)
+                                ->get();
+            
+            
+            $user_booking_count = count($user_booking);
+            
+            $user_booking_id[] = "none";
+            
+            for($i=0; $i<$user_booking_count; $i++){
+                $user_booking_id[] = $user_booking[$i]->id;
+            }
+            // dd($user_booking_id);
+            
+            $booking_check = in_array($booking_id, $user_booking_id);
+            
+            // dd($booking_check);
+            
+            
+            
+            // $booking_checkがtrue（user_idとgym_idに紐づいたbooking_idがある）場合はbooked_gym_introduction.blade.phpを表示
             if($booking_check){
-                return view('gym_introduction',[
+                return view('booked_gym_introduction',[
                     'user_name'=>$user_name,
                     'status_name'=>$status_name,
                     'gym_id'=>$gym_id,
@@ -307,7 +674,9 @@ class GymController extends Controller
                     'gymstatus_id' => $gymstatus_id,
                     'gym_desc' => $gym_desc,
                     'gymType_id' => $gymType_id,
+                    'pref' => $pref,
                     'addr' => $addr,
+                    'strt' => $strt,
                     'longitude' =>$longitude, //緯度
                     'longitude_privacy' => $longitude_privacy,
                     'latitude' => $latitude, //緯度
@@ -354,10 +723,9 @@ class GymController extends Controller
                     'gymType_id' => $gymType_id,
                     'pref' => $pref,
                     'addr' => $addr,
-                    'strt' => $strt,
-                    'longitude' =>$longitude, //緯度
+                    // 'longitude' =>$longitude, //緯度
                     'longitude_privacy' => $longitude_privacy,
-                    'latitude' => $latitude, //緯度
+                    // 'latitude' => $latitude, //緯度
                     'latitude_privacy' => $latitude_privacy, //表示する緯度
                     'area' => $area,
                     'guest_gender' => $guest_gender,

@@ -172,7 +172,7 @@
 			
 			@for($i=0; $i<$search_amount; $i++)
 				<!-- Listings -->
-				<form method="post" name="gym_select" action="gym_introduction">
+				<form method="get" name="gym_select" action="gym_introduction">
 				@csrf
 					<div class="col-md-12">
 						<a id={{$i}}_gym onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container" data-marker-id={{$i}}>
