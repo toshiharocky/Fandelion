@@ -198,7 +198,7 @@ class GymController extends Controller
                     ->where('gym_id',$gym_id)
                     ->get();
         $gym_schedule_count = count($gym_schedule);
-        // dd($gym_schedule);
+        // dd($gym_schedule_count);
         
         for($i=0; $i<$gym_schedule_count; $i++){
             $gym_from_times_str = [$gym_schedule[$i]->from_time][0];
