@@ -16,7 +16,14 @@
 				<h2 class="margin-top-30">チェックアウトが完了しました！</h2>
 				<h3 class="margin-top-30">{{$user_name}}さん、お疲れ様でした!!</h3>
 				<p>You'll receive a confirmation email at mail@example.com</p>
-				<a href="history" class="button margin-top-30">履歴に戻る</a>
+				<form method="get" action="review_to_host" style="display:flex; justify-content:center;">
+					<input type="hidden" name="gym_id" value={{$gym_id}}>
+					<input type="hidden" name="booking_id" value={{$booking_id}}>
+					<div style="width:15%;">
+						<input type="button" onclick="submit();" class="button search-button margin-top-30" value="レビューをする">
+					</div>
+					<!--<a href="review_to_host" class="button margin-top-30">レビューをする</a>-->
+				</form>
 			</div>
 
 		</div>
@@ -26,8 +33,10 @@
 <!-- Content / End -->
 @push('js')
 <!--<script src="{{ asset('js/〇〇.js') }}"></script>-->
-
-
+<script>
+	gym_id = {{$gym_id}};
+	console.log(gym_id);
+</script>
 
 @endpush
 @endsection

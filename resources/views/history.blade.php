@@ -6,6 +6,9 @@
         .button.gray{
             margin-top:10px;
         }
+        .active{
+            background-color: #FED85D;
+        }
     </style>
 @endpush
 
@@ -18,8 +21,6 @@
 			<ul class="listing-nav">
 			    <button id="future_bookings" class="active">今後の予約</button>
 			    <button id="past_bookings">過去の予約</button>
-				<!--<li><a id="future_bookings" class="active" href="#future_bookings"></a></li>-->
-				<!--<li><a id="past_bookings" href="#past_bookings">過去の予約</a></li>-->
 			</ul>
 		</div>
     	<div class="dashboard-list-box margin-top-0">
@@ -38,7 +39,7 @@
 @push('js')
 <!--<script src="{{ asset('js/〇〇.js') }}"></script>-->
 <script>
-    let booking_check = "{{$booking_check}}";
+let booking_check = "{{$booking_check}}";
 // console.log(booking_check == 0);
 // 現在の日付を取得する
 let now = new Date();
@@ -79,10 +80,12 @@ let gym_image_url = @json($gym_image_url);
 
 <script>
 function future(){
+    let future_bookings_flg = {{$future_bookings_flg}};
     if($("#future_bookings").hasClass("active")){
         let eq_num = 0;
         $("#history_list").empty();
-        if(booking_check == 0){
+        console.log(booking_check == 0);
+        if(future_bookings_flg == 1){
                 for($i=0; $i<booking_count; $i++){
                     
                     let booking_date_from = new Date(Date.parse(booking_from_time[$i]));
@@ -98,8 +101,8 @@ function future(){
                     let cancel_id = "#"+"cancel_"+$i;
                     
                     
-                    console.log(booking_date_from);
-                    console.log(booking_date_to);
+                    <!--console.log(booking_date_from);-->
+                    <!--console.log(booking_date_to);-->
                     
                     // cancel_policy_idに応じて、キャンセル期限を設定する（時間単位）。
                     let cancel_limit_time = "";
@@ -217,15 +220,17 @@ function future(){
                         			`
                     		    )
                     		}else{
-                    		    $(cancel_id).append(
-                    		        `
-                    		        <h5>チェックインは<br>開始時間15分前から可能です。<h5>
-                        			<form id="check_in" method="put" action="check_in">
-                        			    <input type="submit" class="button gray" style="width:100%; height:35px; background-color:#dcdcdc; color:white;" value="トレーニング開始" disabled>
-                    			    </form>
-                        			<h5>予約の修正・キャンセル期間は<br>終了しました。<h5>
-                        			`
-                    		    )
+                    		    if(now < checkin_open){
+                        		    $(cancel_id).append(
+                        		        `
+                        		        <h5>チェックインは<br>開始時間15分前から可能です。<h5>
+                            			<form id="check_in" method="put" action="check_in">
+                            			    <input type="submit" class="button gray" style="width:100%; height:35px; background-color:#dcdcdc; color:white;" value="トレーニング開始" disabled>
+                        			    </form>
+                            			<h5>予約の修正・キャンセル期間は<br>終了しました。<h5>
+                            			`
+                        		    )
+                    		    }
                     		}
                     		
                           
@@ -307,7 +312,7 @@ function future(){
             
             }else {
                 $("#history_list").append(
-                    `<h4>現在予約はありません<h4>`
+                    `<h4>現在の予約はありません<h4>`
                 )
             }
         }
@@ -317,10 +322,11 @@ function future(){
 
 <script>
 function past(){
+    let past_bookings_flg = {{$past_bookings_flg}};
     if($("#past_bookings").hasClass("active")){
         let eq_num = 0;
         $("#history_list").empty();
-        if(booking_check == 0){
+        if(past_bookings_flg == 1){
                 for($i=0; $i<booking_count; $i++){
                     
                     let booking_date_from = new Date(Date.parse(booking_from_time[$i]));
@@ -389,7 +395,8 @@ function past(){
                         }else{
                 		    $(".history_buttons").eq(eq_num).children('div').eq(0).append(
                     			`
-                    			<form id="review" method="put" action="review">
+                    			<form id="review" method="post" action="review">
+                    			@csrf
                     		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                     		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
                     		        <h5>レビュー済みです<h5>
@@ -453,12 +460,16 @@ function past(){
     $('#past_bookings').on('click',function(){
         $('#past_bookings').addClass('active');
         $('#future_bookings').removeClass('active');
+        console.log($("#future_bookings").hasClass("active"));
+        console.log($("#past_bookings").hasClass("active"));
         past();
     });
     // 「現在の予約」をクリックすると、#past_bookingsのactiveクラスが覗かれ、#future_bookingsにactiveクラスがつく
     $("#future_bookings").on("click",function(){
         $("#future_bookings").addClass("active");
         $("#past_bookings").removeClass("active");
+        console.log($("#future_bookings").hasClass("active"));
+        console.log($("#past_bookings").hasClass("active"));
         future();
     });
 </script>

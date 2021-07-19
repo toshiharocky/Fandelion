@@ -169,27 +169,57 @@
 			</div>
 
 
-			
-			@for($i=0; $i<$search_amount; $i++)
+			@if($search_amount > 1)
+				@for($i=0; $i<$search_amount; $i++)
+					<!-- Listings -->
+					<form method="get" name="gym_select" action="gym_introduction">
+					@csrf
+						<div class="col-md-12">
+							<a id={{$i}}_gym onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container" data-marker-id={{$i}}>
+								<input type="hidden" name="gym_id" value="{{$gym_id[$i]}}">
+								<div class="listing-item">
+									<img src="images/gym_images/{{$gym_image_url[$i]}}" alt="">
+									<div class="listing-item-content">
+										<!--<div id="guest_gender_{{$i}}" value="{{$guest_gender[$i]}}"></div>-->
+										<h3>{{$gym_titles[$i]}} <i class="verified-icon"></i></h3>
+										<span>{{$gym_addr[$i]}}</span>
+									</div>
+									<!--<span class="like-icon"></span>-->
+								</div>
+								<div class="star-rating" data-rating={{$review_average[$i]}}> 
+									<div class="rating-counter">({{$review_amount[$i]}} reviews)</div> 
+									
+									<strong><i class="fas fa-star"></i> {{$review_average[$i]}}</strong>
+									
+								</div>
+							</a>
+						</div>
+					</form>
+					
+					
+					
+					<!--
+					<!-- Listings Container / End -->
+				@endfor
+			@else
 				<!-- Listings -->
 				<form method="get" name="gym_select" action="gym_introduction">
 				@csrf
 					<div class="col-md-12">
-						<a id={{$i}}_gym onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container" data-marker-id={{$i}}>
-							<input type="hidden" name="gym_id" value="{{$gym_id[$i]}}">
+						<a id="gym" onclick="document:gym_select.submit(); return false;" class="listing-item-container" data-marker-id="0">
+							<input type="hidden" name="gym_id" value="{{$gym_id[0]}}">
 							<div class="listing-item">
-								<img src="images/gym_images/{{$gym_image_url[$i]}}" alt="">
+								<img src="images/gym_images/{{$gym_image_url[0]}}" alt="">
 								<div class="listing-item-content">
-									<!--<div id="guest_gender_{{$i}}" value="{{$guest_gender[$i]}}"></div>-->
-									<h3>{{$gym_titles[$i]}} <i class="verified-icon"></i></h3>
-									<span>{{$gym_addr[$i]}}</span>
+									<h3>{{$gym_titles[0]}} <i class="verified-icon"></i></h3>
+									<span>{{$gym_addr[0]}}</span>
 								</div>
 								<!--<span class="like-icon"></span>-->
 							</div>
-							<div class="star-rating" data-rating={{$review_average[$i]}}> 
-								<div class="rating-counter">({{$review_amount[$i]}} reviews)</div> 
+							<div class="star-rating" data-rating={{$review_average[0]}}> 
+								<div class="rating-counter">({{$review_amount[0]}} reviews)</div> 
 								
-								<strong><i class="fas fa-star"></i> {{$review_average[$i]}}</strong>
+								<strong><i class="fas fa-star"></i> {{$review_average[0]}}</strong>
 								
 							</div>
 						</a>
@@ -200,7 +230,7 @@
 				
 				<!--
 				<!-- Listings Container / End -->
-			@endfor
+			@endif
 
 
 			<!-- Pagination Container -->

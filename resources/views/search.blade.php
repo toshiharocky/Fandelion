@@ -117,38 +117,62 @@
 	
 		<!-- Carousel / Start -->
 		<div class="simple-fw-slick-carousel dots-nav">
-			@for ($i = 0; $i < $gyms_count; $i++)
+			@if ($gyms_count > 1)
+				@for ($i = 0; $i < $gyms_count; $i++)
+				<!-- Listing Item -->
+				<div class="fw-carousel-item">
+					<form method="get" name="gym_select" action="gym_introduction">
+					@csrf
+						
+						<a onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact" >
+							<input type="hidden" name="gym_id" value="{{$gym_id[$i]}}">
+							<div class="listing-item">
+								<img src="images/gym_images/{{$gym_image_url[$i]}}" alt="">
+								<!--<div class="listing-item-details">-->
+								<!--	<ul>-->
+								<!--		<li>Friday, August 10</li>-->
+								<!--	</ul>-->
+								<!--</div>-->
 			
-			<!-- Listing Item -->
-			<div class="fw-carousel-item">
-				<form method="get" name="gym_select" action="gym_introduction">
-				@csrf
-					
-					<a onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact" >
-						<input type="hidden" name="gym_id" value="{{$gym_id[$i]}}">
-						<div class="listing-item">
-							<img src="images/gym_images/{{$gym_image_url[$i]}}" alt="">
-							<!--<div class="listing-item-details">-->
-							<!--	<ul>-->
-							<!--		<li>Friday, August 10</li>-->
-							<!--	</ul>-->
-							<!--</div>-->
-		
-							<!--<div class="listing-badge now-open">Now Open</div>-->
-		
-							<div class="listing-item-content">
-								<div class="numerical-rating" data-rating={{$review_average[$i]}}></div>
-								<h3 class="gym_title_select">{{$gym_titles[$i]}}</h3>
-								<span>{{$gym_addr[$i]}}</span>
+								<!--<div class="listing-badge now-open">Now Open</div>-->
+			
+								<div class="listing-item-content">
+									<div class="numerical-rating" data-rating={{$review_average[$i]}}></div>
+									<h3 class="gym_title_select">{{$gym_titles[$i]}}</h3>
+									<span>{{$gym_addr[$i]}}</span>
+								</div>
+								<!--<span class="like-icon"></span>-->
 							</div>
-							<!--<span class="like-icon"></span>-->
-						</div>
-					</a>
-				</form>
-			</div>
-			 <!--Listing Item / End -->
+						</a>
+					</form>
+				</div>
+				 <!--Listing Item / End -->
+				
+				@endfor
 			
-			@endfor
+			@else
+				<!-- Listing Item -->
+				<div class="fw-carousel-item">
+					<form method="get" name="gym_select" action="gym_introduction">
+					@csrf
+						
+						<a onclick="document:gym_select.submit(); return false;" class="listing-item-container compact" >
+							<input type="hidden" name="gym_id" value="{{$gym_id[0]}}">
+							<div class="listing-item">
+								<img src="images/gym_images/{{$gym_image_url[0]}}" alt="">
+								<div class="listing-item-content">
+									<div class="numerical-rating" data-rating={{$review_average[0]}}></div>
+									<h3 class="gym_title_select">{{$gym_titles[0]}}</h3>
+									<span>{{$gym_addr[0]}}</span>
+								</div>
+								<!--<span class="like-icon"></span>-->
+							</div>
+						</a>
+					</form>
+				</div>
+				 <!--Listing Item / End -->
+			
+			@endif
 	
 			
 	

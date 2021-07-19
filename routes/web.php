@@ -115,3 +115,8 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['middleware' => 'auth'], function() {
    Route::post('/booking_cancel','MainController@does_not_exist'); // page404へ
 });
+
+// ログインユーザーのみ、レビュー内容を確認する
+Route::group(['middleware' => 'auth'], function() {
+   Route::post('/review','MainController@does_not_exist'); // page404へ
+});

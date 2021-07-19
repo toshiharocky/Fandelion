@@ -47,8 +47,6 @@ class BookingController extends Controller
         
         
         
-        
-        
         foreach($user_histories as $user_history){
                 $booking_id[] = $user_history->id;
                 $booking_from_time[] = $user_history->booking_from_time;
@@ -70,8 +68,19 @@ class BookingController extends Controller
                             ->get()[0]->img_url;
                             
             }
+        // dd($bookingstatus_id);
         
+        if(in_array(1, $bookingstatus_id) || in_array(5, $bookingstatus_id) || in_array(20, $bookingstatus_id)){
+            $future_bookings_flg = 1; 
+        }else {
+            $future_bookings_flg = 0;
+        }
         
+        if(in_array(25, $bookingstatus_id) || in_array(30, $bookingstatus_id) || in_array(35, $bookingstatus_id)){
+            $past_bookings_flg = 1;
+        }else{
+            $past_bookings_flg = 0;
+        };
         
         //$booking_idが存在しない（＝予約がゼロ）かどうかによって、history.blade.phpに渡す値を変える
         if(isset($booking_id)){
@@ -90,7 +99,8 @@ class BookingController extends Controller
                 'cancel_policy_id'=>$cancel_policy_id,
                 'cancel_policy'=>$cancel_policy,
                 'gym_image_url'=>$gym_image_url,
-                
+                'future_bookings_flg' => $future_bookings_flg,
+                'past_bookings_flg' => $past_bookings_flg,
                 ]
                 );
         } else {
@@ -108,6 +118,8 @@ class BookingController extends Controller
                 'cancel_policy_id'=>"none",
                 'cancel_policy'=>"none",
                 'gym_image_url'=>"none",
+                'future_bookings_flg' => 0,
+                'past_bookings_flg' => 0,
                 ]
                 );   
         }
@@ -261,6 +273,8 @@ class BookingController extends Controller
         
         $user_name =  Auth::user()->name;
         
+        $gym_id = $request->session()->get('gym_id');
+        
         // bookingsテーブルのbookingstatus_idを「20」に変更する（ルーティングが必要
         $booking_id = $request->booking_id;
         $booking = Booking::find($booking_id);
@@ -268,7 +282,10 @@ class BookingController extends Controller
         $booking->save();   
         
         return view('check_in',[
-                'user_name'=>$user_name,]
+                'user_name'=>$user_name,
+                'gym_id' => $gym_id,
+                'booking_id' => $booking_id
+                ]
                 );
     }
     
@@ -278,6 +295,8 @@ class BookingController extends Controller
         
         $user_name =  Auth::user()->name;
         
+        $gym_id = $request->session()->get('gym_id');
+        
         // bookingsテーブルのbookingstatus_idを「25」に変更する（ルーティングが必要
         $booking_id = $request->booking_id;
         $booking = Booking::find($booking_id);
@@ -285,7 +304,11 @@ class BookingController extends Controller
         $booking->save();   
         
         return view('check_out',[
-                'user_name'=>$user_name,]
+                'user_name'=>$user_name,
+                'gym_id' => $gym_id,
+                'booking_id' => $booking_id
+                
+                ]
                 );
     }
 }

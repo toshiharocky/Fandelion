@@ -48,6 +48,8 @@ class ReviewController extends Controller
         
         $gym_id = $request->session()->get('gym_id');
         $booking_id = $request->session()->get('booking_id');
+        // dd($gym_id);
+        // dd($booking_id);
         
         $gym_infos = Gym::where('id', $gym_id)->get();
         // dd($gym_infos);

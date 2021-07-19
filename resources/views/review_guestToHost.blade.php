@@ -2,6 +2,18 @@
 
 @push('css')
     <!--<link href="{{ asset('css/〇〇.css') }}" rel="stylesheet">-->
+<style>
+	.add-sub-rating{
+		text-align:center;
+		width: 24%;
+		desplay: flex;
+		justify-content:center;
+	}
+	.sub-rating-stars{
+		display:flex; 
+		justify-content:center;
+	}
+</style>
 @endpush
 
 @section('content')
@@ -55,29 +67,32 @@
 
 				<form method="post" action="review_submit">
 				@csrf
-					<!-- Totalrating #1 -->
-					<div class="add-sub-rating">
-						<div class="sub-rating-title">Total <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></div>
-						<div class="sub-rating-stars">
-							<!-- Leave Rating -->
-							<div class="clearfix"></div>
-							<div class="leave-rating">
-								<input type="radio" name="total_stars" id="rating-41" value="5"/>
-								<label for="rating-41" class="fa fa-star"></label>
-								<input type="radio" name="total_stars" id="rating-42" value="4"/>
-								<label for="rating-42" class="fa fa-star"></label>
-								<input type="radio" name="total_stars" id="rating-43" value="3"/>
-								<label for="rating-43" class="fa fa-star"></label>
-								<input type="radio" name="total_stars" id="rating-44" value="2"/>
-								<label for="rating-44" class="fa fa-star"></label>
-								<input type="radio" name="total_stars" id="rating-45" value="1"/>
-								<label for="rating-45" class="fa fa-star"></label>
+					<!-- Subratings Container -->
+					<div class="ratings-container">
+						 <!--Totalrating #1 -->
+						<div class="add-sub-rating" style="width: 100%; margin-bottom:36px;">
+							<div class="sub-rating-title">Total <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></div>
+							<div class="sub-rating-stars">
+								 <!--Leave Rating -->
+								<div class="clearfix"></div>
+								<div class="leave-rating">
+									<input type="radio" name="total_stars" id="rating-41" value="5"/>
+									<label for="rating-41" class="fa fa-star" style="font-size: 36px;"></label>
+									<input type="radio" name="total_stars" id="rating-42" value="4"/>
+									<label for="rating-42" class="fa fa-star" style="font-size: 36px;"></label>
+									<input type="radio" name="total_stars" id="rating-43" value="3"/>
+									<label for="rating-43" class="fa fa-star" style="font-size: 36px;"></label>
+									<input type="radio" name="total_stars" id="rating-44" value="2"/>
+									<label for="rating-44" class="fa fa-star" style="font-size: 36px;"></label>
+									<input type="radio" name="total_stars" id="rating-45" value="1"/>
+									<label for="rating-45" class="fa fa-star" style="font-size: 36px;"></label>
+								</div>
 							</div>
 						</div>
-					</div>
+					
 					
 					<!-- Subratings Container -->
-					<div class="sub-ratings-container">
+					<!--<div class="sub-ratings-container">-->
 	
 						<!-- Subrating #1 -->
 						<div class="add-sub-rating">
@@ -162,8 +177,8 @@
 								</div>
 							</div>
 						</div>	
-						
-					</div>
+					</div>	
+					<!--</div>-->
 					<!-- Subratings Container / End -->
 					
 					
