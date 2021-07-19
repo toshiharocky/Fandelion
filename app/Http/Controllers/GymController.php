@@ -212,7 +212,7 @@ class GymController extends Controller
             $gym_open_times[] = array('date' => date("m/d/Y", strtotime($gym_from_times_str)), 'from_time' => date("H:i", strtotime($gym_from_times_str))
             , 'to_time' => date("H:i", strtotime($gym_to_times_str)), 'status' => $gym_status);
         }
-        dd($gym_open_times);
+        // dd($gym_open_times);
         
         
         // dd($gym_schedule);
