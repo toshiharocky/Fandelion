@@ -22,6 +22,11 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
         
+// ログインユーザーのみgym登録確認画面を表示
+Route::group(['middleware' => 'auth'], function() {
+   Route::post('/gym_register_confirm', 'GymController@store'); //のちにGymController@confirmに変える
+});
+
 
 // ログインユーザーのみgym登録処理が可能
 Route::group(['middleware' => 'auth'], function() {

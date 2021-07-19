@@ -828,27 +828,72 @@ class GymController extends Controller
         
         // ログインユーザー取得
         $user = Auth::user()->id;
-        
-        
+        $user_name = Auth::user()->name;
+        // dd($user);
         
         $all = $request->all();
-        // $i = $request->start_date;
-        // $s = $request->monday_start_time;
         
-        // $day = date('N', strtotime($i)); //start_dateの曜日取得
-        // $d = $i." ".$s;
-        // $d2 = new DateTime($i);
-        // // $e = '2021-10-04 15:25:07';
-        // $c = date('Y-m-d H:i',strtotime($d));
+        // $gym_title = $request->session()->get('gym_title');
         
-        // // $d2 -> modify("+15 minute");
+        // dd($gym_title);
+        
+        // $gymType_id = $request->session()->get('gymType_id');
+        // $area = $request->session()->get('area');
+        // $guest_limit = $request->session()->get('guest_limit');
+        // $guest_gender = $request->session()->get('guest_gender');
+        // $zip01 = $request->session()->get('zip01');
+        // $pref01 = $request->session()->get('pref01');
+        // $addr01 = $request->session()->get('addr01');
+        // $strt01 = $request->session()->get('strt01');
+        // $longitude = $request->session()->get('longitude');
+        // $latitude = $request->session()->get('latitude');
+        // $gym_desc = $request->session()->get('gym_desc');
+        // $cancel_policy_id = $request->session()->get('cancel_policy_id');
+        // $equipment_name = $request->session()->get('equipment_name');
+        // $min_weight = $request->session()->get('min_weight');
+        // $max_weight = $request->session()->get('max_weight');
+        // $note = $request->session()->get('note');
+        // $start_date = $request->session()->get('start_date');
+        // $initial_duration = $request->session()->get('initial_duration');
+        
+        // // Monday
+        // $monday_start_time = $request->session()->get('monday_start_time');
+        // $monday_end_time = $request->session()->get('monday_end_time');
+        // $monday_price = $request->session()->get('monday_price');
+        
+        // //Tuesday
+        // $tuesday_start_time = $request->session()->get('tuesday_start_time');
+        // $tuesday_end_time = $request->session()->get('tuesday_end_time');
+        // $tuesday_price = $request->session()->get('tuesday_price');
         
         
+        // // Wednesday
+        // $wednesday_start_time = $request->session()->get('wednesday_start_time');
+        // $wednesday_end_time = $request->session()->get('wednesday_end_time');
+        // $wednesday_price = $request->session()->get('wednesday_price');
         
-        // $t = gettype($c);
-        // $datatype = gettype($request->longitude);
-        // dd($datatype);
-        // dd($all);
+        
+        // // Thursday
+        // $thursday_start_time = $request->session()->get('thursday_start_time');
+        // $thursday_end_time = $request->session()->get('thursday_end_time');
+        // $thursday_price = $request->session()->get('thursday_price');
+        
+        
+        // // Friday
+        // $friday_start_time = $request->session()->get('friday_start_time');
+        // $friday_end_time = $request->session()->get('friday_end_time');
+        // $friday_price = $request->session()->get('friday_price');
+        
+        // // Saturday
+        // $saturday_start_time = $request->session()->get('saturday_start_time');
+        // $saturday_end_time = $request->session()->get('saturday_end_time');
+        // $saturday_price = $request->session()->get('saturday_price');
+        
+        // // Sunday
+        // $sunday_start_time = $request->session()->get('sunday_start_time');
+        // $sunday_end_time = $request->session()->get('sunday_end_time');
+        // $sunday_price = $request->session()->get('sunday_price');
+        
         
         // ジム登録情報のバリデーション
         $validator = Validator::make($request->all(), [
@@ -874,28 +919,16 @@ class GymController extends Controller
             'note.*' => 'nullable|string',
         ]);
         
-        //バリデーション:エラー
+         //バリデーション:エラー
         if ($validator->fails()) {
             return redirect('/add_gym')
                 ->withInput()
                 ->withErrors($validator);
         }
-        // 画像のバリデーション
-        // $validator = $request->validate( [
-        //     'images.*' => 'required|file|image|max:2048', 
-        // ]);
-        
-        // //バリデーション:エラー
-        // if ($validator->fails()) {
-        //     return redirect('/search')
-        //         ->withInput()
-        //         ->withErrors($validator);
-        // }
         
         // 画像ファイル取得
-        // $file = $request->all();
         $images = $request->file('images');
-        // dd($image);
+        // dd($images);
         
         
     
@@ -972,20 +1005,7 @@ class GymController extends Controller
                 $end_datetime = date("Y-m-d", strtotime('+'.$initial_duration.'days',strtotime($start_datetime)));
                 $day = date('N', strtotime($start_date)); //start_dateの曜日取得
                 
-                // $monday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->monday_start_time)));
-                // $monday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->monday_end_time)));
-                // $tuesday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->tuesday_start_time)));
-                // $tuesday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->tuesday_end_time)));
-                // $wednesday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->wednesday_start_time)));
-                // $wednesday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->wednesday_end_time)));
-                // $thursday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->thursday_start_time)));
-                // $thursday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->thursday_end_time)));
-                // $friday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->friday_start_time)));
-                // $friday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->friday_end_time)));
-                // $saturday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->saturday_start_time)));
-                // $saturday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->saturday_end_time)));
-                // $sunday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->sunday_start_time)));
-                // $sunday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->sunday_end_time)));
+                
                 
                 
                 switch($day){
@@ -1327,105 +1347,17 @@ class GymController extends Controller
                 }
                 
                 
-                // Monday info
-                // if($request->monday_start_time != "Closed"){
-                //     // $monday = $start_date." ".$request->monday_start_time;
-                //     $monday_start_datetime = $request->monday_start_time;
-                //     $monday_start_datetime = new DateTime($start_date." ".$request->monday_start_time);
-                //     $monday_end_datetime = new DateTime($request->monday_end_time);
-                //     $monday_price = $request->monday_price;
-                // }
                 
-                // // Tuesday info
-                // if($request->tuesday_start_time != "Closed"){
-                //     $tuesday_start_datetime = new DateTime($request->tuesday_start_time);
-                //     $tuesday_end_datetime = new DateTime($request->tuesday_end_time);
-                //     $tuesday_price = $request->tuesday_price;
-                // }
-                
-                // // Wednesday info
-                // if($request->wednesday_start_time != "Closed"){
-                //     $wednesday_start_datetime = new DateTime($request->wednesday_start_time);
-                //     $wednesday_end_datetime = new DateTime($request->wednesday_end_time);
-                //     
-                // }
-                
-                // // Thursday info
-                // if($request->thursday_start_time != "Closed"){
-                //     $thursday_start_datetime = new DateTime($request->thursday_start_time);
-                //     $thursday_end_datetime = new DateTime($request->thursday_end_time);
-                //     
-                
-                // }
-                
-                // // Friday info
-                // if($request->friday_start_time != "Closed"){
-                //     $friday_start_datetime = new DateTime($request->friday_start_time);
-                //     $friday_end_datetime = new DateTime($request->friday_end_time);
-                //     
-                
-                // }
-                
-                // // Saturday info
-                // if($request->saturday_start_time != "Closed"){
-                //     $saturday_start_datetime = new DateTime($request->saturday_start_time);
-                //     $saturday_end_datetime = new DateTime($request->saturday_end_time);
-                //     
-                
-                // }
-                
-                // // Sunday info
-                // if($request->sunday_start_time != "Closed"){
-                //     $sunday_start_datetime = new DateTime($request->sunday_start_time);
-                //     $sunday_end_datetime = new DateTime($request->sunday_end_time);
-                //     
-                
-                // }
-                
-                
-                
-                // $d = $start_date." ".$monday_start_datetime;
-                // $start_datetime = new DateTime($d);
-                // dd($monday_start_datetime);
-                // $end_datetime = $start_datetime -> modify("+15 minute");
-                // $e = '2021-10-04 15:25:07';
-                // $start_date_datetime = date('Y-m-d H:i',strtotime($d));
-                // $start_datetime = new DateTime($start_date);
-                // dd($end_datetime);
-                
-                // $d2 -> modify("+15 minute");
-                // $d2 -> modify("+15 minute");
-                // $c = strtotime($d);
-                
-                // 全ての時間帯をstatus0(使用不可)で登録
-                // for($i=0; $i<$initial_duration; $i++){
-                //     for($j=0; $j<96; $j++){
-                //         $gym_schedule = new GymSchedule;
-                //         $gym_schedule->gym_id = $gym_id;
-                //         if($day<7){
-                //             $gym_schedule->day = $day;
-                //         }else{
-                //             $day = 1;
-                //             $gym_schedule->day = $day;
-                //         }
-                //         $gym_schedule->from_time = $start_datetime;
-                //         $gym_schedule->to_time = $end_datetime;
-                //         $gym_schedule->save();
-                //         $start_datetime -> modify("+15 minute");
-                //         $end_datetime -> modify("+15 minute");
-                //     }
-                //         $day++;
-                    
-                // }
-                
-                // 選択した時間帯をstatus1(予約可能)で登録
     
         }else{
-    
-            return redirect('/home');
+            
+            return redirect("javascript:history.back()")->with('flash_message', '入力内容に不備があります');
         }
     
-        return redirect('/');
+        return view('/gym_register_completed',[
+                'user_name'=>$user_name,
+                
+            ]);
         }
 
     /**
@@ -1471,5 +1403,363 @@ class GymController extends Controller
     public function destroy(Gym $gym)
     {
         //
+    }
+    
+    
+    public function confirm(Request $request)
+    {
+        //
+        // ログインユーザー取得
+        $user = Auth::user()->id;
+        $user_name = Auth::user()->name;
+        // dd($user_name);
+        
+        // セッションの値を全て取得
+        $data = $request->all();
+        
+        // dd($data);
+        
+        
+        
+        // ジム登録情報のバリデーション
+        $validator = Validator::make($request->all(), [
+            // 'user_id' => 'required|integer',
+            // 'gymStatus_id' => 'required|integer',
+            'gym_title' => 'required|string|max:255',
+            'gym_desc' => 'required',
+            'cancel_policy_id' => 'required|string',
+            'gymType_id' => 'required|integer',
+            'zip01' => 'required|string',
+            'pref01' => 'required|string',
+            'addr01' => 'required|string',
+            'strt01' => 'required|string',
+            'longitude' => 'required|numeric',
+            'latitude' => 'required|numeric',
+            'area' => 'required|integer',
+            'guest_gender' => 'required|integer',
+            'guest_limit' =>  'required|integer|max:255',
+            'images.*' => 'required|file|image|max:2048', 
+            'equipment_name.*' => 'required|string',
+            'min_weight.*' => 'nullable|numeric',
+            'max_weight.*' => 'nullable|numeric',
+            'note.*' => 'nullable|string',
+        ]);
+        
+        //バリデーション:エラー
+        if ($validator->fails()) {
+            return redirect('/add_gym')
+                ->withInput()
+                ->withErrors($validator);
+        }
+        
+        
+        $request->session()->put('gym_title', $request->gym_title);
+        $gym_title = $request->session()->get('gym_title');
+        
+        $request->session()->put('gymType_id', $request->gymType_id);
+        $gymType_id = $request->session()->get('gymType_id');
+        
+        $request->session()->put('area', $request->area);
+        $area = $request->session()->get('area');
+        
+        $request->session()->put('guest_limit', $request->guest_limit);
+        $guest_limit = $request->session()->get('guest_limit');
+        
+        $request->session()->put('guest_gender', $request->guest_gender);
+        $guest_gender = $request->session()->get('guest_gender');
+        
+        $request->session()->put('zip01', $request->zip01);
+        $zip01 = $request->session()->get('zip01');
+        
+        $request->session()->put('pref01', $request->pref01);
+        $pref01 = $request->session()->get('pref01');
+        
+        $request->session()->put('addr01', $request->addr01);
+        $addr01 = $request->session()->get('addr01');
+        
+        $request->session()->put('strt01', $request->strt01);
+        $strt01 = $request->session()->get('strt01');
+        
+        $request->session()->put('longitude', $request->longitude);
+        $longitude = $request->session()->get('longitude');
+        
+        $request->session()->put('latitude', $request->latitude);
+        $latitude = $request->session()->get('latitude');
+        
+        $request->session()->put('gym_desc', $request->gym_desc);
+        $gym_desc = $request->session()->get('gym_desc');
+        
+        $request->session()->put('cancel_policy_id', $request->cancel_policy_id);
+        $cancel_policy_id = $request->session()->get('cancel_policy_id');
+        
+        $request->session()->put('equipment_name', $request->equipment_name);
+        $equipment_name = $request->session()->get('equipment_name');
+        
+        $request->session()->put('min_weight', $request->min_weight);
+        $min_weight = $request->session()->get('min_weight');
+        
+        $request->session()->put('max_weight', $request->max_weight);
+        $max_weight = $request->session()->get('max_weight');
+        
+        $request->session()->put('note', $request->note);
+        $note = $request->session()->get('note');
+        
+        $request->session()->put('start_date', $request->start_date);
+        $start_date = $request->session()->get('start_date');
+        
+        $request->session()->put('initial_duration', $request->initial_duration);
+        $initial_duration = $request->session()->get('initial_duration');
+        
+        // Monday
+        $request->session()->put('monday_start_time', $request->monday_start_time);
+        $monday_start_time = $request->session()->get('monday_start_time');
+        
+        $request->session()->put('monday_end_time', $request->monday_end_time);
+        $monday_end_time = $request->session()->get('monday_end_time');
+        
+        $request->session()->put('monday_price', $request->monday_price);
+        $monday_price = $request->session()->get('monday_price');
+        
+        if($monday_price == ""){
+            $monday_start_time = "-";
+            $monday_end_time = "-";
+            $monday_price = "-";
+        }
+        
+        
+        //Tuesday
+        $request->session()->put('tuesday_start_time', $request->tuesday_start_time);
+        $tuesday_start_time = $request->session()->get('tuesday_start_time');
+        
+        $request->session()->put('tuesday_end_time', $request->tuesday_end_time);
+        $tuesday_end_time = $request->session()->get('tuesday_end_time');
+        
+        $request->session()->put('tuesday_price', $request->tuesday_price);
+        $tuesday_price = $request->session()->get('tuesday_price');
+        
+        if($tuesday_price == ""){
+            $tuesday_start_time = "-";
+            $tuesday_end_time = "-";
+            $tuesday_price = "-";
+        }
+        
+        
+        // Wednesday
+        $request->session()->put('wednesday_start_time', $request->wednesday_start_time);
+        $wednesday_start_time = $request->session()->get('wednesday_start_time');
+        
+        $request->session()->put('wednesday_end_time', $request->wednesday_end_time);
+        $wednesday_end_time = $request->session()->get('wednesday_end_time');
+        
+        $request->session()->put('wednesday_price', $request->wednesday_price);
+        $wednesday_price = $request->session()->get('wednesday_price');
+        
+        if($wednesday_price == ""){
+            $wednesday_start_time = "-";
+            $wednesday_end_time = "-";
+            $wednesday_price = "-";
+        }
+        
+        
+        // Thursday
+        $request->session()->put('thursday_start_time', $request->thursday_start_time);
+        $thursday_start_time = $request->session()->get('thursday_start_time');
+        
+        $request->session()->put('thursday_end_time', $request->thursday_end_time);
+        $thursday_end_time = $request->session()->get('thursday_end_time');
+        
+        $request->session()->put('thursday_price', $request->thursday_price);
+        $thursday_price = $request->session()->get('thursday_price');
+        
+        if($thursday_price == ""){
+            $thursday_start_time = "-";
+            $thursday_end_time = "-";
+            $thursday_price = "-";
+        }
+        
+        // Friday
+        $request->session()->put('friday_start_time', $request->friday_start_time);
+        $friday_start_time = $request->session()->get('friday_start_time');
+        
+        $request->session()->put('friday_end_time', $request->friday_end_time);
+        $friday_end_time = $request->session()->get('friday_end_time');
+        
+        $request->session()->put('friday_price', $request->friday_price);
+        $friday_price = $request->session()->get('friday_price');
+        
+        if($friday_price == ""){
+            $friday_start_time = "-";
+            $friday_end_time = "-";
+            $friday_price = "-";
+        }
+        
+        // Saturday
+        $request->session()->put('saturday_start_time', $request->saturday_start_time);
+        $saturday_start_time = $request->session()->get('saturday_start_time');
+        
+        $request->session()->put('saturday_end_time', $request->saturday_end_time);
+        $saturday_end_time = $request->session()->get('saturday_end_time');
+        
+        $request->session()->put('saturday_price', $request->saturday_price);
+        $saturday_price = $request->session()->get('saturday_price');
+        
+        if($saturday_price == ""){
+            $saturday_start_time = "-";
+            $saturday_end_time = "-";
+            $saturday_price = "-";
+        }
+        
+        // Sunday
+        $request->session()->put('sunday_start_time', $request->sunday_start_time);
+        $sunday_start_time = $request->session()->get('sunday_start_time');
+        
+        $request->session()->put('sunday_end_time', $request->sunday_end_time);
+        $sunday_end_time = $request->session()->get('sunday_end_time');
+        
+        $request->session()->put('sunday_price', $request->sunday_price);
+        $sunday_price = $request->session()->get('sunday_price');
+        
+        if($sunday_price == ""){
+            $sunday_start_time = "-";
+            $sunday_end_time = "-";
+            $sunday_price = "-";
+        }
+        
+        
+        // 画像ファイルを取り出す
+        $images = $request->file('images');
+        $images_count = count($images);
+        
+        
+        
+        
+        dd($images);
+        
+        switch($gymType_id){
+            case 1:
+                $gymtype_title = "個室";
+                break;
+            case 2:
+                $gymtype_title = "住宅全体";
+                break;
+            case 3:
+                $gymtype_title = "シェアスペース";
+                break;
+        }
+        
+        switch($area){
+            case 1:
+                $area_title = "〜10㎡";
+                break;
+            case 2:
+                $area_title = "10〜20㎡";
+                break;
+            case 3:
+                $area_title = "30〜40㎡";
+                break;
+            case 4:
+                $area_title = "40〜50㎡";
+                break;
+            case 5:
+                $area_title = "50㎡以上";
+                break;
+        }
+        
+        switch($guest_gender){
+            case 1:
+                $guest_gender_title = "特になし";
+                break;
+            case 2:
+                $guest_gender_title = "女性限定";
+                break;
+            case 3:
+                $guest_gender_title = "男性限定";
+                break;
+            case 4:
+                $guest_gender_title = "女性限定(女性同伴の場合は男性も可)";
+                break;
+            case 5:
+                $guest_gender_title = "男性限定(男性同伴の場合は女性も可)";
+                break;
+        }
+        
+        switch($cancel_policy_id){
+            case 1:
+                $cancel_policy_name = "柔軟";
+                $cancel_policy_detail = "チェックイン（確認メールに記載の日時）の1時間前までは無料でキャンセルできます。";
+                break;
+            case 2:
+                $cancel_policy_name = "普通";
+                $cancel_policy_detail = "チェックイン（確認メールに記載の日時）の24時間前までは無料でキャンセルできます。";
+                break;
+            case 3:
+                $cancel_policy_name = "厳格";
+                $cancel_policy_detail = "チェックイン（確認メールに記載の日時）の3日前までは無料でキャンセルできます。";
+                break;
+            case 4:
+                $cancel_policy_name = "かなり厳格";
+                $cancel_policy_detail = "チェックイン（確認メールに記載の日時）の7日前までは無料でキャンセルできます。";
+                break;
+        }
+        
+        $equipment_amount = count($equipment_name);
+        // dd($equipment_amount);
+        // dd($equipment_name);
+        
+        return view('gym_register_confirm',[
+                'user'=>$user,
+                'user_name'=>$user_name,
+                'gym_title'=>$gym_title,
+                'gymType_id'=>$gymType_id,
+                'gymtype_title'=>$gymtype_title,
+                'area'=>$area,
+                'area_title'=>$area_title,
+                'guest_limit'=>$guest_limit,
+                'guest_gender'=>$guest_gender,
+                'guest_gender_title'=>$guest_gender_title,
+                'zip01'=>$zip01,
+                'pref01'=>$pref01,
+                'addr01'=>$addr01,
+                'strt01'=>$strt01,
+                'longitude'=>$longitude,
+                'latitude'=>$latitude,
+                'gym_desc'=>$gym_desc,
+                'cancel_policy_id'=>$cancel_policy_id,
+                'cancel_policy_name'=>$cancel_policy_name,
+                'cancel_policy_detail'=>$cancel_policy_detail,
+                'equipment_name'=>$equipment_name,
+                'equipment_amount'=>$equipment_amount,
+                'min_weight'=>$min_weight,
+                'max_weight'=>$max_weight,
+                'note'=>$note,
+                'start_date'=>$start_date,
+                'initial_duration'=>$initial_duration,
+                'monday_start_time'=>$monday_start_time,
+                'monday_end_time'=>$monday_end_time,
+                'monday_price'=>$monday_price,
+                'tuesday_start_time'=>$tuesday_start_time,
+                'tuesday_end_time'=>$tuesday_end_time,
+                'tuesday_price'=>$tuesday_price,
+                'wednesday_start_time'=>$wednesday_start_time,
+                'wednesday_end_time'=>$wednesday_end_time,
+                'wednesday_price'=>$wednesday_price,
+                'thursday_start_time'=>$thursday_start_time,
+                'thursday_end_time'=>$thursday_end_time,
+                'thursday_price'=>$thursday_price,
+                'friday_start_time'=>$friday_start_time,
+                'friday_end_time'=>$friday_end_time,
+                'friday_price'=>$friday_end_time,
+                'saturday_start_time'=>$saturday_start_time,
+                'saturday_end_time'=>$saturday_end_time,
+                'saturday_price'=>$saturday_price,
+                'sunday_start_time'=>$sunday_start_time,
+                'sunday_end_time'=>$sunday_end_time,
+                'sunday_price'=>$sunday_price,
+                'images'=>$images,
+                // 'images_url'=>$images_url
+            
+            ]);
+        
+        
     }
 }
