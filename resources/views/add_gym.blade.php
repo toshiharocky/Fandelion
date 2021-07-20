@@ -325,9 +325,10 @@
 								<p>適用期間</p>
 								<div class="col-lg-3">	
 									<select type="integer" name="initial_duration" placeholder="Date" readonly="readonly">
-										<option value="30"> 30日</option>
-										<option value="90">90日</option>
-										<option value="180">180日</option>
+										<option value="7"> 7日</option>
+										<option value="30" disabled> 30日</option>
+										<option value="90" disabled>90日</option>
+										<option value="180" disabled>180日</option>
 									</select>
 								</div>
 								
