@@ -26,7 +26,7 @@ class GymController extends Controller
     public function index(Request $request)
     {
         //
-        // dd($request->gym_id);
+        // dd($request->all());
         $request->session()->put('gym_id', $request->gym_id);
         // dd($request->session()->get('gym_id'));
         $gym_id = $request->session()->get('gym_id');

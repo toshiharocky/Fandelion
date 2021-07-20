@@ -31,7 +31,7 @@ class MainController extends Controller
         //ジム情報の入手（広い順）
             // $gyms_all = Gym::all();
             // $gyms = Gym::orderBy('user_id', 'DESC')->take(16)->get();
-            $area_gyms = Gym::orderBy('area', 'DESC')->take(8)->get();
+            $area_gyms = Gym::orderBy('area', 'DESC')->take(4)->get();
             
             
             $area_gyms_count = count($area_gyms);
@@ -52,14 +52,14 @@ class MainController extends Controller
                             ->get()[0]->img_url;
                 
             }
-            // dd($gym_id[0]);
+            // dd($area_gym_id);
             // dd($review_average[0]);
             // dd($gym_image_url[0]);
     
     
     //ジム情報の入手（住宅まるごと）
             $whole_gyms = Gym::where('gymType_id',2)
-                    ->orderBy('area', 'DESC')->take(8)->get();
+                    ->orderBy('area', 'DESC')->take(4)->get();
             
             
             $whole_gyms_count = count($whole_gyms);

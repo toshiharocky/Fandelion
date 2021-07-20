@@ -26,9 +26,8 @@
 						<h2>ジムを探す</h2>
 						<h4>あなたに合ったフィットネス環境をみつけましょう</h4>
 	
-						<form method="get" action="search_results">
-						@csrf	
-						{{method_field('get')}}
+						<form method="put" action="search_results">
+						@csrf
 							<div class="main-search-input" style="width:60%;">
 		
 								<!-- <div class="main-search-input-item">
@@ -121,11 +120,11 @@
 				@for ($i = 0; $i < $area_gyms_count; $i++)
 				<!-- Listing Item -->
 				<div class="fw-carousel-item">
-					<form method="get" name="gym_select" action="gym_introduction">
+					<form method="put" name="area_gym_select" action="gym_introduction">
 					@csrf
 						
-						<a onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact" >
-							<input type="hidden" name="gym_id" value="{{$area_gym_id[$i]}}">
+						<a onclick="document:area_gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact" >
+							<input type="hidden" name="gym_id" value={{$area_gym_id[$i]}}>
 							<div class="listing-item">
 								<img src="images/gym_images/{{$area_gym_image_url[$i]}}" alt="">
 								<!--<div class="listing-item-details">-->
@@ -153,17 +152,17 @@
 			@else
 				<!-- Listing Item -->
 				<div class="fw-carousel-item">
-					<form method="get" name="gym_select" action="gym_introduction">
+					<form method="put" name="area_gym_select" action="gym_introduction">
 					@csrf
 						
-						<a onclick="document:gym_select.submit(); return false;" class="listing-item-container compact" >
-							<input type="hidden" name="gym_id" value="{{$gym_id[0]}}">
+						<a onclick="document:area_gym_select.submit(); return false;" class="listing-item-container compact" >
+							<input type="hidden" name="gym_id" value="{{$area_gym_id[0]}}">
 							<div class="listing-item">
-								<img src="images/gym_images/{{$gym_image_url[0]}}" alt="">
+								<img src="images/gym_images/{{$area_gym_image_url[0]}}" alt="">
 								<div class="listing-item-content">
-									<div class="numerical-rating" data-rating={{$review_average[0]}}></div>
-									<h3 class="gym_title_select">{{$gym_titles[0]}}</h3>
-									<span>{{$gym_addr[0]}}</span>
+									<div class="numerical-rating" data-rating={{$area_review_average[0]}}></div>
+									<h3 class="gym_title_select">{{$area_gym_titles[0]}}</h3>
+									<span>{{$area_gym_addr[0]}}</span>
 								</div>
 								<!--<span class="like-icon"></span>-->
 							</div>
@@ -201,10 +200,10 @@
 				@for ($i = 0; $i < $whole_gyms_count; $i++)
 				 <!--Listing Item -->
 				<div class="fw-carousel-item">
-					<form method="get" name="gym_select" action="gym_introduction">
+					<form method="put" name="whole_gym_select" action="gym_introduction">
 					@csrf
 						
-						<a onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact" >
+						<a onclick="document:whole_gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact" >
 							<input type="hidden" name="gym_id" value="{{$whole_gym_id[$i]}}">
 							<div class="listing-item">
 								<img src="images/gym_images/{{$whole_gym_image_url[$i]}}" alt="">
@@ -233,17 +232,17 @@
 			@else
 				 <!--Listing Item -->
 				<div class="fw-carousel-item">
-					<form method="get" name="gym_select" action="gym_introduction">
+					<form method="put" name="whole_gym_select" action="gym_introduction">
 					@csrf
 						
-						<a onclick="document:gym_select.submit(); return false;" class="listing-item-container compact" >
+						<a onclick="document:whole_gym_select.submit(); return false;" class="listing-item-container compact" >
 							<input type="hidden" name="gym_id" value="{{$whole_gym_id[0]}}">
 							<div class="listing-item">
 								<img src="images/gym_images/{{$whole_gym_image_url[0]}}" alt="">
 								<div class="listing-item-content">
 									<div class="numerical-rating" data-rating={{$whole_review_average[0]}}></div>
 									<h3 class="gym_title_select">{{$whole_gym_titles[0]}}</h3>
-									<span>{{$gym_addr[0]}}</span>
+									<span>{{$whole_gym_addr[0]}}</span>
 								</div>
 								<!--<span class="like-icon"></span>-->
 							</div>
