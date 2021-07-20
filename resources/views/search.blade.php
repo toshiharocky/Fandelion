@@ -1,4 +1,4 @@
-@extends('layouts.menu_footer_mobnav')
+@extends('layouts.menu_mobnav')
 
 
 @push('css')
@@ -108,8 +108,8 @@
 	
 				<div class="col-md-12">
 					<h3 class="headline centered margin-bottom-45">
-						Most Visited Places
-						<span>Discover top-rated local businesses</span>
+						広いジム
+						<span></span>
 					</h3>
 				</div>
 			</div>
@@ -117,17 +117,17 @@
 	
 		<!-- Carousel / Start -->
 		<div class="simple-fw-slick-carousel dots-nav">
-			@if ($gyms_count > 1)
-				@for ($i = 0; $i < $gyms_count; $i++)
+			@if ($area_gyms_count > 1)
+				@for ($i = 0; $i < $area_gyms_count; $i++)
 				<!-- Listing Item -->
 				<div class="fw-carousel-item">
 					<form method="get" name="gym_select" action="gym_introduction">
 					@csrf
 						
 						<a onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact" >
-							<input type="hidden" name="gym_id" value="{{$gym_id[$i]}}">
+							<input type="hidden" name="gym_id" value="{{$area_gym_id[$i]}}">
 							<div class="listing-item">
-								<img src="images/gym_images/{{$gym_image_url[$i]}}" alt="">
+								<img src="images/gym_images/{{$area_gym_image_url[$i]}}" alt="">
 								<!--<div class="listing-item-details">-->
 								<!--	<ul>-->
 								<!--		<li>Friday, August 10</li>-->
@@ -137,9 +137,9 @@
 								<!--<div class="listing-badge now-open">Now Open</div>-->
 			
 								<div class="listing-item-content">
-									<div class="numerical-rating" data-rating={{$review_average[$i]}}></div>
-									<h3 class="gym_title_select">{{$gym_titles[$i]}}</h3>
-									<span>{{$gym_addr[$i]}}</span>
+									<!--<div class="numerical-rating" data-rating={{$area_review_average[$i]}}></div>-->
+									<h3 class="gym_title_select">{{$area_gym_titles[$i]}}</h3>
+									<span>{{$area_gym_addr[$i]}}</span>
 								</div>
 								<!--<span class="like-icon"></span>-->
 							</div>
@@ -173,86 +173,94 @@
 				 <!--Listing Item / End -->
 			
 			@endif
+		</div>
+		<!-- Carousel / End -->
+		
+	</section>
+	<!-- Fullwidth Section / End -->
+	
+	
+	<!-- Fullwidth Section -->
+	<section class="fullwidth margin-top-65 padding-top-75 padding-bottom-70" data-background-color="#f8f8f8">
+	
+		<div class="container">
+			<div class="row">
+	
+				<div class="col-md-12">
+					<h3 class="headline centered margin-bottom-45">
+						家丸ごとジム
+						<span></span>
+					</h3>
+				</div>
+			</div>
+		</div>
+	
+		<!-- Carousel / Start -->
+		<div class="simple-fw-slick-carousel dots-nav">
+			@if ($whole_gyms_count > 1)
+				@for ($i = 0; $i < $whole_gyms_count; $i++)
+				 <!--Listing Item -->
+				<div class="fw-carousel-item">
+					<form method="get" name="gym_select" action="gym_introduction">
+					@csrf
+						
+						<a onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact" >
+							<input type="hidden" name="gym_id" value="{{$whole_gym_id[$i]}}">
+							<div class="listing-item">
+								<img src="images/gym_images/{{$whole_gym_image_url[$i]}}" alt="">
+								<!--<div class="listing-item-details">-->
+								<!--	<ul>-->
+								<!--		<li>Friday, August 10</li>-->
+								<!--	</ul>-->
+								<!--</div>-->
+			
+								<!--<div class="listing-badge now-open">Now Open</div>-->
+			
+								<div class="listing-item-content">
+									<!--<div class="numerical-rating" data-rating={{$whole_review_average[$i]}}></div>-->
+									<h3 class="gym_title_select">{{$whole_gym_titles[$i]}}</h3>
+									<span>{{$whole_gym_addr[$i]}}</span>
+								</div>
+								<!--<span class="like-icon"></span>-->
+							</div>
+						</a>
+					</form>
+				</div>
+				 <!--Listing Item / End -->
+				
+				@endfor
+			
+			@else
+				 <!--Listing Item -->
+				<div class="fw-carousel-item">
+					<form method="get" name="gym_select" action="gym_introduction">
+					@csrf
+						
+						<a onclick="document:gym_select.submit(); return false;" class="listing-item-container compact" >
+							<input type="hidden" name="gym_id" value="{{$whole_gym_id[0]}}">
+							<div class="listing-item">
+								<img src="images/gym_images/{{$whole_gym_image_url[0]}}" alt="">
+								<div class="listing-item-content">
+									<div class="numerical-rating" data-rating={{$whole_review_average[0]}}></div>
+									<h3 class="gym_title_select">{{$whole_gym_titles[0]}}</h3>
+									<span>{{$gym_addr[0]}}</span>
+								</div>
+								<!--<span class="like-icon"></span>-->
+							</div>
+						</a>
+					</form>
+				</div>
+				 <!--Listing Item / End -->
+			
+			@endif
 	
 			
 	
 		</div>
 		<!-- Carousel / End -->
-	
-	
+		
 	</section>
 	<!-- Fullwidth Section / End -->
-	
-	
-	<!-- Container -->
-	<div class="container">
-		<div class="row">
-	
-			<div class="col-md-12">
-				<h3 class="headline centered margin-bottom-35 margin-top-70">Popular Cities <span>Browse listings in popular places</span></h3>
-			</div>
-			
-			<div class="col-md-4">
-	
-				<!-- Image Box -->
-				<a href="listings-list-with-sidebar.html" class="img-box" data-background-image="images/popular-location-01.jpg">
-					<div class="img-box-content visible">
-						<h4>New York </h4>
-						<span>14 Listings</span>
-					</div>
-				</a>
-	
-			</div>	
-				
-			<div class="col-md-8">
-	
-				<!-- Image Box -->
-				<a href="listings-list-with-sidebar.html" class="img-box" data-background-image="images/popular-location-02.jpg">
-					<div class="img-box-content visible">
-						<h4>Los Angeles</h4>
-						<span>24 Listings</span>
-					</div>
-				</a>
-	
-			</div>	
-	
-			<div class="col-md-8">
-	
-				<!-- Image Box -->
-				<a href="listings-list-with-sidebar.html" class="img-box" data-background-image="images/popular-location-03.jpg">
-					<div class="img-box-content visible">
-						<h4>San Francisco </h4>
-						<span>12 Listings</span>
-					</div>
-				</a>
-	
-			</div>	
-				
-			<div class="col-md-4">
-	
-				<!-- Image Box -->
-				<a href="listings-list-with-sidebar.html" class="img-box" data-background-image="images/popular-location-04.jpg">
-					<div class="img-box-content visible">
-						<h4>Miami</h4>
-						<span>9 Listings</span>
-					</div>
-				</a>
-	
-			</div>
-	
-		</div>
-	</div>
-	<!-- Container / End -->
-	
-	
-	<!-- Flip banner -->
-	<!--<a href="listings-half-screen-map-list.html" class="flip-banner parallax margin-top-65" data-background="images/slider-bg-02.jpg" data-color="#f91942" data-color-opacity="0.85" data-img-width="2500" data-img-height="1666">-->
-	<!--	<div class="flip-banner-content">-->
-	<!--		<h2 class="flip-visible">Expolore top-rated attractions nearby</h2>-->
-	<!--		<h2 class="flip-hidden">Browse Listings <i class="sl sl-icon-arrow-right"></i></h2>-->
-	<!--	</div>-->
-	<!--</a>-->
-	<!-- Flip banner / End -->
 	
 	
 	

@@ -28,31 +28,58 @@ class MainController extends Controller
         //                     ->get();
         // dd($gym_images);
         
-        //ジム情報の入手
+        //ジム情報の入手（広い順）
             // $gyms_all = Gym::all();
-            $gyms = Gym::orderBy('user_id', 'DESC')->take(4)->get();
-            $gyms_count = count($gyms);
+            // $gyms = Gym::orderBy('user_id', 'DESC')->take(16)->get();
+            $area_gyms = Gym::orderBy('area', 'DESC')->take(8)->get();
+            
+            
+            $area_gyms_count = count($area_gyms);
                     // ->where('pref', "群馬県");
             // $gyms = $gyms_all->sortBy('id', 'DESC');
             // dd($gyms_count);
             
-            foreach($gyms as $gym){
-                $gym_id[] = $gym->id;
-                $gym_titles[] = $gym->gym_title;
-                $gym_descs[] = $gym->gym_desc;
-                $gym_addr[] = $gym->addr;
-                $review_average[] = $gym->review_average;
-                $gym_image_url[] = DB::table('gyms')
+            foreach($area_gyms as $area_gym){
+                $area_gym_id[] = $area_gym->id;
+                $area_gym_titles[] = $area_gym->gym_title;
+                $area_gym_descs[] = $area_gym->gym_desc;
+                $area_gym_addr[] = $area_gym->addr;
+                $area_review_average[] = $area_gym->review_average;
+                $area_gym_image_url[] = DB::table('gyms')
                             ->join('gym_images', 'gyms.id', '=', 'gym_id')
                             ->select('img_url')
-                            ->where('gym_id',$gym->id)
+                            ->where('gym_id',$area_gym->id)
                             ->get()[0]->img_url;
                 
             }
             // dd($gym_id[0]);
             // dd($review_average[0]);
             // dd($gym_image_url[0]);
+    
+    
+    //ジム情報の入手（住宅まるごと）
+            $whole_gyms = Gym::where('gymType_id',2)
+                    ->orderBy('area', 'DESC')->take(8)->get();
             
+            
+            $whole_gyms_count = count($whole_gyms);
+                    
+            
+            foreach($whole_gyms as $whole_gym){
+                $whole_gym_id[] = $whole_gym->id;
+                $whole_gym_titles[] = $whole_gym->gym_title;
+                $whole_gym_descs[] = $whole_gym->gym_desc;
+                $whole_gym_addr[] = $whole_gym->addr;
+                $whole_review_average[] = $whole_gym->review_average;
+                $whole_gym_image_url[] = DB::table('gyms')
+                            ->join('gym_images', 'gyms.id', '=', 'gym_id')
+                            ->select('img_url')
+                            ->where('gym_id',$whole_gym->id)
+                            ->get()[0]->img_url;
+                
+            }
+            
+    
         
         if (Auth::check()){
             $user = Auth::user()->id;
@@ -78,25 +105,46 @@ class MainController extends Controller
             return view('search',[
                 'user_name'=>$user_name,
                 'status_name'=>$status_name,
-                'gym_id'=>$gym_id,
-                'gym_titles'=>$gym_titles,
-                'gym_descs'=>$gym_descs,
-                'gym_addr'=>$gym_addr,
-                'review_average'=>$review_average,
-                'gym_image_url'=>$gym_image_url,
-                'gyms_count' => $gyms_count,
+                // 'gym_id'=>$gym_id,
+                // 'gym_titles'=>$gym_titles,
+                // 'gym_descs'=>$gym_descs,
+                // 'gym_addr'=>$gym_addr,
+                // 'review_average'=>$review_average,
+                // 'gym_image_url'=>$gym_image_url,
+                // 'gyms_count' => $gyms_count,
+                'area_gym_id'=>$area_gym_id,
+                'area_gym_titles'=>$area_gym_titles,
+                'area_gym_descs'=>$area_gym_descs,
+                'area_gym_addr'=>$area_gym_addr,
+                'area_review_average'=>$area_review_average,
+                'area_gym_image_url'=>$area_gym_image_url,
+                'area_gyms_count' => $area_gyms_count,
+                'whole_gym_id'=>$whole_gym_id,
+                'whole_gym_titles'=>$whole_gym_titles,
+                'whole_gym_descs'=>$whole_gym_descs,
+                'whole_gym_addr'=>$whole_gym_addr,
+                'whole_review_average'=>$whole_review_average,
+                'whole_gym_image_url'=>$whole_gym_image_url,
+                'whole_gyms_count' => $whole_gyms_count,
                 // 'gym_title'=>$gym_title,
                 // 'gym_status_name'=>$gym_status_name,
                 ]);
             } else{
             return view('search',[
-                'gym_id'=>$gym_id,
-                'gym_titles'=>$gym_titles,
-                'gym_descs'=>$gym_descs,
-                'gym_addr'=>$gym_addr,
-                'review_average'=>$review_average,
-                'gym_image_url'=>$gym_image_url,
-                'gyms_count' => $gyms_count,
+                'area_gym_id'=>$area_gym_id,
+                'area_gym_titles'=>$area_gym_titles,
+                'area_gym_descs'=>$area_gym_descs,
+                'area_gym_addr'=>$area_gym_addr,
+                'area_review_average'=>$area_review_average,
+                'area_gym_image_url'=>$area_gym_image_url,
+                'area_gyms_count' => $area_gyms_count,
+                'whole_gym_id'=>$whole_gym_id,
+                'whole_gym_titles'=>$whole_gym_titles,
+                'whole_gym_descs'=>$whole_gym_descs,
+                'whole_gym_addr'=>$whole_gym_addr,
+                'whole_review_average'=>$whole_review_average,
+                'whole_gym_image_url'=>$whole_gym_image_url,
+                'whole_gyms_count' => $whole_gyms_count,
                 // 'gym_title'=>$gym_title,
                 // 'gym_status_name'=>$gym_status_name,
                 ]);
