@@ -7,8 +7,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<!-- CSS
-================================================== -->
+
 
 <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css">
 @stack('css')
@@ -16,6 +15,56 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons%7CMaterial+Icons+Outlined" rel="stylesheet">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="stylesheet" href="https://use.typekit.net/wau6xrc.css">
+<!-- CSS
+================================================== -->
+<style>
+	.mobile-nav{
+		padding-bottom:20px;	
+	}
+	
+	#logo_mark{
+			font-size: 4vw;
+		}
+
+	@media (max-width: 991px){
+		#header{
+		    height: 110px;
+		    box-sizing:border-box;
+			}
+		#logo{
+			text-align:center;
+			display:flex;
+			justify-content:center;
+			padding-top:10px;
+		}
+		#logo_mark{
+			font-size: 15vw;
+			text-align:center;
+		}
+		.user-name span img{
+			display:none;
+			}
+		.user-name span:after{
+			display:none;
+			}
+		.header-menu{
+			flex-direction: column;
+			}
+		.left-side{
+			display:flex;
+			justify-content:center;
+		}
+		.pc_menu{
+			display:none;
+		}
+		.header-widget{
+			border-top:none;
+			padding-top:5px;
+		}
+		
+	}
+	
+</style>
 
 </head>
 
@@ -37,7 +86,7 @@
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="/" style="color: #2B4393; font-size:52px;">Fandelion</a>
+					<a id="logo_mark" href="/" style="color: #2B4393;">Fandelion</a>
 				</div>
 
 				<!-- Mobile Navigation -->
@@ -187,12 +236,14 @@
 							<ul>
 								<!--<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>-->
 								<!--<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>-->
-								<li><a href="/history"><i class="fas fa-dumbbell"></i>予約一覧</a></li>
-								<li><a href="/add_gym"><i class="fa fa-calendar-check-o"></i>ジムの追加</a></li>
+								<li class="pc_menu"><a href="/history"><i class="fas fa-dumbbell"></i>予約一覧</a></li>
+								<li class="pc_menu"><a href="/bookmarks"><i class="fas fa-heart"></i>お気に入り</a></li>
+								<li class="pc_menu"><a href="/messages"><i class="fas fa-envelope"></i>メッセージ</a></li>
+								<li class="pc_menu"><a href="/add_gym"><i class="fas fa-plus"></i>ジムの追加</a></li>
 								<li><a href="{{ route('logout') }}"
 	                                   onclick="event.preventDefault();
 	                                                 document.getElementById('logout-form').submit();">
-	                                    <i class="sl sl-icon-power"></i>{{ __('Logout') }}</a></li>
+	                                    <i class="fas fa-sign-out-alt"></i>{{ __('Logout') }}</a></li>
 	
 	                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 	                                @csrf
@@ -438,7 +489,7 @@
 </div>
 
 <!-- Mobile Navigation -->
-<nav class="mobile-nav mmenu-trigger">
+<nav class="mobile-nav mmenu-trigger" style="height:80px;">
 	<div class="mmenu_icon">
 		<a href="/" class="mmenus">
 			<span class="material-icons-outlined " style="font-size: 42px; margin: auto; color: black; font-weight: bold;">
@@ -448,7 +499,7 @@
 		</a>
 	</div>
 	<div class="mmenu_icon">
-		<a href="#" class="mmenus">
+		<a href="/bookmarks" class="mmenus">
 			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
 				favorite_border
 			</span>
@@ -456,15 +507,15 @@
 		</a>
 	</div>
 	<div class="mmenu_icon">
-		<a href="#" class="mmenus">
+		<a href="/history" class="mmenus">
 			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
 				fitness_center
 			</span>
-			<p class="icon-disc">トレーニング</p>
+			<p class="icon-disc">予約一覧</p>
 		</a>
 	</div>
 	<div class="mmenu_icon">
-		<a href="#" class="mmenus">
+		<a href="/messages" class="mmenus">
 			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
 				chat_bubble_outline
 			</span>
@@ -472,11 +523,11 @@
 		</a>
 	</div>
 	<div class="mmenu_icon">
-		<a href="#" class="mmenus">
+		<a href="/add_gym" class="mmenus">
 			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
-				account_circle
+				<i class="fas fa-plus"></i>
 			</span>
-			<p class="icon-disc">プロフィール</p>
+			<p class="icon-disc">ジムの追加</p>
 		</a>
 	</div>
 </nav>

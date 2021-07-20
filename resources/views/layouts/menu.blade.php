@@ -16,7 +16,44 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons%7CMaterial+Icons+Outlined" rel="stylesheet">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="stylesheet" href="https://use.typekit.net/wau6xrc.css">
+<style>
+	#logo_mark{
+			font-size: 4vw;
+		}
 
+	@media (max-width: 991px){
+		#header{
+		    height: 80px;
+		    box-sizing:border-box;
+			}
+		#logo{
+			text-align:center;
+			display:flex;
+			justify-content:center;
+		}
+		#logo_mark{
+			font-size: 15vw;
+			text-align:center;
+		}
+		.user-name span img{
+			display:none;
+			}
+		.user-name span:after{
+			display:none;
+			}
+		.header-menu{
+			flex-direction: column;
+			}
+		.left-side{
+			display:flex;
+			justify-content:center;
+		}
+		.right-side{
+			display:none;
+		}
+	}
+	
+</style>
 </head>
 
 <body>
@@ -37,7 +74,7 @@
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="/" style="color: #2B4393; font-size:52px;">Fandelion</a>
+					<a id="logo_mark" href="/" style="color: #2B4393; ">Fandelion</a>
 				</div>
 
 				<!-- Mobile Navigation -->
@@ -176,23 +213,28 @@
 				<!-- Authentication Links -->
 				
                 @guest
-					<div class="header-widget">
+					<div class="header-widget" style="border-top:none;">
 						<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"><i class="sl sl-icon-login"></i> Sign In</a>
 					</div>
 				@else
-					<div class="header-widget">
+					<div class="header-widget" style="border-top:none;">
 					<!-- User Menu -->
 						<div class="user-menu">
-							<div class="user-name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>{{$user_name}}  </div>
+							<div class="user-name">
+								<span class="user_img"><img src="images/dashboard-avatar.jpg" alt=""></span>
+								{{$user_name}}  
+							</div>
 							<ul>
 								<!--<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>-->
 								<!--<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>-->
 								<li><a href="/history"><i class="fas fa-dumbbell"></i>予約一覧</a></li>
-								<li><a href="/add_gym"><i class="fa fa-calendar-check-o"></i>ジムの追加</a></li>
+								<li><a href="/bookmarks"><i class="fas fa-heart"></i>お気に入り</a></li>
+								<li><a href="/messages"><i class="fas fa-envelope"></i>メッセージ</a></li>
+								<li><a href="/add_gym"><i class="fas fa-plus"></i>ジムの追加</a></li>
 								<li><a href="{{ route('logout') }}"
 	                                   onclick="event.preventDefault();
 	                                                 document.getElementById('logout-form').submit();">
-	                                    <i class="sl sl-icon-power"></i>{{ __('Logout') }}</a></li>
+	                                    <i class="fas fa-sign-out-alt"></i>{{ __('Logout') }}</a></li>
 	
 	                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 	                                @csrf

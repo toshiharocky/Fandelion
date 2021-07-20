@@ -74,40 +74,40 @@ Route::group(['middleware' => 'auth'], function() {
 
 // ログインユーザーのみ、お気に入り画面を表示する
 Route::group(['middleware' => 'auth'], function() {
-   Route::get('/bookmarks','BookmarksController@index'); // コントローラー未作成
+   Route::get('/bookmarks','BookmarksController@index');
 });
 
 // ログインユーザーのみ、予約したジム情報の画面を表示する
 Route::group(['middleware' => 'auth'], function() {
-   Route::post('/booked_gym_introduction','GymController@booked_gym_index'); // コントローラー未作成
+   Route::post('/booked_gym_introduction','GymController@booked_gym_index');
 });
 
 
 // ログインユーザーのみ、チェックインを実行する
 Route::group(['middleware' => 'auth'], function() {
-   Route::get('/check_in','BookingController@check_in'); // コントローラー未作成
+   Route::get('/check_in','BookingController@check_in'); 
 });
 
 // ログインユーザーのみ、チェックアウトを実行する
 Route::group(['middleware' => 'auth'], function() {
-   Route::get('/check_out','BookingController@check_out'); // コントローラー未作成
+   Route::get('/check_out','BookingController@check_out'); 
 });
 
 // ログインユーザーのみ、ホストに対するレビュー入力画面を開く
 Route::group(['middleware' => 'auth'], function() {
-   Route::get('/review_to_host','ReviewController@guestToHost_create'); // コントローラー未作成
+   Route::get('/review_to_host','ReviewController@guestToHost_create');
 });
 
 
 
 // ログインユーザーのみ、ホストに対するレビューを登録する
 Route::group(['middleware' => 'auth'], function() {
-   Route::post('/review_submit','ReviewController@guestToHost_store'); // コントローラー未作成
+   Route::post('/review_submit','ReviewController@guestToHost_store'); 
 });
 
 // ログインユーザーのみ、ブックマークを登録 or 削除する
 Route::group(['middleware' => 'auth'], function() {
-   Route::post('/bookmark','BookmarkController@store'); // コントローラー未作成
+   Route::post('/bookmark','BookmarkController@store'); 
 });
 
 // ログインユーザーのみ、予約を更新する
@@ -124,4 +124,22 @@ Route::group(['middleware' => 'auth'], function() {
 // ログインユーザーのみ、レビュー内容を確認する
 Route::group(['middleware' => 'auth'], function() {
    Route::post('/review','MainController@does_not_exist'); // page404へ
+});
+
+// ログインユーザーのみ、メッセージを表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/messages','MainController@does_not_exist'); // page404へ
+});
+
+
+// ログインユーザーのみ、お気に入りを表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/bookmarks','MainController@does_not_exist'); // page404へ
+});
+
+
+
+// ログインユーザーのみ、お気に入りを表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/profile','MainController@does_not_exist'); // page404へ
 });

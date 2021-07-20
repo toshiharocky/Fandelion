@@ -39,7 +39,7 @@
 			<div class="col-lg-12">
 
 				<div id="add-listing">
-					<form method='POST' action='gym_register' enctype="multipart/form-data">
+					<form id="gym_add_submit" method='POST' action='gym_register' enctype="multipart/form-data">
             			@csrf
 						<!-- Section -->
 						<div class="add-listing-section">
@@ -1155,10 +1155,18 @@
     		$('#price_sun').empty();
     	}
 	 });
-	 
-	 
-		  
-									
+	 					
+	  </script>
+	  
+	  <script>
+	  	
+	  	$("#gym_add_submit").submit(function(){
+		    if(window.confirm('記載の内容でジムを登録しますか？')){ // 確認ダイアログを表示
+        		return true; // 「OK」時は送信を実行
+        	}else{ // 「キャンセル」時の処理
+        		return false; // 送信を中止
+	        }
+		});
 	  </script>
 @endpush
 @endsection
