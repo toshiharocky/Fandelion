@@ -126,6 +126,7 @@ function future(){
                     
                     //参考 あとで消す
                     let booking_date_from = new Date(booking_from_time[$i]);
+                    console.log(booking_date_from);
                     let booking_date_to = new Date(booking_to_time[$i]);
                     
                     let checkin_open = new Date(booking_date_from);
@@ -134,9 +135,9 @@ function future(){
                     
                     
                     
-                    let date = formatDate(booking_date_from);
-                    let from_time = formatTime(booking_date_from);
-                    let to_time = formatTime(booking_date_to);
+                    let date = formatDate(booking_from_time[$i]);
+                    let from_time = formatTime(booking_from_time[$i]);
+                    let to_time = formatTime(booking_to_time[$i]);
                     //参考 あとで消す
                     
                     // あとで復活
