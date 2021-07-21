@@ -69,7 +69,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h2>ジムを探す</h2>
-						<h4>あなたに合ったフィットネス環境をみつけましょう</h4>
+						<h4>あなたに合ったフィットネス環境を<br>みつけましょう</h4>
 	
 						<form method="put" action="search_results">
 						@csrf

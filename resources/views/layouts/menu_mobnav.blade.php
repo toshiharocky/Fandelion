@@ -64,6 +64,10 @@
 		.copyrights{
 			margin-bottom:50px;
 		}
+		.user-menu ul {
+		    left: auto;
+		    right: 15px;
+		}
 		
 	}
 	

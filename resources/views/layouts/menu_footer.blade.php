@@ -17,6 +17,13 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons%7CMaterial+Icons+Outlined" rel="stylesheet">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="stylesheet" href="https://use.typekit.net/wau6xrc.css">
+<style>
+	
+	.user-menu ul {
+	    left: auto;
+	    right: 15px;
+	}
+</style>
 
 </head>
 

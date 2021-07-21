@@ -52,6 +52,10 @@
 		.right-side{
 			display:none;
 		}
+		.user-menu ul {
+		    left: auto;
+		    right: 15px;
+		}
 	}
 	
 </style>
