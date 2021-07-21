@@ -14,12 +14,64 @@
     		display:flex;
     		align-items:center;
     	}
-    	
+    	.add_gym_map_parts{
+    		width:50%;
+    	}
+    	#equipment_list{
+    		display:flex;
+    		width:100%;
+    	}
+	@media (min-width: 991px){
+	    	.down_arrow{
+	    		display:none;
+	    	}
+			.add-listing-headline{
+				display:flex; 
+				flex-direction:row;
+			}
+			.day_details{
+				display:none;
+			}
+    	}
+	@media (max-width: 991px){
+		.add_gym_map_parts{
+    		width:100%;
+    	}
+    	.add_gym_map_parts > input{
+    		margin-bottom:0 !important;
+    	}
+    	#mapbutton{
+    		margin-top:20px;
+    	}
+    	.right_arrow{
+    		display:none;
+    	}
+    	.add-listing-section{
+    		padding:0 10px 25px;
+    	}
+		.add-listing-headline{
+			flex-direction:column;
+			padding:auto;
+		}
+		.day_price{
+			width:100%;
+			display:flex;
+		}
+		.price_q{
+			width:90%;
+		}
+		.opening-day-title{
+			display:none;
+		}
+    	#equipment_list{
+    		flex-direction:column;
+    	}
+	}
     </style>
 @endpush
 
 @section('content')
-<div class="dashboard-content">
+<div class="dashboard-content" >
 
 		<!-- Titlebar -->
 		<div id="titlebar">
@@ -167,7 +219,7 @@
 	
 									<!-- Zip-Code -->
 									<div class="col-md-6 add_gym_map">
-										<div class="add_gym_map_parts" style="width:45%;">
+										<div class="add_gym_map_parts">
 											<!--<h5>Zip-Code</h5>-->
 											<h4>〒</h4>
 											<input class="col-md-3" type="text" name="zip01" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','pref01','addr01','strt01');"><br>
@@ -176,10 +228,13 @@
 											<input class="col-md-6" id="street" type="text" name="strt01" size="60">
     										<input id="mapbutton" type="button" value="Encode" onclick="codeAddress()">
 										</div>
-										<div style="width:5%; text-align:center;">
+										<div style="width:5%; text-align:center;" class="right_arrow">
 											<i class="fas fa-caret-right" style="font-size:60px"></i>
 										</div>
-										<div class="add_gym_map_parts" style="width:50%;">
+										<div style="width:100%; text-align:center;" class="down_arrow">
+											<i class="fas fa-caret-down " style="font-size:80px"></i>
+										</div>
+										<div class="add_gym_map_parts">
 											<h5>ジムの所在地へドラッグしてください <i class="tip" ></i></h5>
 											<div id="map"  style="width:100%; height:300px;"></div>
 											<div id="map_place">
@@ -265,7 +320,7 @@
 															<a class="delete" ><i class="fa fa-remove"></i></a>
 														</div>
 														<div style="width:90%;">
-															<div style="display:flex;">
+															<div id="equipment_list">
 																<div class="fm-input col-md-12" style="margin-right:0; box-sizing:border-box;">
 																	<input list="equipment-list" name="equipment_name[]" type="text" placeholder="選択肢から選択 or 直接入力" />
 																	<datalist id="equipment-list">
@@ -278,14 +333,16 @@
 																		<option value="エアロバイク">エアロバイク</option>
 																	</datalist>
 																</div>
-																<div class="fm-input col-md-3"  style="margin-right:0; box-sizing:border-box;">
-																	<input name="min_weight[]" placeholder="Min Weight" style="text-align:right;"/>
+																<div style="display:flex;">
+																	<div class="fm-input col-md-3"  style="margin-right:0; box-sizing:border-box;">
+																		<input name="min_weight[]" placeholder="Min" style="text-align:right;"/>
+																	</div>
+																	<p style="display: inline-block; vertical-align: bottom; margin-right:0; width:7%; box-sizing:border-box;">kg ~ </p>
+																	<div class="fm-input col-md-3" style="margin-right:0;">
+																		<input name="max_weight[]" placeholder="Max" style="text-align:right;"/>
+																	</div>
+																	<p style="display: inline-block; vertical-align: bottom; margin-right:0; width:3%; box-sizing:border-box;">kg</p>
 																</div>
-																<p style="display: inline-block; vertical-align: bottom; margin-right:0; width:7%; box-sizing:border-box;">kg ~ </p>
-																<div class="fm-input col-md-3" style="margin-right:0;">
-																	<input name="max_weight[]" placeholder="Max Weight" style="text-align:right;"/>
-																</div>
-																<p style="display: inline-block; vertical-align: bottom; margin-right:0; width:3%; box-sizing:border-box;">kg</p>
 															</div>
 															<div class="fm-input col-md-12" style="margin-right:0; box-sizing:border-box;">
 																<input name="note[]" type="text" placeholder="備考"/>
@@ -314,7 +371,7 @@
 						<div class=" margin-top-45">
 							
 							<!-- Headline -->
-							<div class="add-listing-headline" style="display:flex; flex-direction:row;">
+							<div>
 								<h3 style="margin-right:10%;"><i class="sl sl-icon-clock"></i> Opening Hours</h3>
 								<!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
 								<p>開始日</p>
@@ -345,12 +402,15 @@
 							
 	
 								<!-- Day -->
-								<div class="row opening-day">
+								<div class="row opening-day row opening-day-title">
 									<div class="col-md-2"></div>
 									<div class="col-md-3" style="text-align:center;"><h5>開始時間</h5></div>
 									<div class="col-md-1"></div>
 									<div class="col-md-3" style="text-align:center;"><h5>終了時間</h5></div>
 									<div class="col-md-2" style="text-align:center;"><h5>15分あたりの価格</h5></div>
+								</div>
+								<div class="day_details">
+									<p>曜日別営業時間 & 価格</p>
 								</div>
 								<div class="row opening-day">
 									<div class="col-md-2" style="display:flex; flex-direction:row; align-items:center; justify-content:space-between;">
@@ -424,8 +484,8 @@
 												<option value="24:00">24:00</option>
 											</select>
 										</div>
-										<div id="price_mon">
-											<div class="col-md-2">
+										<div id="price_mon" class="day_price">
+											<div class="col-md-2 price_q">
 												<input name="monday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
 											</div>
 											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
@@ -505,8 +565,8 @@
 												<option value="24:00">24:00</option>
 											</select>
 										</div>
-										<div id="price_tue">
-											<div class="col-md-2">
+										<div id="price_tue" class="day_price">
+											<div class="col-md-2 price_q">
 												<input name="tuesday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
 											</div>
 											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
@@ -586,8 +646,8 @@
 												<option value="24:00">24:00</option>
 											</select>
 										</div>
-										<div id="price_wed">
-											<div class="col-md-2">
+										<div id="price_wed" class="day_price">
+											<div class="col-md-2 price_q">
 												<input name="wednesday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
 											</div>
 											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
@@ -667,8 +727,8 @@
 												<option value="24:00">24:00</option>
 											</select>
 										</div>
-										<div id="price_thur">
-											<div class="col-md-2">
+										<div id="price_thur" class="day_price">
+											<div class="col-md-2 price_q">
 												<input name="thursday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
 											</div>
 											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
@@ -748,8 +808,8 @@
 												<option value="24:00">24:00</option>
 											</select>
 										</div>
-										<div id="price_fri">
-											<div class="col-md-2">
+										<div id="price_fri" class="day_price">
+											<div class="col-md-2 price_q">
 												<input name="friday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
 											</div>
 											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
@@ -829,8 +889,8 @@
 												<option value="24:00">24:00</option>
 											</select>
 										</div>
-										<div id="price_sat">
-											<div class="col-md-2">
+										<div id="price_sat" class="day_price">
+											<div class="col-md-2 price_q">
 												<input name="saturday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
 											</div>
 											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
@@ -910,8 +970,10 @@
 												<option value="24:00">24:00</option>
 											</select>
 										</div>
-										<div id="price_sun">
-											<div class="col-md-2"><input name="sunday_price" style="text-align:right;" placeholder="15分あたりの価格" required></div>
+										<div id="price_sun" class="day_price">
+											<div class="col-md-2 price_q">
+												<input name="sunday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+											</div>
 											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 										</div>
 									</div>
