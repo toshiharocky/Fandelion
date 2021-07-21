@@ -63,6 +63,9 @@
 	    	.copyrights{
 	    		margin-top:450px;
 	    	}
+	    	.booking-sticky-footer h3{
+	    		font-size:18px;
+	    	}
 	    	
     	}
     </style>
