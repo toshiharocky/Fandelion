@@ -150,12 +150,13 @@ function future(){
                             }
                     }
                     
-                    let cancel_limit = new Date(new Date(booking_from_time[$i]));
-                    cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);
-                    console.log(cancel_limit);
+                    let cancel_limit = new Date(booking_from_time[$i]).toISOString();
+                    <!--cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);-->
                     
-                    let checkin_open = new Date(new Date(booking_from_time[$i]));
-                    checkin_open.setMinutes(checkin_open.getMinutes() - 15);
+                    <!--console.log(cancel_limit);-->
+                    
+                    let checkin_open = new Date(booking_from_time[$i]).toISOString();
+                    <!--checkin_open.setMinutes(checkin_open.getMinutes() - 15);-->
                     
                     let cancel_time_y = ("0"+new Date(cancel_limit).getFullYear()).slice(-4);
                     let cancel_time_m = ("0"+new Date(cancel_limit).getMonth()).slice(-2);
@@ -168,8 +169,7 @@ function future(){
         			let cancel_time = cancel_time_h + ":" + cancel_time_i;
         			console.log(cancel_time);
                     
-                    <!--let cancel_date = formatDate(cancel_limit);-->
-                    <!--let cancel_time = formatTime(cancel_limit);-->
+                    
                     
                     
                     
