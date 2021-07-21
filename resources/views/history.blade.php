@@ -9,6 +9,9 @@
         .active{
             background-color: #FED85D;
         }
+        .list-box-listing{
+            width:100%;
+        }
     </style>
 @endpush
 
@@ -24,6 +27,7 @@
 			</ul>
 		</div>
     	<div class="dashboard-list-box margin-top-0">
+	    <!--<div class="margin-top-0">-->
     		<ul>
     		    <div id="history_list">
         		</div>
@@ -147,7 +151,7 @@ function future(){
                 		`
             		    <li>
             		        <h3>${date}　${from_time}〜${to_time}</h3>
-                    		<div class="list-box-listing" style="width:60%;">
+                    		<div class="list-box-listing">
                     		    <div class="list-box-listing-img" style="display:flex;flex-direction:column;justify-content: center;">
                     			    <img src="images/gym_images/${gym_image_url[$i]}" alt="">
                 			    </div>
@@ -160,15 +164,15 @@ function future(){
                             		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                             		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
                         					<div style="text-align:center;">
-                        					    <input type="submit" class="button gray" style="width:80%; background-color:#f91942; color:white;" value="ジムの詳細を確認">
+                        					    <input type="submit" class="button gray" style="width:50%; background-color:#f91942; color:white;" value="ジムの詳細を確認">
                         				    </div>
                     			        </form>
                     				</div>
                     			</div>
-                    		</div>
-                		    <div id=${history_buttons} class="buttons-to-right" style="width:30%; text-align:center;">
-                    		    <div id=${check_in_out}></div>
-                    			<div id=${cancel}></div>
+                    		    <div id=${history_buttons}  style="width:30%; text-align:center;">
+                        		    <div id=${check_in_out}></div>
+                        			<div id=${cancel}></div>
+                        		</div>
                     		</div>
                 		</li>
                 		`)
@@ -344,7 +348,7 @@ function past(){
                 		`
             		    <li>
             		        <h3>${date}　${from_time}〜${to_time}</h3>
-                    		<div class="list-box-listing" style="width:60%;">
+                    		<div class="list-box-listing">
                     		    <div class="list-box-listing-img" style="display:flex;flex-direction:column;justify-content: center;">
                     			    <img src="images/gym_images/${gym_image_url[$i]}" alt="">
                 			    </div>
@@ -357,14 +361,14 @@ function past(){
                             		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                             		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
                         					<div style="text-align:center;">
-                        					    <input type="submit" class="button gray" style="width:80%; background-color:#f91942; color:white;" value="ジムの詳細を確認">
+                        					    <input type="submit" class="button gray" style="width:50%; background-color:#f91942; color:white;" value="ジムの詳細を確認">
                         				    </div>
                     			        </form>
                     				</div>
                     			</div>
-                    		</div>
-                		    <div class="buttons-to-right history_buttons" style="width:30%; text-align:center;">
-                    			<div class="review"></div>
+                    		    <div class="history_buttons" style="width:30%; text-align:center;">
+                        			<div class="review"></div>
+                        		</div>
                     		</div>
                 		</li>
                 		`)
