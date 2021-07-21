@@ -150,7 +150,7 @@ function future(){
                             }
                     }
                     
-                    let cancel_limit = new Date(booking_date_from);
+                    let cancel_limit = new Date(new Date(booking_from_time[$i]));
                     cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);
                     console.log(cancel_limit);
                     
@@ -209,8 +209,8 @@ function future(){
                     <!--let cancel_check = ;-->
                     
                     <!--let checkInTime_check= ;-->
-                    console.log(bookingstatus_id[$i]);
-                    console.log(bookingstatus_id[$i]);
+                    <!--console.log(bookingstatus_id[$i]);-->
+                    <!--console.log(bookingstatus_id[$i]);-->
                     
                     if(bookingstatus_id[$i]=='1' || bookingstatus_id[$i]=='5' || bookingstatus_id[$i]=='20'){ //1はあとでとる
                         
@@ -382,7 +382,6 @@ function past(){
         			let to_time_i = ("0"+new Date(booking_to_time[$i]).getMinutes()).slice(-2);
         			let to_time = to_time_h + ":" + to_time_i;
         			
-                    
                     
                     
                     function history_list(){
