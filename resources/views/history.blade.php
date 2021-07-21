@@ -49,7 +49,7 @@
 
 @push('js')
 <!--<script src="{{ asset('js/〇〇.js') }}"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.28.5/date_fns.min.js"/></script>
+
 
 
 <script>
@@ -102,17 +102,28 @@ function future(){
         if(future_bookings_flg == 1){
                 for($i=0; $i<booking_count; $i++){
                     
-                    // let booking_date_from = new Date(Date.parse(booking_from_time[$i]));
-                    let booking_date_from = dateFns.format(new Date(booking_from_time[$i]));
+                    
                     let booking_date_from_original = new Date(booking_from_time[$i]);
-                    console.log(booking_date_from);
+                    let booking_date_from = booking_date_from_original.toISOString();
                     let booking_date_to_original = new Date(Date.parse(booking_to_time[$i]));
                     let booking_date_to = booking_date_to_original.toISOString();
-                    // <!--console.log(booking_date_from);-->
                     
-                    let date = dateFns.format(new Date(booking_from_time[$i]), 'MM/DD');
-                    let from_time = dateFns.format(new Date(booking_from_time[$i]), 'MM/DD');
-                    let to_time = dateFns.format(new Date(booking_from_time[$i]), 'MM/DD');
+                    
+                    let from_time_y = ("0"+new Date(booking_from_time[$i]).getFullYear()).slice(-4);
+        			let from_time_m = ("0"+new Date(booking_from_time[$i]).getMonth()).slice(-2);
+        			let from_time_d = ("0"+new Date(booking_from_time[$i]).getDate()).slice(-2);
+        			let date = from_time_y + "/" + from_time_m + "/" + from_time_d;
+                    
+                    
+                    
+        			let from_time_h = ("0"+new Date(booking_from_time[$i]).getHours()).slice(-2);
+        			let from_time_i = ("0"+new Date(booking_from_time[$i]).getMinutes()).slice(-2);
+        			let from_time = from_time_h + ":" + from_time_i;
+        			let to_time_h = ("0"+new Date(booking_to_time[$i]).getHours()).slice(-2);
+        			let to_time_i = ("0"+new Date(booking_to_time[$i]).getMinutes()).slice(-2);
+        			let to_time = to_time_h + ":" + to_time_i;
+        			
+                    
                     
                     console.log(date);
                     
@@ -151,13 +162,18 @@ function future(){
                             }
                     }
                     
-                    let cancel_limit = new Date(booking_date_from);
+                    let cancel_limit = new Date(booking_date_from_original);
                     cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);
                     
-                    let checkin_open = new Date(booking_date_from);
+                    let checkin_open = new Date(booking_date_from_original);
                     checkin_open.setMinutes(checkin_open.getMinutes() - 15);
                     
-                    
+           <!--         let cancel_time_y = ("0"+new Date(booking_from_time[$i]).getFullYear()).slice(-4);-->
+           <!--         let cancel_time_m = ("0"+new Date(booking_from_time[$i]).getMonth()).slice(-2);-->
+        			<!--let cancel_time_d = ("0"+new Date(booking_from_time[$i]).getDate()).slice(-2);-->
+        			<!--let cancel_date = cancel_time_y-->
+           <!--         let cancel_time_h = ("0"+new Date(booking_to_time[$i]).getHours()).slice(-2);-->
+        			<!--let cancel_time_i = ("0"+new Date(booking_to_time[$i]).getMinutes()).slice(-2);-->
                     
                     let cancel_date = formatDate(cancel_limit);
                     let cancel_time = formatTime(cancel_limit);
@@ -169,8 +185,7 @@ function future(){
                     
                 		`
             		    <li>
-            		        <h3>${date}</h3>
-            		        <h3>${from_time}〜${to_time}</h3>
+            		        <h3>${date}　   ${from_time}〜${to_time}</h3>
                     		<div class="list-box-listing">
                     		    <div class="list-box-listing-img" style="display:flex;flex-direction:column;justify-content: center;">
                     			    <img src="images/gym_images/${gym_image_url[$i]}" alt="">
@@ -353,13 +368,27 @@ function past(){
         if(past_bookings_flg == 1){
                 for($i=0; $i<booking_count; $i++){
                     
-                    let booking_date_from = new Date(Date.parse(booking_from_time[$i]));
-                    let booking_date_to = new Date(Date.parse(booking_to_time[$i]));
+                    let booking_date_from_original = new Date(booking_from_time[$i]);
+                    let booking_date_from = booking_date_from_original.toISOString();
+                    let booking_date_to_original = new Date(Date.parse(booking_to_time[$i]));
+                    let booking_date_to = booking_date_to_original.toISOString();
                     
                     
-                    let date = formatDate(booking_date_from);
-                    let from_time = formatTime(booking_date_from);
-                    let to_time = formatTime(booking_date_to);
+                    let from_time_y = ("0"+new Date(booking_from_time[$i]).getFullYear()).slice(-4);
+        			let from_time_m = ("0"+new Date(booking_from_time[$i]).getMonth()).slice(-2);
+        			let from_time_d = ("0"+new Date(booking_from_time[$i]).getDate()).slice(-2);
+        			let date = from_time_y + "/" + from_time_m + "/" + from_time_d;
+                    
+                    
+                    
+        			let from_time_h = ("0"+new Date(booking_from_time[$i]).getHours()).slice(-2);
+        			let from_time_i = ("0"+new Date(booking_from_time[$i]).getMinutes()).slice(-2);
+        			let from_time = from_time_h + ":" + from_time_i;
+        			let to_time_h = ("0"+new Date(booking_to_time[$i]).getHours()).slice(-2);
+        			let to_time_i = ("0"+new Date(booking_to_time[$i]).getMinutes()).slice(-2);
+        			let to_time = to_time_h + ":" + to_time_i;
+        			
+                    
                     
                     
                     function history_list(){
@@ -367,7 +396,7 @@ function past(){
                     
                 		`
             		    <li>
-            		        <h3>${date}　${from_time}〜${to_time}</h3>
+            		        <h3>${date}　   ${from_time}〜${to_time}</h3>
                     		<div class="list-box-listing">
                     		    <div class="list-box-listing-img" style="display:flex;flex-direction:column;justify-content: center;">
                     			    <img src="images/gym_images/${gym_image_url[$i]}" alt="">
