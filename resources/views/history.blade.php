@@ -49,6 +49,9 @@
 
 @push('js')
 <!--<script src="{{ asset('js/〇〇.js') }}"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.28.5/date_fns.min.js"/></script>
+
+
 <script>
 let booking_check = "{{$booking_check}}";
 // console.log(booking_check == 0);
@@ -99,13 +102,18 @@ function future(){
         if(future_bookings_flg == 1){
                 for($i=0; $i<booking_count; $i++){
                     
-                    let booking_date_from = new Date(Date.parse(booking_from_time[$i]));
-                    let booking_date_to = new Date(Date.parse(booking_to_time[$i]));
-                    
-                    let date = formatDate(booking_date_from);
-                    let from_time = formatTime(booking_date_from);
-                    let to_time = formatTime(booking_date_to);
+                    // let booking_date_from = new Date(Date.parse(booking_from_time[$i]));
+                    let booking_date_from = dateFns.format(new Date(booking_from_time[$i]));
+                    let booking_date_from_original = new Date(booking_from_time[$i]);
                     console.log(booking_date_from);
+                    let booking_date_to_original = new Date(Date.parse(booking_to_time[$i]));
+                    let booking_date_to = booking_date_to_original.toISOString();
+                    // <!--console.log(booking_date_from);-->
+                    
+                    let date = dateFns.format(new Date(booking_from_time[$i]), 'MM/DD');
+                    let from_time = dateFns.format(new Date(booking_from_time[$i]), 'MM/DD');
+                    let to_time = dateFns.format(new Date(booking_from_time[$i]), 'MM/DD');
+                    
                     console.log(date);
                     
                     
@@ -161,7 +169,7 @@ function future(){
                     
                 		`
             		    <li>
-            		        <h3>${booking_date_from}</h3>
+            		        <h3>${date}</h3>
             		        <h3>${from_time}〜${to_time}</h3>
                     		<div class="list-box-listing">
                     		    <div class="list-box-listing-img" style="display:flex;flex-direction:column;justify-content: center;">
