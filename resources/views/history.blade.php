@@ -12,6 +12,13 @@
         .list-box-listing{
             width:100%;
         }
+        
+        @media (max-width: 991px){
+            .list-box-listing{
+                display: flex;
+                flex-direction: column;
+            }
+        }
     </style>
 @endpush
 
