@@ -81,19 +81,19 @@ let gym_image_url = @json($gym_image_url);
 
 <script>
 // 日付をYYYY/MM/DDの書式で返すメソッド
-<!--function formatDate(dt) {-->
-<!--  var y = ('0'+new Date(dt).getFullYear()).slice(-4);-->
-<!--  var m = ('0' + new Date(dt).getMonth()).slice(-2);-->
-<!--  m ++;-->
-<!--  var d = ('0' + new Date(dt).getDate()).slice(-2);-->
-<!--  return (y + '/' + m + '/' + d);-->
-<!--}-->
+function formatDate(dt) {
+  var y = ('0'+new Date(dt).getFullYear()).slice(-4);
+  var m = ('0' + new Date(dt).getMonth()).slice(-2);
+  m ++;
+  var d = ('0' + new Date(dt).getDate()).slice(-2);
+  return (y + '/' + m + '/' + d);
+}
 // 日付をhh:iiの書式で返すメソッド
-<!--function formatTime(dt) {-->
-<!--  var h = ('00' + new Date(dt).getHours()).slice(-2);-->
-<!--  var i = ('00' + new Date(dt).getMinutes()).slice(-2);-->
-<!--  return (h + ':' + i);-->
-<!--}-->
+function formatTime(dt) {
+  var h = ('00' + new Date(dt).getHours()).slice(-2);
+  var i = ('00' + new Date(dt).getMinutes()).slice(-2);
+  return (h + ':' + i);
+}
 
 
 
@@ -125,20 +125,18 @@ function future(){
                 for($i=0; $i<booking_count; $i++){
                     
                     //参考 あとで消す
-                    let booking_date_from = new Date(booking_from_time[$i]).toISOString();
-                    let booking_date_to = new Date(booking_to_time[$i]).toISOString();
+                    let booking_date_from = new Date(booking_from_time[$i]);
+                    let booking_date_to = new Date(booking_to_time[$i]);
                     
                     let checkin_open = new Date(booking_date_from);
                     checkin_open.setMinutes(checkin_open.getMinutes() - 15);
                     
                     
-                    let date = booking_date_from;
-                    let from_time = booking_date_from;
-                    let to_time = booking_date_to;
                     
-                    <!--let date = formatDate(booking_date_from);-->
-                    <!--let from_time = formatTime(booking_date_from);-->
-                    <!--let to_time = formatTime(booking_date_to);-->
+                    
+                    let date = formatDate(booking_date_from);
+                    let from_time = formatTime(booking_date_from);
+                    let to_time = formatTime(booking_date_to);
                     //参考 あとで消す
                     
                     // あとで復活
@@ -203,14 +201,13 @@ function future(){
                     
                     
                     // 参考 後で消す
-                    let cancel_limit = new Date(booking_date_from).toISOString();
-                    <!--cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);-->
+                    let cancel_limit = new Date(booking_date_from);
+                    cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);
                     
-                    let cancel_date = cancel_limit;
-                    let cancel_time = cancel_limit;
                     
-                    <!--let cancel_date = formatDate(cancel_limit);-->
-                    <!--let cancel_time = formatTime(cancel_limit);-->
+                    
+                    let cancel_date = formatDate(cancel_limit);
+                    let cancel_time = formatTime(cancel_limit);
                     // 参考 後で消す
                     
                     
