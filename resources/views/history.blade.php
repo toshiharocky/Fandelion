@@ -157,7 +157,8 @@ function future(){
                     
                 		`
             		    <li>
-            		        <h3>${date}　${from_time}〜${to_time}</h3>
+            		        <h3>${date}</h3>
+            		        <h3>${from_time}〜${to_time}</h3>
                     		<div class="list-box-listing">
                     		    <div class="list-box-listing-img" style="display:flex;flex-direction:column;justify-content: center;">
                     			    <img src="images/gym_images/${gym_image_url[$i]}" alt="">
