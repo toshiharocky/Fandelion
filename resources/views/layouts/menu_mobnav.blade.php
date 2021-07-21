@@ -61,6 +61,9 @@
 			border-top:none;
 			padding-top:5px;
 		}
+		.copyrights{
+			margin-bottom:30px;
+		}
 		
 	}
 	

@@ -45,7 +45,7 @@ class BookingController extends Controller
                     ->orderBy('booking_from_time', 'asc')
                     ->get();
         
-        
+        // dd($user_histories);
         
         foreach($user_histories as $user_history){
                 $booking_id[] = $user_history->id;
@@ -70,17 +70,21 @@ class BookingController extends Controller
             }
         // dd($bookingstatus_id);
         
-        if(in_array(1, $bookingstatus_id) || in_array(5, $bookingstatus_id) || in_array(20, $bookingstatus_id)){
-            $future_bookings_flg = 1; 
-        }else {
-            $future_bookings_flg = 0;
+        if(isset($bookingstatus_id)){
+            if(in_array(1, $bookingstatus_id) || in_array(5, $bookingstatus_id) || in_array(20, $bookingstatus_id)){
+                $future_bookings_flg = 1; 
+            }else {
+                $future_bookings_flg = 0;
+            }
+            
+            if(in_array(25, $bookingstatus_id) || in_array(30, $bookingstatus_id) || in_array(35, $bookingstatus_id)){
+                $past_bookings_flg = 1;
+            }else{
+                $past_bookings_flg = 0;
+            };
         }
         
-        if(in_array(25, $bookingstatus_id) || in_array(30, $bookingstatus_id) || in_array(35, $bookingstatus_id)){
-            $past_bookings_flg = 1;
-        }else{
-            $past_bookings_flg = 0;
-        };
+        
         
         //$booking_idが存在しない（＝予約がゼロ）かどうかによって、history.blade.phpに渡す値を変える
         if(isset($booking_id)){
