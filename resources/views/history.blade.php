@@ -125,8 +125,8 @@ function future(){
                 for($i=0; $i<booking_count; $i++){
                     
                     //参考 あとで消す
-                    let booking_date_from = new Date(Date.parse(booking_from_time[$i])).toISOString();
-                    let booking_date_to = new Date(Date.parse(booking_to_time[$i])).toISOString();
+                    let booking_date_from = new Date(booking_from_time[$i]).toISOString();
+                    let booking_date_to = new Date(booking_to_time[$i]).toISOString();
                     
                     let checkin_open = new Date(booking_date_from);
                     checkin_open.setMinutes(checkin_open.getMinutes() - 15);
