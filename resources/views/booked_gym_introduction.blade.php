@@ -2,6 +2,31 @@
 
 @push('css')
     <!--<link href="{{ asset('css/〇〇.css') }}" rel="stylesheet">-->
+<style>
+	.booking-sticky-footer{
+		background-color:#f6f6f6;
+	}
+	@media (min-width: 991px){
+		.listing-titlebar-title{
+			max-width:70%;
+		}
+	}
+	@media (max-width: 991px){
+		.book_request{
+			display:none !important;
+		}
+		.price_range{
+			display:none;
+		}
+		.listing-titlebar-title{
+			width:100%;
+		}
+		.cancel_policy{
+			padding: 10px !important;
+		}
+		
+	}
+</style>
 @endpush
 
 @section('content')
@@ -27,19 +52,28 @@
 		
 			<!-- Titlebar -->
 			<div id="titlebar" class="listing-titlebar" style="display:flex; flex-direction:row; justify-content:space-between;">
-				<div class="listing-titlebar-title" style="max-width:70%;">
-					<h2>{{$gym_title}} 
-						<div id=gym_tags></div>
-					</h2>
-					<span>
+				<div class="listing-titlebar-title">
+					<h2>{{$gym_title}} </h2>
+					<h5>
 						<a href="#listing-location" class="listing-address">
 							<i class="fa fa-map-marker"></i>
 							{{$addr}}
 						</a>
-					</span>
+					</h5>
+					<div id=gym_tags></div>
 					<div class="star-rating" data-rating="5">
 						<div class="rating-counter"><a href="#listing-reviews">({{$review_amount}} reviews)</a></div>
 					</div>
+				</div>
+				<div class="listing-titlebar-title price_range" style="text-align:right;">
+					<h2>{{$price_range}} 
+						<!--<span class="listing-tag">Eat & Drink</span>-->
+					</h2>
+					<span>
+						<a href="#listing-location" class="listing-address">
+							(15分あたり)
+						</a>
+					</span>
 				</div>
 			</div>
 
@@ -76,7 +110,7 @@
 				<!--<div class="show-more">-->
 					<div class="pricing-list-container">
 						<ul>
-							<li>
+							<li class="cancel_policy">
 								<h5>{{$cancel_policy[0]->policy_name}}</h5>
 								<p>{{$cancel_policy[0]->policy_desc}}</p>
 							</li>
@@ -148,9 +182,9 @@
 
 				
 			<!-- Verified Badge -->
-			<div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
-				<i class="sl sl-icon-check"></i> Verified Listing
-			</div>
+			<!--<div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">-->
+			<!--	<i class="sl sl-icon-check"></i> Verified Listing-->
+			<!--</div>-->
 
 			<!-- Book Now -->
 			<div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35">
@@ -211,40 +245,40 @@
 				</div>
 				
 				<!-- Book Now -->
-				<a href="/gym_booking" class="button book-now fullwidth margin-top-5">Request To Book</a>
+				<a href="/gym_booking" class="book_request button book-now fullwidth margin-top-5">Request To Book</a>
 			</div>
 			<!-- Book Now / End -->
 
 
 			<!-- Coupon Widget -->
-			<div class="coupon-widget" style="background-image: url(https://localhost/listeo_html/images/single-listing-01.jpg);">
-				<a href="#" class="coupon-top">
-					<span class="coupon-link-icon"></span>
-					<h3>Order 1 burger and get 50% off on second!</h3>
-					<div class="coupon-valid-untill">Expires 25/10/2019</div>
-					<div class="coupon-how-to-use"><strong>How to use?</strong> Just show us this coupon on a screen of your smartphone!</div>
-				</a>
-				<div class="coupon-bottom">
-					<div class="coupon-scissors-icon"></div>
-					<div class="coupon-code">L1ST30</div>
-				</div>
-			</div>
+			<!--<div class="coupon-widget" style="background-image: url(https://localhost/listeo_html/images/single-listing-01.jpg);">-->
+			<!--	<a href="#" class="coupon-top">-->
+			<!--		<span class="coupon-link-icon"></span>-->
+			<!--		<h3>Order 1 burger and get 50% off on second!</h3>-->
+			<!--		<div class="coupon-valid-untill">Expires 25/10/2019</div>-->
+			<!--		<div class="coupon-how-to-use"><strong>How to use?</strong> Just show us this coupon on a screen of your smartphone!</div>-->
+			<!--	</a>-->
+			<!--	<div class="coupon-bottom">-->
+			<!--		<div class="coupon-scissors-icon"></div>-->
+			<!--		<div class="coupon-code">L1ST30</div>-->
+			<!--	</div>-->
+			<!--</div>-->
 
 		
 			<!-- Opening Hours -->
-			<div class="boxed-widget opening-hours margin-top-35">
-				<div class="listing-badge now-open">Now Open</div>
-				<h3><i class="sl sl-icon-clock"></i> Opening Hours</h3>
-				<ul>
-					<li>Monday <span>9 AM - 5 PM</span></li>
-					<li>Tuesday <span>9 AM - 5 PM</span></li>
-					<li>Wednesday <span>9 AM - 5 PM</span></li>
-					<li>Thursday <span>9 AM - 5 PM</span></li>
-					<li>Friday <span>9 AM - 5 PM</span></li>
-					<li>Saturday <span>9 AM - 3 PM</span></li>
-					<li>Sunday <span>Closed</span></li>
-				</ul>
-			</div>
+			<!--<div class="boxed-widget opening-hours margin-top-35">-->
+			<!--	<div class="listing-badge now-open">Now Open</div>-->
+			<!--	<h3><i class="sl sl-icon-clock"></i> Opening Hours</h3>-->
+			<!--	<ul>-->
+			<!--		<li>Monday <span>9 AM - 5 PM</span></li>-->
+			<!--		<li>Tuesday <span>9 AM - 5 PM</span></li>-->
+			<!--		<li>Wednesday <span>9 AM - 5 PM</span></li>-->
+			<!--		<li>Thursday <span>9 AM - 5 PM</span></li>-->
+			<!--		<li>Friday <span>9 AM - 5 PM</span></li>-->
+			<!--		<li>Saturday <span>9 AM - 3 PM</span></li>-->
+			<!--		<li>Sunday <span>Closed</span></li>-->
+			<!--	</ul>-->
+			<!--</div>-->
 			<!-- Opening Hours / End -->
 
 
@@ -273,7 +307,7 @@
 					</div>
 					<div class="message-reply margin-top-0">
 						<textarea cols="40" rows="3" placeholder="Your message to Tom"></textarea>
-						<button class="button">Send Message</button>
+						<a href="messages" class="button">Send Message</a>
 					</div>
 				</div>
 
@@ -283,9 +317,9 @@
 
 
 			<!-- Share / Like -->
-			<div class="listing-share margin-top-40 margin-bottom-40 no-border">
-				<button class="like-button"><span class="like-icon"></span> Bookmark this listing</button> 
-				<span>159 people bookmarked this place</span>
+			<!--<div class="listing-share margin-top-40 margin-bottom-40 no-border">-->
+			<!--	<button class="like-button"><span class="like-icon"></span> Bookmark this listing</button> -->
+			<!--	<span>159 people bookmarked this place</span>-->
 
 					<!-- Share Buttons -->
 					<!--<ul class="share-buttons margin-top-40 margin-bottom-0">-->
@@ -294,8 +328,8 @@
 					<!--	<li><a class="gplus-share" href="#"><i class="fa fa-google-plus"></i> Share</a></li>-->
 						<!-- <li><a class="pinterest-share" href="#"><i class="fa fa-pinterest-p"></i> Pin</a></li> -->
 					<!--</ul>-->
-					<div class="clearfix"></div>
-			</div>
+			<!--		<div class="clearfix"></div>-->
+			<!--</div>-->
 
 		</div>
 		<!-- Sidebar / End -->
@@ -310,13 +344,14 @@
 <div class="booking-sticky-footer">
 	<div class="container">
 		<div class="bsf-left">
-			<h4>Starting from $29</h4>
+			<h3>{{$price_range}}</h3>
+			<h4>(15分あたり)</h4>
 			<div class="star-rating" data-rating="5">
 				<div class="rating-counter"></div>
 			</div>
 		</div>
 		<div class="bsf-right">
-			<a href="#booking-widget-anchor" class="button">Book Now</a>
+			<a href="/gym_booking" class="button">Book Now</a>
 		</div>
 	</div>
 </div>
@@ -369,19 +404,24 @@
 			return (elem.date == date);
 		});
 		
-		<!--console.log(openingtime_of_the_day[0].from_time);-->
 		
-		$.each(openingtimes, function(index,openingtime){
+		if(openingtimes==""){
 			$("#opening-time-slot").append(
-			`<div class="time-slot">
-				<p id="time-slot-1" >
-				<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">
-					<strong class="booking_status" style="font-size:25px; padding-right:15px;">${openingtime.status}</strong>
-					<strong>${openingtime.from_time} - ${openingtime.to_time}</strong>
-				</label>
-				</p>
-			</div>`);
-		});
+			`<h5>利用可能な時間帯はありません</h5>`
+			)
+		}else{
+			$.each(openingtimes, function(index,openingtime){
+			$("#opening-time-slot").append(
+				`<div class="time-slot">
+					<p id="time-slot-1" >
+					<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">
+						<strong class="booking_status" style="font-size:25px; padding-right:15px;">${openingtime.status}</strong>
+						<strong>${openingtime.from_time} - ${openingtime.to_time}</strong>
+					</label>
+					</p>
+				</div>`);
+			});
+		}
 		
 		
 		

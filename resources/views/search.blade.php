@@ -8,7 +8,52 @@
     	overflow: hidden;
 	    text-overflow: ellipsis;
 	    white-space: nowrap;
-    }	
+    }
+    .main-search-input{
+	    	width:60%;
+	    }
+    .panel-dropdown{
+	    	width:20%;
+	    }
+    #search{
+    	width:15%;
+    }
+    .featured-gyms{
+    	display:flex;
+    	justify-content:space-around;
+    	width:95%;
+	    margin: 0 auto;
+    }
+    .fw-carousel-item {
+	    width: 24%;
+	}
+    
+    
+    @media (max-width: 991px){
+	    .main-search-input{
+	    	width:100%;
+	    }
+	    .panel-dropdown{
+	    	width:100%;
+	    }
+	    #search{
+	    	width:100%;
+	    	margin-top:50px;
+	    }
+	    #search > input{
+	    	width:100%;
+	    	margin-top:50px;
+	    }
+	    .featured-gyms{
+	    	flex-direction:column;
+	    	justify-content:space-around;
+	    	width:95%;
+		    margin: 0 auto;
+	    }
+	    .fw-carousel-item {
+		    width: 100%;
+		}
+    }
     </style>
 @endpush
 
@@ -28,7 +73,7 @@
 	
 						<form method="put" action="search_results">
 						@csrf
-							<div class="main-search-input" style="width:60%;">
+							<div class="main-search-input">
 		
 								<!-- <div class="main-search-input-item">
 									<input type="text" placeholder="What are you looking for?" value=""/>
@@ -46,7 +91,7 @@
 								</div>
 		
 							<!--<div class="main-search-input-item" >-->
-								<div class="panel-dropdown" style="width:20%;">
+								<div class="panel-dropdown">
 									<a href="#"  style="width:100%; text-align:center;">Guests <span class="qtyTotal" name="qtyTotal" style="background-color:#f91942">1</span></a>
 									<div class="panel-dropdown-content">
 	
@@ -73,7 +118,7 @@
 										</div>
 									</div>
 								</div>
-								<div style="width:15%;" id="search" >
+								<div id="search" >
 									<input type="button" onclick="submit();" class="button search-button" value="Search" style="background-color:#dcdcdc; color:white;" disabled>
 								</div>
 							</form>
@@ -115,7 +160,8 @@
 		</div>
 	
 		<!-- Carousel / Start -->
-		<div class="simple-fw-slick-carousel dots-nav">
+		<div class="featured-gyms dots-nav"> 
+		<!--//simple-fw-slick-carousel-->
 			@if ($area_gyms_count > 1)
 				@for ($i = 0; $i < $area_gyms_count; $i++)
 				<!-- Listing Item -->
@@ -195,7 +241,8 @@
 		</div>
 	
 		<!-- Carousel / Start -->
-		<div class="simple-fw-slick-carousel dots-nav">
+		<div class="featured-gyms dots-nav"> 
+		<!--//simple-fw-slick-carousel-->
 			@if ($whole_gyms_count > 1)
 				@for ($i = 0; $i < $whole_gyms_count; $i++)
 				 <!--Listing Item -->

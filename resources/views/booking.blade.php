@@ -15,8 +15,6 @@
     		justify-content:space-around;
     	}
     	
-    	
-    	
     	.element_details{
     		text-align:right;
     	}
@@ -38,7 +36,35 @@
     	.cursor {
     		cursor: pointer !important;
     	}
-    	
+	@media (min-width: 991px){
+	    	#titlebar{
+	    		display:flex; 
+	    		flex-direction:row; 
+	    		justify-content:space-between; 
+	    		max-width:50%;
+	    	}
+    	}
+	@media (max-width: 991px){
+	    	#booking-widget-anchor{
+	    		display:none;
+	    	}
+	    	#titlebar{
+	    		display:flex; 
+	    		flex-direction:row; 
+	    		justify-content:space-between; 
+	    		width:100%;
+	    	}
+	    	.booking-sticky-footer{
+	    		flex-direction:column;
+	    	}
+	    	#time_2, #guest_2, #price_2{
+	    		width:80%;
+	    	}
+	    	.copyrights{
+	    		margin-top:450px;
+	    	}
+	    	
+    	}
     </style>
 @endpush
 
@@ -48,17 +74,14 @@
 <div class="container">
 	<div id="booking_header">
 		<!-- Titlebar -->
-			<div id="titlebar" class="listing-titlebar" style="display:flex; flex-direction:row; justify-content:space-between; max-width:50%;">
+			<div id="titlebar" class="listing-titlebar" >
 				<div class="listing-titlebar-title">
-					<h2>{{$gym_title}} 
-						<div id=gym_tags></div>
-					</h2>
-					<span>
-						<a href="#listing-location" class="listing-address">
-							<i class="fa fa-map-marker"></i>
-							{{$addr}}
-						</a>
-					</span>
+					<h2>{{$gym_title}} </h2>
+					<h5>
+						<i class="fa fa-map-marker"></i>
+						{{$addr}}
+					</h5>
+					<div id=gym_tags></div>
 				</div>
 			</div>
 			
@@ -105,12 +128,12 @@
 			<!--booking_information-->
 			<h3 class="listing-desc-headline margin-top-0 margin-bottom-30">予約をする</h3>
 			
-			<div style="display:flex; justify-content:space-between; align-items:middle ;">
-    			<div>
-    			    <h4 class="listing-desc-headline margin-top-0 margin-bottom-30">人数</h4>
+			<div style="display:flex; justify-content:space-between; align-items:center;">
+    			<div style="display:flex; flex-direction:column; align-items:center;">
+    			    <h4 class="listing-desc-headline" style="margin:10px 0;">人数</h4>
 			    </div>
-    			<div class="main-search-input-item" style="display:flex; justify-content:flex-start; border-right:none; ">
-        			<div class="panel-dropdown" style="width:50%;">
+    			<div class="main-search-input-item" style="display:flex; justify-content:flex-start; border-right:none; margin-left:40px;">
+        			<div class="panel-dropdown" style="width:50%; margin:0;">
         				<a href="#"  style="width:100%; text-align:center; font-size:20px;">合計 <span class="qtyTotal" name="qtyTotal" style="background-color:#f91942; font-size:20px">1</span></a>
         				<div class="panel-dropdown-content">
         
@@ -135,7 +158,7 @@
 			</div>
     			
     		</div>
-			<h4 class="listing-desc-headline margin-top-0 margin-bottom-30">日程</h4>
+			<h4 class="listing-desc-headline margin-top-20 margin-bottom-20">日程</h4>
 			<div class="row with-forms  margin-top-0">
 					<!-- Date Range Picker - docs: https://www.daterangepicker.com/ -->
 					<div id="select_time_range">
@@ -276,9 +299,9 @@
 
 
 			<!-- Share / Like -->
-			<div class="listing-share margin-top-40 margin-bottom-40 no-border">
-				<button class="like-button"><span class="like-icon"></span> Bookmark this listing</button> 
-				<span>159 people bookmarked this place</span>
+			<!--<div class="listing-share margin-top-40 margin-bottom-40 no-border">-->
+			<!--	<button class="like-button"><span class="like-icon"></span> Bookmark this listing</button> -->
+			<!--	<span>159 people bookmarked this place</span>-->
 
 					<!-- Share Buttons -->
 					<!--<ul class="share-buttons margin-top-40 margin-bottom-0">-->
@@ -287,8 +310,8 @@
 					<!--	<li><a class="gplus-share" href="#"><i class="fa fa-google-plus"></i> Share</a></li>-->
 						<!-- <li><a class="pinterest-share" href="#"><i class="fa fa-pinterest-p"></i> Pin</a></li> -->
 					<!--</ul>-->
-					<div class="clearfix"></div>
-			</div>
+			<!--		<div class="clearfix"></div>-->
+			<!--</div>-->
 
 		</div>
 		<!-- Sidebar / End -->
@@ -302,17 +325,35 @@
 
 <!-- Booking Sticky Footer -->
 <div class="booking-sticky-footer">
-	<div class="container">
-		<div class="bsf-left">
-			<h4>Starting from $29</h4>
-			<div class="star-rating" data-rating="5">
-				<div class="rating-counter"></div>
+	<h3 style="text-align:center;"><i class="fa fa-calendar-check-o "></i>現在の予約内容</h3>
+	<form method=post action='booking_confirm'>
+	@csrf
+		<div id="booking_overview_2" style="display:flex; flex-direction:column; align-items:center;">
+			<div id="time_2" class="booking_elements">
+				<div id="total_time_2">
+					<h3>時間</h3>
+				</div>
+				<div id="selected_date_2"></div>
+				<div id="selected_slot_2"></div>
+				<div id="slot_caution_2"></div>
 			</div>
+			<div id="guest_2" class="booking_elements">
+				<div id="guest_details_2">
+					<h3>人数</h3>
+				</div>
+				<div id="guest_caution_2"></div>
+			</div>
+			<div id="price_2" class="booking_elements">
+				<h3>総計</h3>
+			</div>
+			
 		</div>
-		<div class="bsf-right">
-			<a href="#booking-widget-anchor" class="button">Book Now</a>
+		
+		<!-- Book Now -->
+		<div id="submit_button_2" style="display:flex; justify-content:center; margin-top:30px;">
+			<input type="submit" class="button book-now fullwidth margin-top-5" value="予約内容の確認" style="width:80%; background-color:#dcdcdc; color:white;" disabled>
 		</div>
-	</div>
+	</form>
 </div>
 
 </div>
@@ -402,13 +443,21 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 		if($("#guest_caution > h5").length==0 && $("#slot_caution > h5").length==0 && 
 		$("#selected_slot > div > h5").length>0 && $("#guest_details > h5").length>0) {
 			$("#submit_button").empty();
+			$("#submit_button_2").empty();
 			$("#submit_button").append(
 				`<input type="submit" class="button book-now fullwidth margin-top-5" value="予約内容の確認" style="background-color:#f91942; color:white;">`
 			);
+			$("#submit_button_2").append(
+				`<input type="submit" class="button book-now fullwidth margin-top-5" value="予約内容の確認" style="width:80%; background-color:#f91942; color:white;">`
+			);
 		}else {
 			$("#submit_button").empty();
+			$("#submit_button_2").empty();
 			$("#submit_button").append(
 				`<input type="submit" class="button book-now fullwidth margin-top-5" value="予約内容の確認" style="background-color:#dcdcdc; color:white;" disabled>`
+			);
+			$("#submit_button_2").append(
+				`<input type="submit" class="button book-now fullwidth margin-top-5" value="予約内容の確認" style="width:80%; background-color:#dcdcdc; color:white;" disabled>`
 			);
 		}
 	}
@@ -457,7 +506,9 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 		// genderの希望と合っていない時にアラート
 		if(gender_check == "OK"){
 			$("#guest_details").empty();
+			$("#guest_details_2").empty();
 			$("#guest_caution").empty();
+			$("#guest_caution_2").empty();
 			$("#guest_details").append(
 				`
 				<h4 name="number_of_users">人数：${total_people}名</h4>
@@ -470,34 +521,67 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 				<input name="number_of_others" type="hidden" value="${others}">
 				`
 			);
+			$("#guest_details_2").append(
+				`
+				<h3 name="number_of_users">人数：${total_people}名</h3>
+				<input name="number_of_users" type="hidden" value="${total_people}">
+				<h4 name="number_of_men" class="element_details">男性 ${men}名</h4>
+				<input name="number_of_men"  type="hidden" value="${men}">
+				<h4 name="number_of_women" class="element_details">女性 ${women}名</h4>
+				<input name="number_of_women" type="hidden" value="${women}">
+				<h4 name="number_of_others" class="element_details">その他 ${others}名</h4>
+				<input name="number_of_others" type="hidden" value="${others}">
+				`
+			);
 		}else{
 			$("#guest_details").empty();
+			$("#guest_details_2").empty();
 			$("#guest_caution").empty();
+			$("#guest_caution_2").empty();
 			$("#guest_caution").append(
 				`
 				<h4 name="number_of_users">人数</h4>
 				<h5 style="color:#f91942;">${guest_gender}です</h5>`
+			);
+			$("#guest_caution_2").append(
+				`
+				<h3 name="number_of_users">人数</h3>
+				<h4 style="color:#f91942; text-align:right;">${guest_gender}です</h4>`
 			);
 		}
 		
 		// 定員超えした際にアラート
 		if(total_people > guest_limit){
 			$("#guest_details").empty();
+			$("#guest_details_2").empty();
 			$("#guest_caution").empty();
+			$("#guest_caution_2").empty();
 			$("#guest_caution").append(
 				`
 				<h4 name="number_of_users">人数</h4>
 				<h5 style="color:#f91942;">定員は${guest_limit}名です</h5>`
+			);
+			$("#guest_caution_2").append(
+				`
+				<h3 name="number_of_users">人数</h3>
+				<h4 style="color:#f91942; text-align:right;">定員は${guest_limit}名です</h4>`
 			);
 		}
 		
 		// total_peopleがゼロの場合にクリアする
 		if(total_people == 0){
 			$("#guest_details").empty();
+			$("#guest_details_2").empty();
 			$("#guest_caution").empty();
+			$("#guest_caution_2").empty();
 			$("#guest_details").append(
 				`
 				<h4 name="number_of_users">人数</h4>
+				`
+			)
+			$("#guest_details_2").append(
+				`
+				<h3 name="number_of_users">人数</h3>
 				`
 			)
 			};
@@ -520,6 +604,21 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 					$("#total_time").append(
 						`<h4>時間</h4>`
 					);
+					$("#price").empty();
+					$("#price").append(
+						`<h4>総計</h4>`
+					);
+					$("#selected_date_2").empty();
+					$("#selected_slot_2").empty();
+					$("#total_time_2").empty();
+					$("#total_time_2").append(
+						`<h3>時間</h4>`
+					);
+					$("#price_2").empty();
+					$("#price_2").append(
+						`<h3>総計</h4>`
+					);
+					submit();
 				}else{
 					return;
 				}
@@ -630,7 +729,14 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			
 			$("#selected_date").empty();
 			$("#selected_date").append(
-				`<h4 id="showing_date" class="element_details" style="text-align:left; margin-bottom:0;" name="booking_from_time" >${date}</h4>
+				`<h4 class="showing_date element_details" style="text-align:left; margin-bottom:0;" name="booking_from_time" >${date}</h4>
+				<input type="hidden" name="date" value="${date}">
+				`
+			);
+			
+			$("#selected_date_2").empty();
+			$("#selected_date_2").append(
+				`<h4 class="showing_date element_details" style="text-align:right; margin-bottom:0;" name="booking_from_time" >${date}</h4>
 				<input type="hidden" name="date" value="${date}">
 				`
 			);
@@ -640,7 +746,9 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			
 			// #selected_dateと#slot_cautionをいったん空にする
 			$("#selected_slot").empty();
+			$("#selected_slot_2").empty();
 			$("#slot_caution").empty();
+			$("#slot_caution_2").empty();
 			
 			
 			// activeクラスがついているstart-slotタグを取得
@@ -678,6 +786,16 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 							<input type="hidden" name="booking_to_times[${num}]" value="${to_time_set}">
 						</div>`
 					);
+					$("#selected_slot_2").append(
+						`
+						<div style="display:flex; justify-content:flex-end;" class="${schedule_id}">
+							<input type="hidden" name="schedule_ids[${id_array}]"  value="${schedule_id}">
+							<h4 hidden class="element_details" name="booking_from_time_${num}" value="${from_time_set}">${from_time_set} 〜 ${to_time_set}</h4>
+							<p hidden value="${to_time_set}"></p>
+							<input type="hidden" name="booking_from_times[${num}]" value="${from_time_set}">
+							<input type="hidden" name="booking_to_times[${num}]" value="${to_time_set}">
+						</div>`
+					);
 					num ++;
 					id_array ++;
 				};
@@ -694,13 +812,16 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			// selected_slot内の最後のdevのclassの値と、最初ののdevのclassの値の差と、labelsの値を比較して、飛び石でスロットを選択しているかどうかを判断する。
 			let first_dev_class = $("#selected_slot").children("div").eq(0).attr("class");
 			let last_dev_class = $("#selected_slot").children("div").eq(-1).attr("class");
+			let first_dev_class_2 = $("#selected_slot_2").children("div").eq(0).attr("class");
+			let last_dev_class_2 = $("#selected_slot_2").children("div").eq(-1).attr("class");
 			
 			// heroku用
-			let dev_class_amount = last_dev_class - first_dev_class + 10;
+			// let dev_class_amount = last_dev_class - first_dev_class + 10;
+			// let dev_class_amount_2 = last_dev_class_2 - first_dev_class_2 + 10;
 			
 			// cloud9用
-			// let dev_class_amount = last_dev_class - first_dev_class + 1;
-			
+			let dev_class_amount = last_dev_class - first_dev_class + 1;
+			let dev_class_amount_2 = last_dev_class_2 - first_dev_class_2 + 1;
 			
 			
 			
@@ -708,10 +829,12 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			// 最初の値と最後の値を入手する
 			let first_from_time = $("#selected_slot").children("div").eq(0).children("h5").attr("value");
 			let last_to_time = $("#selected_slot").children("div").eq(-1).children("p").attr("value");
+			let first_from_time_2 = $("#selected_slot_2").children("div").eq(0).children("h4").attr("value");
+			let last_to_time_2 = $("#selected_slot_2").children("div").eq(-1).children("p").attr("value");
 			
 			// 飛び石で選択している場合は、#slot_cautionに「連続したスロットを選択してください」と表示する。
-			if(labels*10 != dev_class_amount){ //heroku用
-			// if(labels != dev_class_amount){ // cloud9用
+			// if(labels*10 != dev_class_amount){ //heroku用
+			if(labels != dev_class_amount){ // cloud9用
 				if($("#selected_slot > div > h5").length){
 					$("#slot_caution").append(
 						`<h5 style="color:#f91942;">連続したスロットを選択してください</h5>`
@@ -728,6 +851,26 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 						</div>`
 					);
 			}
+			
+			// 飛び石で選択している場合は、#slot_cautionに「連続したスロットを選択してください」と表示する。
+			// if(labels*10 != dev_class_amount_2){ //heroku用
+			if(labels != dev_class_amount_2){ // cloud9用
+				if($("#selected_slot_2 > div > h4").length){
+					$("#slot_caution_2").append(
+						`<h4 style="color:#f91942; text-align:right;">連続したスロットを選択してください</h4>`
+						
+					)
+					}
+			}else {
+				$("#selected_slot_2").append(
+						`
+						<div style="display:flex; justify-content:flex-end;" >
+							<h4 class="element_details">${first_from_time_2} 〜 ${last_to_time_2}</h4>
+							<input type="hidden" name="from_to" value="${first_from_time_2} 〜 ${last_to_time_2}">
+							<input type="hidden" name="slots" value="${labels}">
+						</div>`
+					);
+			}
 			;
 			
 			
@@ -740,6 +883,12 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			$("#total_time").empty();
 			$("#total_time").append(
 				`<h4>時間：${total_time}分</h4>
+				<input type="hidden"  name="total_time" value="${total_time}">`
+			);
+			
+			$("#total_time_2").empty();
+			$("#total_time_2").append(
+				`<h3>時間：${total_time}分</h3>
 				<input type="hidden"  name="total_time" value="${total_time}">`
 			);
 			
@@ -772,6 +921,34 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 				<h5 name="service_price"  value="service_price" class="element_details">サービス料 ${service_price}円</h5>
 				<input name="service_price" type="hidden" value="${service_price}">
 				<h5 name="tax"  value="tax" class="element_details">VAT ${tax}円</h5>
+				<input name="tax" type="hidden" value="${tax}">
+				`
+			);
+			
+			
+			for($i=0; $i<labels; $i++){
+				let getScheduleId = $("#selected_slot_2").children('div').eq($i).attr('class');
+				let slot_price = $.grep(gym_open_times, function(elem,index){
+						return (elem.gym_schedule_id == getScheduleId);
+					});
+				let price_plus = parseInt(slot_price[0].price, 10);
+				gym_price += price_plus;
+				service_price = gym_price*0.1;
+				price_before_tax = gym_price + service_price;
+				tax = parseInt(price_before_tax * 0.1, 10);
+				total_price = price_before_tax + tax;
+				
+			}
+			$("#price_2").empty();
+			$("#price_2").append(
+				`
+				<h3 name="total_price" value="${total_price}" >総計：${total_price}円</h3>
+				<input name="total_price" type="hidden" value="${total_price}">
+				<h4 name="gym_price"  value="gym_price" class="element_details">ジム使用料 ${gym_price}円</h4>
+				<input name="gym_price" type="hidden" value="${gym_price}">
+				<h4 name="service_price"  value="service_price" class="element_details">サービス料 ${service_price}円</h4>
+				<input name="service_price" type="hidden" value="${service_price}">
+				<h4 name="tax"  value="tax" class="element_details">VAT ${tax}円</h4>
 				<input name="tax" type="hidden" value="${tax}">
 				`
 			);
