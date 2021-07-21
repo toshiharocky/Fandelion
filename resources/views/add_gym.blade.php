@@ -98,9 +98,9 @@
 							
 	
 							<!-- Headline -->
-							<div class="add-listing-headline">
+							<!--<div class="add-listing-headline">-->
 								<h3><i class="sl sl-icon-doc"></i> Basic Informations</h3>
-							</div>
+							<!--</div>-->
 	
 							<!-- Title -->
 							<div class="row with-forms">
@@ -181,9 +181,9 @@
 						<div class="add-listing-section margin-top-45">
 	
 							<!-- Headline -->
-							<div class="add-listing-headline">
-								<h3><i class="sl sl-icon-location"></i> Location</h3>
-							</div>
+							<!--<div class="add-listing-headline">-->
+							<h3><i class="sl sl-icon-location"></i> Location</h3>
+							<!--</div>-->
 	
 							<div class="submit-section">
 	
@@ -235,7 +235,7 @@
 											<i class="fas fa-caret-down " style="font-size:80px"></i>
 										</div>
 										<div class="add_gym_map_parts">
-											<h5>ジムの所在地へドラッグしてください <i class="tip" ></i></h5>
+											<h5>ジムの所在地へドラッグしてください</h5>
 											<div id="map"  style="width:100%; height:300px;"></div>
 											<div id="map_place">
 												<input name="longitude" type="hidden" required>
@@ -256,9 +256,9 @@
 						<div class="add-listing-section margin-top-45">
 	
 							<!-- Headline -->
-							<div class="add-listing-headline">
-								<h3><i class="sl sl-icon-picture"></i> Gallery</h3>
-							</div>
+							<!--<div class="add-listing-headline">-->
+							<h3><i class="sl sl-icon-picture"></i> Gallery</h3>
+							<!--</div>-->
 	
 							<!-- Dropzone -->
 							<div class="submit-section">
@@ -273,9 +273,9 @@
 						<div class="add-listing-section margin-top-45">
 	
 							<!-- Headline -->
-							<div class="add-listing-headline">
-								<h3><i class="sl sl-icon-docs"></i> Details</h3>
-							</div>
+							<!--<div class="add-listing-headline">-->
+							<h3><i class="sl sl-icon-docs"></i> Details</h3>
+							<!--</div>-->
 	
 							<!-- Description -->
 							<div class="form">
@@ -300,11 +300,11 @@
 						<div class="add-listing-section margin-top-45">
 							
 							<!-- Headline -->
-							<div class="add-listing-headline">
-								<h3><i class="sl sl-icon-book-open"></i>Equipment</h3>
+							<!--<div class="add-listing-headline">-->
+							<h3><i class="sl sl-icon-book-open"></i>Equipment</h3>
 								<!-- Switcher -->
 								<!--<label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>-->
-							</div>
+							<!--</div>-->
 	
 							<!-- Switcher ON-OFF Content -->
 							<!--<div class="switcher-content">-->
