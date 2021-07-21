@@ -102,6 +102,13 @@ function future(){
                     let booking_date_from = new Date(Date.parse(booking_from_time[$i]));
                     let booking_date_to = new Date(Date.parse(booking_to_time[$i]));
                     
+                    let date = formatDate(booking_date_from);
+                    let from_time = formatTime(booking_date_from);
+                    let to_time = formatTime(booking_date_to);
+                    console.log(booking_date_from);
+                    console.log(date);
+                    
+                    
                     let id = $i;
                     let history_buttons = "history_buttons_"+$i;
                     let check_in_out = "check_in_out_"+$i;
@@ -147,9 +154,6 @@ function future(){
                     let cancel_date = formatDate(cancel_limit);
                     let cancel_time = formatTime(cancel_limit);
                     
-                    let date = formatDate(booking_date_from);
-                    let from_time = formatTime(booking_date_from);
-                    let to_time = formatTime(booking_date_to);
                     
                     
                     function history_list(){
