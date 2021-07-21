@@ -95,7 +95,9 @@ function formatTime(dt) {
   return (h + ':' + i);
 }
 
-
+function plus_minitues(m){
+    
+}
 
 <!--function formatDate(a){-->
 <!--    let from_time_y = ("0"+new Date(a).getFullYear()).slice(-4);-->
@@ -124,20 +126,26 @@ function future(){
         if(future_bookings_flg == 1){
                 for($i=0; $i<booking_count; $i++){
                     
-                    //参考 あとで消す
-                    let booking_date_from = new Date(booking_from_time[$i]);
-                    console.log(booking_date_from);
-                    let booking_date_to = new Date(booking_to_time[$i]);
                     
-                    let checkin_open = new Date(booking_date_from);
+                    let booking_from_time_str = booking_from_time[$i];
+                    let booking_to_time_str = booking_to_time[$i];
+                    //参考 あとで消す
+                    let booking_date_from = booking_from_time_str.replace(/-/g,"/");
+                    let booking_date_to = booking_to_time_str.replace(/-/g,"/");
+                    
+                    
+                    
+                    let checkin_open = new Date(booking_from_time[$i]);
                     checkin_open.setMinutes(checkin_open.getMinutes() - 15);
                     
+                    console.log(checkin_open.toString());
                     
                     
                     
-                    let date = formatDate(booking_from_time[$i]);
-                    let from_time = formatTime(booking_from_time[$i]);
-                    let to_time = formatTime(booking_to_time[$i]);
+                    
+                    let date = formatDate(booking_date_from);
+                    let from_time = formatTime(booking_date_from);
+                    let to_time = formatTime(booking_date_to);
                     //参考 あとで消す
                     
                     // あとで復活
