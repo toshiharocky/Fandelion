@@ -58,20 +58,7 @@ let booking_check = "{{$booking_check}}";
 // 現在の日付を取得する
 let now = new Date();
 
-// 日付をYYYY/MM/DDの書式で返すメソッド
-function formatDate(dt) {
-  var y = dt.getFullYear();
-  var m = ('00' + (dt.getMonth()+1)).slice(-2);
-  var d = ('00' + dt.getDate()).slice(-2);
-  return (y + '/' + m + '/' + d);
-}
 
-// 日付をhh:iiの書式で返すメソッド
-function formatTime(dt) {
-  var h = ('00' + dt.getHours()).slice(-2);
-  var i = ('00' + dt.getMinutes()).slice(-2);
-  return (h + ':' + i);
-}
 
 
 
@@ -108,9 +95,11 @@ function future(){
                     let booking_date_to_original = new Date(Date.parse(booking_to_time[$i]));
                     let booking_date_to = booking_date_to_original.toISOString();
                     
+                    console.log(booking_date_from_original);
                     
                     let from_time_y = ("0"+new Date(booking_from_time[$i]).getFullYear()).slice(-4);
         			let from_time_m = ("0"+new Date(booking_from_time[$i]).getMonth()).slice(-2);
+        			from_time_m ++;
         			let from_time_d = ("0"+new Date(booking_from_time[$i]).getDate()).slice(-2);
         			let date = from_time_y + "/" + from_time_m + "/" + from_time_d;
                     
@@ -162,21 +151,26 @@ function future(){
                             }
                     }
                     
-                    let cancel_limit = new Date(booking_date_from_original);
+                    let cancel_limit = new Date(booking_date_from);
                     cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);
+                    console.log(cancel_limit);
                     
                     let checkin_open = new Date(booking_date_from_original);
                     checkin_open.setMinutes(checkin_open.getMinutes() - 15);
                     
-           <!--         let cancel_time_y = ("0"+new Date(booking_from_time[$i]).getFullYear()).slice(-4);-->
-           <!--         let cancel_time_m = ("0"+new Date(booking_from_time[$i]).getMonth()).slice(-2);-->
-        			<!--let cancel_time_d = ("0"+new Date(booking_from_time[$i]).getDate()).slice(-2);-->
-        			<!--let cancel_date = cancel_time_y-->
-           <!--         let cancel_time_h = ("0"+new Date(booking_to_time[$i]).getHours()).slice(-2);-->
-        			<!--let cancel_time_i = ("0"+new Date(booking_to_time[$i]).getMinutes()).slice(-2);-->
+                    let cancel_time_y = ("0"+new Date(cancel_limit).getFullYear()).slice(-4);
+                    let cancel_time_m = ("0"+new Date(cancel_limit).getMonth()).slice(-2);
+                    cancel_time_m ++; 
+        			let cancel_time_d = ("0"+new Date(cancel_limit).getDate()).slice(-2);
+        			let cancel_date = cancel_time_y + "/" + cancel_time_m + "/" + cancel_time_d;
+        			console.log(cancel_date);
+                    let cancel_time_h = ("0"+new Date(cancel_limit).getHours()).slice(-2);
+        			let cancel_time_i = ("0"+new Date(cancel_limit).getMinutes()).slice(-2);
+        			let cancel_time = cancel_time_h + ":" + cancel_time_i;
+        			console.log(cancel_time);
                     
-                    let cancel_date = formatDate(cancel_limit);
-                    let cancel_time = formatTime(cancel_limit);
+                    <!--let cancel_date = formatDate(cancel_limit);-->
+                    <!--let cancel_time = formatTime(cancel_limit);-->
                     
                     
                     
@@ -258,6 +252,7 @@ function future(){
                         			<h5>予約の修正・キャンセルは<br>${cancel_date} ${cancel_time}までです。<h5>
                         			`
                     		    )
+                    		    
                     		}else{
                     		    if(now < checkin_open){
                         		    $(cancel_id).append(
@@ -376,6 +371,7 @@ function past(){
                     
                     let from_time_y = ("0"+new Date(booking_from_time[$i]).getFullYear()).slice(-4);
         			let from_time_m = ("0"+new Date(booking_from_time[$i]).getMonth()).slice(-2);
+                    from_time_m ++;
         			let from_time_d = ("0"+new Date(booking_from_time[$i]).getDate()).slice(-2);
         			let date = from_time_y + "/" + from_time_m + "/" + from_time_d;
                     
