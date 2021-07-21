@@ -696,10 +696,10 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			let last_dev_class = $("#selected_slot").children("div").eq(-1).attr("class");
 			
 			// heroku用
-			// let dev_class_amount = last_dev_class - first_dev_class + 10;
+			let dev_class_amount = last_dev_class - first_dev_class + 10;
 			
 			// cloud9用
-			let dev_class_amount = last_dev_class - first_dev_class + 1;
+			// let dev_class_amount = last_dev_class - first_dev_class + 1;
 			
 			
 			
@@ -710,8 +710,8 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			let last_to_time = $("#selected_slot").children("div").eq(-1).children("p").attr("value");
 			
 			// 飛び石で選択している場合は、#slot_cautionに「連続したスロットを選択してください」と表示する。
-			// if(labels*10 != dev_class_amount){ //heroku用
-			if(labels != dev_class_amount){ // cloud9用
+			if(labels*10 != dev_class_amount){ //heroku用
+			// if(labels != dev_class_amount){ // cloud9用
 				if($("#selected_slot > div > h5").length){
 					$("#slot_caution").append(
 						`<h5 style="color:#f91942;">連続したスロットを選択してください</h5>`
