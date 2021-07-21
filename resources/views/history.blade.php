@@ -132,11 +132,13 @@ function future(){
                     checkin_open.setMinutes(checkin_open.getMinutes() - 15);
                     
                     
+                    let date = booking_date_from;
+                    let from_time = booking_date_from;
+                    let to_time = booking_date_to;
                     
-                    
-                    let date = formatDate(booking_date_from);
-                    let from_time = formatTime(booking_date_from);
-                    let to_time = formatTime(booking_date_to);
+                    <!--let date = formatDate(booking_date_from);-->
+                    <!--let from_time = formatTime(booking_date_from);-->
+                    <!--let to_time = formatTime(booking_date_to);-->
                     //参考 あとで消す
                     
                     // あとで復活
