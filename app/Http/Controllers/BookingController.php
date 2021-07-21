@@ -56,6 +56,30 @@ class BookingController extends Controller
                 $addr[] = $user_history->addr;
                 $bookingstatus_id[] = $user_history->bookingstatus_id;
                 $cancel_policy_id[] = $user_history->cancel_policy_id;
+                switch($user_history->cancel_policy_id){
+                        case "1":{
+                            $cancel_limit_time[] = date("m/d/Y H:i:s", strtotime('-1 hours',strtotime($user_history->booking_from_time)));
+                            
+                            break;
+                            }
+                        case "2":{
+                            $cancel_limit_time[] = date("m/d/Y H:i:s", strtotime('-24 hours',strtotime($user_history->booking_from_time)));
+                            
+                            break;
+                            }
+                        case "3":{
+                            $cancel_limit_time[] = date("m/d/Y H:i:s", strtotime('-72 hours',strtotime($user_history->booking_from_time)));
+                            
+                            break;
+                            }
+                        case "4":{
+                            $cancel_limit_time[] = date("m/d/Y H:i:s", strtotime('-168 hours',strtotime($user_history->booking_from_time)));
+                            
+                            break;
+                            }
+                    }
+                // dd($cancel_limit_time);
+                $checkin_open[] = date("m/d/Y H:i:s", strtotime('-15 minute',strtotime($user_history->booking_from_time)));
                 $cancel_policy = DB::table('cancel_policies')
                             ->join('gyms', 'cancel_policies.id', '=', 'gyms.cancel_policy_id')
                             ->select('policy_name', 'policy_desc')
@@ -84,6 +108,8 @@ class BookingController extends Controller
             };
         }
         
+        $now = date("m/d/Y H:i:s");
+        
         
         
         //$booking_idが存在しない（＝予約がゼロ）かどうかによって、history.blade.phpに渡す値を変える
@@ -101,10 +127,13 @@ class BookingController extends Controller
                 'gym_id'=>$gym_id,
                 'bookingstatus_id'=>$bookingstatus_id,
                 'cancel_policy_id'=>$cancel_policy_id,
+                'cancel_limit_time'=>$cancel_limit_time,
                 'cancel_policy'=>$cancel_policy,
+                'checkin_open'=>$checkin_open,
                 'gym_image_url'=>$gym_image_url,
                 'future_bookings_flg' => $future_bookings_flg,
                 'past_bookings_flg' => $past_bookings_flg,
+                'now' =>$now,
                 ]
                 );
         } else {
@@ -120,10 +149,13 @@ class BookingController extends Controller
                 'gym_id'=>"none",
                 'bookingstatus_id'=>"none",
                 'cancel_policy_id'=>"none",
+                'cancel_limit_time'=>"none",
                 'cancel_policy'=>"none",
+                'checkin_open'=>"none",
                 'gym_image_url'=>"none",
                 'future_bookings_flg' => 0,
                 'past_bookings_flg' => 0,
+                'now' =>$now,
                 ]
                 );   
         }

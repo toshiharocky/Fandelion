@@ -55,12 +55,6 @@
 <script>
 let booking_check = "{{$booking_check}}";
 // console.log(booking_check == 0);
-// 現在の日付を取得する
-let now = new Date();
-<!--let now = new Date().toISOString();-->
-<!--console.log(now);-->
-
-
 
 
 
@@ -73,10 +67,13 @@ let booking_to_time = @json($booking_to_time);
 let gym_id = @json($gym_id);
 let bookingstatus_id = @json($bookingstatus_id);
 let cancel_policy_id = @json($cancel_policy_id);
+let cancel_limit_time = @json($cancel_limit_time);
 let cancel_policy = @json($cancel_policy);
+let checkin_time = @json($checkin_open);
 let gym_image_url = @json($gym_image_url);
+let now = @json($now);
 
-
+console.log(cancel_limit_time);
 </script>
 
 <script>
@@ -129,49 +126,22 @@ function future(){
                     
                     let booking_from_time_str = booking_from_time[$i];
                     let booking_to_time_str = booking_to_time[$i];
-                    //参考 あとで消す
+                    console.log(booking_from_time_str);
+                    
                     let booking_date_from = booking_from_time_str.replace(/-/g,"/");
                     let booking_date_to = booking_to_time_str.replace(/-/g,"/");
                     
                     
                     
-                    let checkin_open = new Date(booking_from_time[$i]);
-                    checkin_open.setMinutes(checkin_open.getMinutes() - 15);
-                    
-                    console.log(checkin_open.toString());
-                    
-                    
-                    
+                    let checkin_open = checkin_time[$i];
+                    console.log(checkin_open);
                     
                     let date = formatDate(booking_date_from);
                     let from_time = formatTime(booking_date_from);
                     let to_time = formatTime(booking_date_to);
-                    //参考 あとで消す
-                    
-                    // あとで復活
-           <!--         let booking_date_from = new Date(booking_from_time[$i]).toISOString();-->
-           <!--         let booking_date_to = new Date(Date.parse(booking_to_time[$i])).toISOString();-->
                     
                     
                     
-           <!--         let from_time_y = ("0"+new Date(booking_from_time[$i]).getFullYear()).slice(-4);-->
-        			<!--let from_time_m = ("0"+new Date(booking_from_time[$i]).getMonth()).slice(-2);-->
-        			<!--from_time_m ++;-->
-        			<!--let from_time_d = ("0"+new Date(booking_from_time[$i]).getDate()).slice(-2);-->
-        			<!--let date = from_time_y + "/" + from_time_m + "/" + from_time_d;-->
-                    
-                    
-                    
-        			<!--let from_time_h = ("0"+new Date(booking_from_time[$i]).getHours()).slice(-2);-->
-        			<!--let from_time_i = ("0"+new Date(booking_from_time[$i]).getMinutes()).slice(-2);-->
-        			<!--let from_time = from_time_h + ":" + from_time_i;-->
-        			<!--let to_time_h = ("0"+new Date(booking_to_time[$i]).getHours()).slice(-2);-->
-        			<!--let to_time_i = ("0"+new Date(booking_to_time[$i]).getMinutes()).slice(-2);-->
-        			<!--let to_time = to_time_h + ":" + to_time_i;-->
-        			// あとで復活
-                    
-                    
-                    console.log(date);
                     
                     
                     let id = $i;
@@ -184,66 +154,15 @@ function future(){
                     let cancel_id = "#"+"cancel_"+$i;
                     
                     
-                    <!--console.log(booking_date_from);-->
-                    <!--console.log(booking_date_to);-->
                     
                     // cancel_policy_idに応じて、キャンセル期限を設定する（時間単位）。
-                    let cancel_limit_time = "";
-                    switch(cancel_policy_id[$i]){
-                        case "1":{
-                            cancel_limit_time = 1;
-                            break;
-                            }
-                        case "2":{
-                            cancel_limit_time = 24;
-                            break;
-                            }
-                        case "3":{
-                            cancel_limit_time = 72;
-                            break;
-                            }
-                        case "4":{
-                            cancel_limit_time = 168;
-                            break;
-                            }
-                    }
-                    
-                    
-                    // 参考 後で消す
-                    let cancel_limit = new Date(booking_date_from);
-                    cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);
+                    let cancel_limit = cancel_limit_time[$i];
                     
                     
                     
                     let cancel_date = formatDate(cancel_limit);
                     let cancel_time = formatTime(cancel_limit);
                     // 参考 後で消す
-                    
-                    
-                    // あとで復活
-           <!--         let cancel_limit = new Date(booking_from_time[$i]).toISOString();-->
-                    <!--cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);-->
-                    
-                    <!--console.log(cancel_limit);-->
-                    
-           <!--         let checkin_open = new Date(booking_from_time[$i]).toISOString();-->
-                    
-                    <!--checkin_open.setMinutes(checkin_open.getMinutes() - 15);-->
-           <!--         console.log(checkin_open);-->
-                    
-           <!--         let cancel_time_y = ("0"+new Date(cancel_limit).getFullYear()).slice(-4);-->
-           <!--         let cancel_time_m = ("0"+new Date(cancel_limit).getMonth()).slice(-2);-->
-           <!--         cancel_time_m ++; -->
-        			<!--let cancel_time_d = ("0"+new Date(cancel_limit).getDate()).slice(-2);-->
-        			<!--let cancel_date = cancel_time_y + "/" + cancel_time_m + "/" + cancel_time_d;-->
-        			<!--console.log(cancel_date);-->
-           <!--         let cancel_time_h = ("0"+new Date(cancel_limit).getHours()).slice(-2);-->
-        			<!--let cancel_time_i = ("0"+new Date(cancel_limit).getMinutes()).slice(-2);-->
-        			<!--let cancel_time = cancel_time_h + ":" + cancel_time_i;-->
-        			<!--console.log(cancel_time);-->
-                    // あとで復活
-                    
-                    
                     
                     
                     function history_list(){
@@ -346,14 +265,13 @@ function future(){
                     		<!--予約のキャンセルを押すと、「予約をキャンセルしますか？（この処理は取り消すことができません）」のconfirmが出てキャンセルする-->
                     		
                     		
-                    		
                     		<!--// nowが開始15分前の場合、history_buttonsに「トレーニング開始」ボタンを表示-->
-                    		if(now > checkin_open){
+                    		if(now > new Date(checkin_open[$i])){
                         		<!--// dateが開始時間を超過し、bookingstatus_idが「1」「5」の場合、history_buttonsに「トレーニング開始時間を超過しています」というアナウンスと-->
                         		<!--　「トレーニング終了」ボタンを表示-->
-                        		if(now > booking_date_from){
+                        		if(now > new Date(booking_from_time[$i])){
                         		    if(bookingstatus_id[$i] == "1" || bookingstatus_id[$i] == "5"){
-                    		                if(now < booking_date_to){
+                    		                if(now < new Date(booking_date_to[$i])){
                                     		    $(check_in_out_id).append(
                                         			`
                                         			<h5>トレーニング開始時間を超過しています。<h5>
@@ -436,25 +354,16 @@ function past(){
                 for($i=0; $i<booking_count; $i++){
                     
                     
-                    let booking_date_from = new Date(booking_from_time[$i]).toISOString();
-                    let booking_date_to = new Date(Date.parse(booking_to_time[$i])).toISOString();
+                    let booking_from_time_str = booking_from_time[$i];
+                    let booking_to_time_str = booking_to_time[$i];
+                    
+                    let booking_date_from = booking_from_time_str.replace(/-/g,"/");
+                    let booking_date_to = booking_to_time_str.replace(/-/g,"/");
                     
                     
-                    let from_time_y = ("0"+new Date(booking_from_time[$i]).getFullYear()).slice(-4);
-        			let from_time_m = ("0"+new Date(booking_from_time[$i]).getMonth()).slice(-2);
-                    from_time_m ++;
-        			let from_time_d = ("0"+new Date(booking_from_time[$i]).getDate()).slice(-2);
-        			let date = from_time_y + "/" + from_time_m + "/" + from_time_d;
-                    
-                    
-                    
-        			let from_time_h = ("0"+new Date(booking_from_time[$i]).getHours()).slice(-2);
-        			let from_time_i = ("0"+new Date(booking_from_time[$i]).getMinutes()).slice(-2);
-        			let from_time = from_time_h + ":" + from_time_i;
-        			let to_time_h = ("0"+new Date(booking_to_time[$i]).getHours()).slice(-2);
-        			let to_time_i = ("0"+new Date(booking_to_time[$i]).getMinutes()).slice(-2);
-        			let to_time = to_time_h + ":" + to_time_i;
-        			
+                    let date = formatDate(booking_date_from);
+                    let from_time = formatTime(booking_date_from);
+                    let to_time = formatTime(booking_date_to);
                     
                     
                     function history_list(){
