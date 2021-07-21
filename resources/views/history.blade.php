@@ -56,7 +56,8 @@
 let booking_check = "{{$booking_check}}";
 // console.log(booking_check == 0);
 // 現在の日付を取得する
-let now = new Date().toISOString();
+let now = new Date();
+<!--let now = new Date().toISOString();-->
 <!--console.log(now);-->
 
 
@@ -78,7 +79,39 @@ let gym_image_url = @json($gym_image_url);
 
 </script>
 
+<script>
+// 日付をYYYY/MM/DDの書式で返すメソッド
+function formatDate(dt) {
+  var y = dt.getFullYear();
+  var m = ('00' + (dt.getMonth()+1)).slice(-2);
+  var d = ('00' + dt.getDate()).slice(-2);
+  return (y + '/' + m + '/' + d);
+}
+// 日付をhh:iiの書式で返すメソッド
+function formatTime(dt) {
+  var h = ('00' + dt.getHours()).slice(-2);
+  var i = ('00' + dt.getMinutes()).slice(-2);
+  return (h + ':' + i);
+}
 
+
+
+<!--function formatDate(a){-->
+<!--    let from_time_y = ("0"+new Date(a).getFullYear()).slice(-4);-->
+<!--    let from_time_m = ("0"+new Date(a).getMonth()).slice(-2);-->
+<!--    from_time_m ++;-->
+<!--	let from_time_d = ("0"+new Date(a).getDate()).slice(-2);-->
+<!--	let date = from_time_y + "/" + from_time_m + "/" + from_time_d;-->
+<!--    console.log(date);-->
+<!--}-->
+    
+<!--function formatTime(a){-->
+<!--	let from_time_h = ("0"+new Date(a).getHours()).slice(-2);-->
+<!--	let from_time_i = ("0"+new Date(a).getMinutes()).slice(-2);-->
+<!--	let from_time = from_time_h + ":" + from_time_i;-->
+<!--	retrun from_time;-->
+<!--}-->
+</script>
 
 <script>
 function future(){
@@ -90,28 +123,42 @@ function future(){
         if(future_bookings_flg == 1){
                 for($i=0; $i<booking_count; $i++){
                     
+                    //参考 あとで消す
+                    let booking_date_from = new Date(Date.parse(booking_from_time[$i]));
+                    let booking_date_to = new Date(Date.parse(booking_to_time[$i]));
                     
-                    
-                    let booking_date_from = new Date(booking_from_time[$i]).toISOString();
-                    let booking_date_to = new Date(Date.parse(booking_to_time[$i])).toISOString();
-                    
-                    
-                    
-                    let from_time_y = ("0"+new Date(booking_from_time[$i]).getFullYear()).slice(-4);
-        			let from_time_m = ("0"+new Date(booking_from_time[$i]).getMonth()).slice(-2);
-        			from_time_m ++;
-        			let from_time_d = ("0"+new Date(booking_from_time[$i]).getDate()).slice(-2);
-        			let date = from_time_y + "/" + from_time_m + "/" + from_time_d;
+                    let checkin_open = new Date(booking_date_from);
+                    checkin_open.setMinutes(checkin_open.getMinutes() - 15);
                     
                     
                     
-        			let from_time_h = ("0"+new Date(booking_from_time[$i]).getHours()).slice(-2);
-        			let from_time_i = ("0"+new Date(booking_from_time[$i]).getMinutes()).slice(-2);
-        			let from_time = from_time_h + ":" + from_time_i;
-        			let to_time_h = ("0"+new Date(booking_to_time[$i]).getHours()).slice(-2);
-        			let to_time_i = ("0"+new Date(booking_to_time[$i]).getMinutes()).slice(-2);
-        			let to_time = to_time_h + ":" + to_time_i;
-        			
+                    
+                    let date = formatDate(booking_date_from);
+                    let from_time = formatTime(booking_date_from);
+                    let to_time = formatTime(booking_date_to);
+                    //参考 あとで消す
+                    
+                    // あとで復活
+           <!--         let booking_date_from = new Date(booking_from_time[$i]).toISOString();-->
+           <!--         let booking_date_to = new Date(Date.parse(booking_to_time[$i])).toISOString();-->
+                    
+                    
+                    
+           <!--         let from_time_y = ("0"+new Date(booking_from_time[$i]).getFullYear()).slice(-4);-->
+        			<!--let from_time_m = ("0"+new Date(booking_from_time[$i]).getMonth()).slice(-2);-->
+        			<!--from_time_m ++;-->
+        			<!--let from_time_d = ("0"+new Date(booking_from_time[$i]).getDate()).slice(-2);-->
+        			<!--let date = from_time_y + "/" + from_time_m + "/" + from_time_d;-->
+                    
+                    
+                    
+        			<!--let from_time_h = ("0"+new Date(booking_from_time[$i]).getHours()).slice(-2);-->
+        			<!--let from_time_i = ("0"+new Date(booking_from_time[$i]).getMinutes()).slice(-2);-->
+        			<!--let from_time = from_time_h + ":" + from_time_i;-->
+        			<!--let to_time_h = ("0"+new Date(booking_to_time[$i]).getHours()).slice(-2);-->
+        			<!--let to_time_i = ("0"+new Date(booking_to_time[$i]).getMinutes()).slice(-2);-->
+        			<!--let to_time = to_time_h + ":" + to_time_i;-->
+        			// あとで復活
                     
                     
                     console.log(date);
@@ -151,27 +198,38 @@ function future(){
                             }
                     }
                     
-                    let cancel_limit = new Date(booking_from_time[$i]).toISOString();
+                    
+                    // 参考 後で消す
+                    let cancel_limit = new Date(booking_date_from);
+                    cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);
+                    
+                    let cancel_date = formatDate(cancel_limit);
+                    let cancel_time = formatTime(cancel_limit);
+                    // 参考 後で消す
+                    
+                    
+                    // あとで復活
+           <!--         let cancel_limit = new Date(booking_from_time[$i]).toISOString();-->
                     <!--cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);-->
                     
                     <!--console.log(cancel_limit);-->
                     
-                    let checkin_open = new Date(booking_from_time[$i]).toISOString();
+           <!--         let checkin_open = new Date(booking_from_time[$i]).toISOString();-->
                     
                     <!--checkin_open.setMinutes(checkin_open.getMinutes() - 15);-->
-                    console.log(checkin_open);
+           <!--         console.log(checkin_open);-->
                     
-                    let cancel_time_y = ("0"+new Date(cancel_limit).getFullYear()).slice(-4);
-                    let cancel_time_m = ("0"+new Date(cancel_limit).getMonth()).slice(-2);
-                    cancel_time_m ++; 
-        			let cancel_time_d = ("0"+new Date(cancel_limit).getDate()).slice(-2);
-        			let cancel_date = cancel_time_y + "/" + cancel_time_m + "/" + cancel_time_d;
-        			console.log(cancel_date);
-                    let cancel_time_h = ("0"+new Date(cancel_limit).getHours()).slice(-2);
-        			let cancel_time_i = ("0"+new Date(cancel_limit).getMinutes()).slice(-2);
-        			let cancel_time = cancel_time_h + ":" + cancel_time_i;
-        			console.log(cancel_time);
-                    
+           <!--         let cancel_time_y = ("0"+new Date(cancel_limit).getFullYear()).slice(-4);-->
+           <!--         let cancel_time_m = ("0"+new Date(cancel_limit).getMonth()).slice(-2);-->
+           <!--         cancel_time_m ++; -->
+        			<!--let cancel_time_d = ("0"+new Date(cancel_limit).getDate()).slice(-2);-->
+        			<!--let cancel_date = cancel_time_y + "/" + cancel_time_m + "/" + cancel_time_d;-->
+        			<!--console.log(cancel_date);-->
+           <!--         let cancel_time_h = ("0"+new Date(cancel_limit).getHours()).slice(-2);-->
+        			<!--let cancel_time_i = ("0"+new Date(cancel_limit).getMinutes()).slice(-2);-->
+        			<!--let cancel_time = cancel_time_h + ":" + cancel_time_i;-->
+        			<!--console.log(cancel_time);-->
+                    // あとで復活
                     
                     
                     
@@ -223,7 +281,121 @@ function future(){
                 		<!--// nowがキャンセル期間よりも前の場合、#cancelに「予約の修正」「予約のキャンセル」ボタンを表示し、-->
                 		<!--//「予約の修正・キャンセルはyyyy/mm/dd H:iまでです」と表示-->
                 		<!--// nowがキャンセル期間を超過した場合、#cancelに「予約の修正・キャンセル期間は終了しました」と表示-->let cancel_id = "cancel_"+$i;
-                         
+                         if(bookingstatus_id[$i]=='20'){
+                		    $(check_in_out_id).append(
+                    			`
+                    			<form id="check_out" method="put" action="check_out">
+                    		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
+                    		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
+                    		        <h5>現在トレーニング中です<h5>
+                    			    <input type="submit" class="button gray" style="width:100%; height:35px;" value="トレーニング終了">
+                			    </form>
+                    			`
+                		    );
+                        }else{
+                		
+                    		if(now < cancel_limit){
+                    		    $(cancel_id).append(
+                    		        `
+                    		        <form method="post" action="booking_update">
+                    		        @csrf
+                        		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
+                        		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
+                        		        <input type="submit" class="button gray" style="width:100%; height:35px;" value="予約の修正">
+                    		        </from>
+                    		        <form method="post" action="booking_cancel">
+                    		        @csrf
+                        		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
+                        		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
+                            			<input type="submit" class="button gray" style="width:100%; height:35px;" value="予約のキャンセル">
+                        			</from>
+                        			<h5>予約の修正・キャンセルは<br>${cancel_date} ${cancel_time}までです。<h5>
+                        			`
+                    		    )
+                    		    
+                    		}else{
+                    		    if(now < checkin_open){
+                        		    $(cancel_id).append(
+                        		        `
+                        		        <h5>チェックインは<br>開始時間15分前から可能です。<h5>
+                            			<form id="check_in" method="put" action="check_in">
+                            			    <input type="submit" class="button gray" style="width:100%; height:35px; background-color:#dcdcdc; color:white;" value="トレーニング開始" disabled>
+                        			    </form>
+                            			<h5>予約の修正・キャンセル期間は<br>終了しました。<h5>
+                            			`
+                        		    )
+                    		    }
+                    		}
+                    		
+                          
+                    		
+                    		　
+                    		<!--予約の修正ボタンを押すと、修正画面へ移る-->
+                    		<!--予約のキャンセルを押すと、「予約をキャンセルしますか？（この処理は取り消すことができません）」のconfirmが出てキャンセルする-->
+                    		
+                    		
+                    		
+                    		<!--// nowが開始15分前の場合、history_buttonsに「トレーニング開始」ボタンを表示-->
+                    		if(now > checkin_open){
+                        		<!--// dateが開始時間を超過し、bookingstatus_idが「1」「5」の場合、history_buttonsに「トレーニング開始時間を超過しています」というアナウンスと-->
+                        		<!--　「トレーニング終了」ボタンを表示-->
+                        		if(now > booking_date_from){
+                        		    if(bookingstatus_id[$i] == "1" || bookingstatus_id[$i] == "5"){
+                    		                if(now < booking_date_to){
+                                    		    $(check_in_out_id).append(
+                                        			`
+                                        			<h5>トレーニング開始時間を超過しています。<h5>
+                                        			<form id="check_out" method="put" action="check_out">
+                                        		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
+                                        		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
+                                        			    <input type="submit" class="button gray" style="width:100%; height:35px;" value="トレーニング終了">
+                                    			    </form>
+                                        			`
+                                    		    )
+                                		    }else {
+                                		        $(check_in_out_id).append(
+                                        			`
+                                        			<h5>トレーニング時間は終了しました。<h5>
+                                        			`
+                                        			)
+                                		    }
+                            		    }
+                            		}else{
+                            		    $(check_in_out_id).append(
+                                			`
+                                			<form id="check_in" method="put" action="check_in">
+                                		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
+                                		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
+                                			    <input type="submit" class="button gray" style="width:100%; height:35px;" value="トレーニング開始">
+                            			    </form>
+                                			`
+                            		    )
+                        		    }
+                    		    eq_num ++;
+                    		}
+                		}
+                		
+                		
+                		<!--// 「トレーニング開始」ボタンを押したら、「トレーニングを開始しますか？（この処理は取り消すことができません）」というconfirmを出した上で、-->
+                		<!--    check_in.blade.phpに遷移し、bookingsテーブルのbookingstatus_idを「20」に変更する（ルーティングが必要）-->
+                		$("#check_in").submit(function(){
+                		    if(window.confirm('トレーニングを開始しますか？（この処理は取り消すことができません）')){ // 確認ダイアログを表示
+                        		return true; // 「OK」時は送信を実行
+                        	}else{ // 「キャンセル」時の処理
+                        		return false; // 送信を中止
+            		        }
+                		});
+                		
+                		
+                		<!--// 「トレーニング終了」ボタンを押したら、「トレーニングを終了しますか？（この処理は取り消すことができません）」というconfirmを出した上で、-->
+                		<!--    checked_out.blade.phpに遷移し、bookingsテーブルのbookingstatus_idを「25」に変更する（ルーティングが必要）-->
+                		$("#check_out").submit(function(){
+                		    if(window.confirm('トレーニングを終了しますか？（この処理は取り消すことができません）')){ // 確認ダイアログを表示
+                        		return true; // 「OK」時は送信を実行
+                        	}else{ // 「キャンセル」時の処理
+                        		return false; // 送信を中止
+            		        }
+                		});
                 
                     }
                     
