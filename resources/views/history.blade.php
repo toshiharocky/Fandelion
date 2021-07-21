@@ -203,11 +203,14 @@ function future(){
                     
                     
                     // 参考 後で消す
-                    let cancel_limit = new Date(booking_date_from);
-                    cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);
+                    let cancel_limit = new Date(booking_date_from).toISOString();
+                    <!--cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);-->
                     
-                    let cancel_date = formatDate(cancel_limit);
-                    let cancel_time = formatTime(cancel_limit);
+                    let cancel_date = cancel_limit;
+                    let cancel_time = cancel_limit;
+                    
+                    <!--let cancel_date = formatDate(cancel_limit);-->
+                    <!--let cancel_time = formatTime(cancel_limit);-->
                     // 参考 後で消す
                     
                     
