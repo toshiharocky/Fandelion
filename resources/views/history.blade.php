@@ -81,19 +81,19 @@ let gym_image_url = @json($gym_image_url);
 
 <script>
 // 日付をYYYY/MM/DDの書式で返すメソッド
-function formatDate(dt) {
-  var y = ('0'+new Date(dt).getFullYear()).slice(-4);
-  var m = ('0' + new Date(dt).getMonth()).slice(-2);
-  m ++;
-  var d = ('0' + new Date(dt).getDate()).slice(-2);
-  return (y + '/' + m + '/' + d);
-}
+<!--function formatDate(dt) {-->
+<!--  var y = ('0'+new Date(dt).getFullYear()).slice(-4);-->
+<!--  var m = ('0' + new Date(dt).getMonth()).slice(-2);-->
+<!--  m ++;-->
+<!--  var d = ('0' + new Date(dt).getDate()).slice(-2);-->
+<!--  return (y + '/' + m + '/' + d);-->
+<!--}-->
 // 日付をhh:iiの書式で返すメソッド
-function formatTime(dt) {
-  var h = ('00' + new Date(dt).getHours()).slice(-2);
-  var i = ('00' + new Date(dt).getMinutes()).slice(-2);
-  return (h + ':' + i);
-}
+<!--function formatTime(dt) {-->
+<!--  var h = ('00' + new Date(dt).getHours()).slice(-2);-->
+<!--  var i = ('00' + new Date(dt).getMinutes()).slice(-2);-->
+<!--  return (h + ':' + i);-->
+<!--}-->
 
 
 
