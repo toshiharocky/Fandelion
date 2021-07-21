@@ -56,7 +56,7 @@
 let booking_check = "{{$booking_check}}";
 // console.log(booking_check == 0);
 // 現在の日付を取得する
-let now = new Date();
+let now = new Date().toISOString();
 
 
 
@@ -156,7 +156,9 @@ function future(){
                     <!--console.log(cancel_limit);-->
                     
                     let checkin_open = new Date(booking_from_time[$i]).toISOString();
+                    
                     <!--checkin_open.setMinutes(checkin_open.getMinutes() - 15);-->
+                    console.log(checkin_open);
                     
                     let cancel_time_y = ("0"+new Date(cancel_limit).getFullYear()).slice(-4);
                     let cancel_time_m = ("0"+new Date(cancel_limit).getMonth()).slice(-2);
