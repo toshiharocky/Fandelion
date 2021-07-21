@@ -90,12 +90,11 @@ function future(){
                 for($i=0; $i<booking_count; $i++){
                     
                     
-                    let booking_date_from_original = new Date(booking_from_time[$i]);
-                    let booking_date_from = booking_date_from_original.toISOString();
-                    let booking_date_to_original = new Date(Date.parse(booking_to_time[$i]));
-                    let booking_date_to = booking_date_to_original.toISOString();
                     
-                    console.log(booking_date_from_original);
+                    let booking_date_from = new Date(booking_from_time[$i]).toISOString();
+                    let booking_date_to = new Date(Date.parse(booking_to_time[$i])).toISOString();
+                    
+                    
                     
                     let from_time_y = ("0"+new Date(booking_from_time[$i]).getFullYear()).slice(-4);
         			let from_time_m = ("0"+new Date(booking_from_time[$i]).getMonth()).slice(-2);
@@ -155,7 +154,7 @@ function future(){
                     cancel_limit.setHours(cancel_limit.getHours() - cancel_limit_time);
                     console.log(cancel_limit);
                     
-                    let checkin_open = new Date(booking_date_from_original);
+                    let checkin_open = new Date(new Date(booking_from_time[$i]));
                     checkin_open.setMinutes(checkin_open.getMinutes() - 15);
                     
                     let cancel_time_y = ("0"+new Date(cancel_limit).getFullYear()).slice(-4);
@@ -363,10 +362,9 @@ function past(){
         if(past_bookings_flg == 1){
                 for($i=0; $i<booking_count; $i++){
                     
-                    let booking_date_from_original = new Date(booking_from_time[$i]);
-                    let booking_date_from = booking_date_from_original.toISOString();
-                    let booking_date_to_original = new Date(Date.parse(booking_to_time[$i]));
-                    let booking_date_to = booking_date_to_original.toISOString();
+                    
+                    let booking_date_from = new Date(booking_from_time[$i]).toISOString();
+                    let booking_date_to = new Date(Date.parse(booking_to_time[$i])).toISOString();
                     
                     
                     let from_time_y = ("0"+new Date(booking_from_time[$i]).getFullYear()).slice(-4);
