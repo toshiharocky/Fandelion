@@ -50,7 +50,9 @@ class BookingController extends Controller
         foreach($user_histories as $user_history){
                 $booking_id[] = $user_history->id;
                 $booking_from_time[] = $user_history->booking_from_time;
+                $booking_from_time_2[] = date("m/d/Y H:i:s",strtotime($user_history->booking_from_time));
                 $booking_to_time[] = $user_history->booking_to_time;
+                $booking_to_time_2[] = date("m/d/Y H:i:s",strtotime($user_history->booking_to_time));
                 $gym_id[] = $user_history->gym_id;
                 $gym_title[] = $user_history->gym_title;
                 $addr[] = $user_history->addr;
@@ -107,7 +109,7 @@ class BookingController extends Controller
                 $past_bookings_flg = 0;
             };
         }
-        
+        date_default_timezone_set('Asia/Tokyo');
         $now = date("m/d/Y H:i:s");
         
         
@@ -123,7 +125,9 @@ class BookingController extends Controller
                 'gym_title'=>$gym_title,
                 'addr'=>$addr,
                 'booking_from_time'=>$booking_from_time,
+                'booking_from_time_2'=>$booking_from_time_2,
                 'booking_to_time'=>$booking_to_time,
+                'booking_to_time_2'=>$booking_to_time_2,
                 'gym_id'=>$gym_id,
                 'bookingstatus_id'=>$bookingstatus_id,
                 'cancel_policy_id'=>$cancel_policy_id,
@@ -146,6 +150,8 @@ class BookingController extends Controller
                 'booking_id'=>"none",
                 'booking_from_time'=>"none",
                 'booking_to_time'=>"none",
+                'booking_from_time_2'=>"none",
+                'booking_to_time_2'=>"none",
                 'gym_id'=>"none",
                 'bookingstatus_id'=>"none",
                 'cancel_policy_id'=>"none",

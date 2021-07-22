@@ -105,7 +105,9 @@ let booking_count = booking_id.length;
 let gym_title = @json($gym_title);
 let addr = @json($addr);
 let booking_from_time = @json($booking_from_time);
+let booking_from_time_2 = @json($booking_from_time_2);
 let booking_to_time = @json($booking_to_time);
+let booking_to_time_2 = @json($booking_to_time_2);
 let gym_id = @json($gym_id);
 let bookingstatus_id = @json($bookingstatus_id);
 let cancel_policy_id = @json($cancel_policy_id);
@@ -115,7 +117,10 @@ let checkin_time = @json($checkin_open);
 let gym_image_url = @json($gym_image_url);
 let now = @json($now);
 
+console.log("now: "+now);
 console.log(cancel_limit_time);
+console.log(checkin_time);
+console.log(booking_from_time_2);
 </script>
 
 <script>
@@ -286,10 +291,10 @@ $(document).ready(function(){
                     		    )
                     		    
                     		}else{
-                    		    if(now < checkin_open){
+                    		    if(now < booking_from_time_2[$i]){
                         		    $(cancel_id).append(
                         		        `
-                        		        <h5>チェックインは<br>開始時間15分前から可能です。<h5>
+                        		        <h5>開始時間になりましたら<br>チェックインしてください。<h5>
                             			<form id="check_in" method="put" action="check_in">
                             			    <input type="submit" class="button gray" style="background-color:#dcdcdc; color:white;" value="トレーニング開始" disabled>
                         			    </form>
@@ -307,20 +312,25 @@ $(document).ready(function(){
                     		
                     		
                     		<!--// nowが開始15分前の場合、history_buttonsに「トレーニング開始」ボタンを表示-->
-                    		if(now > new Date(checkin_open[$i])){
+                    		if(now > booking_from_time_2[$i]){
                         		<!--// dateが開始時間を超過し、bookingstatus_idが「1」「5」の場合、history_buttonsに「トレーニング開始時間を超過しています」というアナウンスと-->
                         		<!--　「トレーニング終了」ボタンを表示-->
-                        		if(now > new Date(booking_from_time[$i])){
+                        		if(now > booking_from_time_2[$i]){
                         		    if(bookingstatus_id[$i] == "1" || bookingstatus_id[$i] == "5"){
-                    		                if(now < new Date(booking_date_to[$i])){
+                    		                if(now < booking_to_time_2[$i]){
                                     		    $(check_in_out_id).append(
                                         			`
                                         			<h5>トレーニング開始時間を超過しています。<h5>
-                                        			<form id="check_out" method="put" action="check_out">
+                                        			<form id="check_in" method="put" action="check_in">
                                         		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                                         		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
-                                        			    <input type="submit" class="button gray" value="トレーニング終了">
+                                        			    <input type="submit" class="button gray" value="トレーニング開始">
                                     			    </form>
+                                        			<!--<form id="check_out" method="put" action="check_out">-->
+                                        		 <!--       <input type="hidden" name="gym_id" value=${gym_id[$i]}>-->
+                                        		 <!--       <input type="hidden" name="booking_id" value=${booking_id[$i]}>-->
+                                        			<!--    <input type="submit" class="button gray" value="トレーニング終了">-->
+                                    			    <!--</form>-->
                                         			`
                                     		    )
                                 		    }else {
