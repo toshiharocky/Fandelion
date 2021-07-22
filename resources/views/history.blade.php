@@ -1,4 +1,4 @@
-@extends('layouts.menu_mobnav')
+@extends('layouts.menu_mobnav_3')
 
 @push('css')
     <!--<link href="{{ asset('css/〇〇.css') }}" rel="stylesheet">-->

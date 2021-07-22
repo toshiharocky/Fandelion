@@ -10,6 +10,9 @@
 		.listing-titlebar-title{
 			max-width:70%;
 		}
+		.equipment_note{
+			width:90%;
+		}
 	}
 	@media (max-width: 991px){
 		.book_request{
@@ -23,6 +26,12 @@
 		}
 		.cancel_policy{
 			padding: 10px !important;
+		}
+		.equipment_note{
+			width:80% !important;
+		}
+		.equipment_weight{
+			font-size:14px !important;
 		}
 		
 	}
@@ -161,10 +170,10 @@
 							@for ($i = 0; $i < $gym_equipment_count; $i++)
 							<li>
 								<h5>{{$gym_equipment[$i]->equipment_name}}</h5>
-								<p>{{$gym_equipment[$i]->note}}</p>
+								<p class="equipment_note">{{$gym_equipment[$i]->note}}</p>
 								@if($gym_equipment[$i]->min_weight)
 									@if($gym_equipment[$i]->max_weight)
-									<span>{{$gym_equipment[$i]->min_weight}}kg〜{{$gym_equipment[$i]->max_weight}}kg</span>
+									<span class="equipment_weight">{{$gym_equipment[$i]->min_weight}}kg〜{{$gym_equipment[$i]->max_weight}}kg</span>
 									@endif
 								@endif
 							</li>

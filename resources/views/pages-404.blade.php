@@ -1,7 +1,19 @@
-@extends('layouts.menu_mobnav')
+@extends('layouts.menu')
 
 @push('css')
     <!--<link href="{{ asset('css/〇〇.css') }}" rel="stylesheet">-->
+<style>
+@media (min-width: 991px){
+		.back-button{
+			width:25%;
+		}
+	}
+@media (max-width: 991px){
+		.back-button{
+			width:80%;
+		}
+	}
+</style>
 @endpush
 
 @section('content')
@@ -16,10 +28,10 @@
 				<p>We're sorry, but the page you were looking for doesn't exist.</p>
 			</section>
 			<div style="text-align:center;">
-			    <a href="javascript:history.back()" class="button margin-top-30" style="width:25%">前のページへ戻る</a>
+			    <a href="javascript:history.back()" class="button margin-top-30 back-button">前のページへ戻る</a>
 			</div>
 		    <div style="text-align:center;">
-			    <a href="/" class="button margin-top-30" style="width:25%">ホームへ戻る</a>
+			    <a href="/" class="button margin-top-30 back-button">ホームへ戻る</a>
 			</div>
 
 		</div>
