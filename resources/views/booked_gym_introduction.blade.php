@@ -86,6 +86,7 @@
 					<li><a href="#listing-cancel_policy">キャンセルポリシー</a></li>
 					<li><a href="#listing-overview">ジムの概要</a></li>
 					<li><a href="#listing-equipment-list">設備</a></li>
+					<li><a href="#listing-reviews">レビュー</a></li>
 					
 				</ul>
 			</div>
@@ -162,6 +163,46 @@
 				<!--<a href="#" class="show-more-button" data-more-title="Show More" data-less-title="Show Less"><i class="fa fa-angle-down"></i></a>-->
 			</div>
 			<!-- Food Menu / End -->
+			
+			
+			<!-- Reviews -->
+			<div id="listing-reviews" class="listing-section">
+				<h3 class="listing-desc-headline margin-top-75 margin-bottom-20">レビュー <span>({{$review_amount}})</span></h3>
+
+				<div id="rating">
+					
+				</div>
+
+
+				<div class="clearfix"></div>
+
+				<!-- Reviews -->
+				<section class="comments listing-reviews">
+					<ul>
+						@for($i=0; $i<$review_amount; $i++)
+						<li>
+							<div class="avatar"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
+							<div class="comment-content"><div class="arrow-comment"></div>
+								<div class="comment-by">{{$review_user_name[$i]}} <i class="tip" data-tip-content="Person who left this review actually was a customer"></i> <span class="date">{{$book_year_month[$i]}}</span>
+									<div class="star-rating" data-rating={{$user_total_stars[$i]}}>
+										<strong><i class="fas fa-star"></i> {{$user_total_stars[$i]}}</strong>
+									</div>
+								</div>
+								<p style="overflow-wrap:break-word;">{{$review_note[$i]}}</p>
+								
+								
+								<!--<div class="review-images mfp-gallery-container">-->
+								<!--	<a href="images/review-image-01.jpg" class="mfp-gallery"><img src="images/review-image-01.jpg" alt=""></a>-->
+								<!--</div>-->
+								<!--<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>12</span></a>-->
+							</div>
+						</li>
+						@endfor
+
+					 </ul>
+				</section>
+			</div>
+
 
 		
 

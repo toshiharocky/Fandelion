@@ -66,7 +66,7 @@
     <div class="col-lg-8 col-md-12 tabs-wrapper">
         <!-- Listing Nav -->
         <ul class="tabs-nav">
-			<li id="future_bookings" class=""><a href="#history-nav1">今後の予約</a></li>
+			<li id="future_bookings" class="active"><a href="#history-nav1">今後の予約</a></li>
 			<li id="past_bookings"><a  href="#history-nav2">過去の予約</a></li>
 		</ul>
 		<!--<div id="history-nav" class="listing-nav-container" style="margin-top:50px">-->
@@ -259,16 +259,29 @@ $(document).ready(function(){
                 		<!--//「予約の修正・キャンセルはyyyy/mm/dd H:iまでです」と表示-->
                 		<!--// nowがキャンセル期間を超過した場合、#cancelに「予約の修正・キャンセル期間は終了しました」と表示-->let cancel_id = "cancel_"+$i;
                          if(bookingstatus_id[$i]=='20'){
-                		    $(check_in_out_id).append(
-                    			`
-                    			<form id="check_out" method="put" action="check_out">
-                    		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
-                    		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
-                    		        <h5>現在トレーニング中です<h5>
-                    			    <input type="submit" class="button gray"  value="トレーニング終了">
-                			    </form>
-                    			`
-                		    );
+                            if(now < booking_to_time_2[$i]){
+                    		    $(check_in_out_id).append(
+                        			`
+                        			<form id="check_out" method="put" action="check_out">
+                        		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
+                        		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
+                        		        <h5>現在トレーニング中です<h5>
+                        			    <input type="submit" class="button gray"  value="トレーニング終了">
+                    			    </form>
+                        			`
+                    		    );
+                		    }else{
+                		        $(check_in_out_id).append(
+                        			`
+                        			<form id="check_out" method="put" action="check_out">
+                        		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
+                        		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
+                        		        <h5>トレーニング時間は終了しました。<h5>
+                        			    <input type="submit" class="button gray"  value="トレーニング終了">
+                    			    </form>
+                        			`
+                        			)
+                		    }
                         }else{
                 		
                     		if(now < cancel_limit){

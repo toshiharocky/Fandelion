@@ -19,7 +19,7 @@
 				<form method="get" action="review_to_host" style="display:flex; justify-content:center;">
 					<input type="hidden" name="gym_id" value={{$gym_id}}>
 					<input type="hidden" name="booking_id" value={{$booking_id}}>
-					<div style="width:15%;">
+					<div style="width:50%;">
 						<input type="button" onclick="submit();" class="button search-button margin-top-30" value="レビューをする">
 					</div>
 					<!--<a href="review_to_host" class="button margin-top-30">レビューをする</a>-->

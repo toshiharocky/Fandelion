@@ -13,6 +13,47 @@
 		display:flex; 
 		justify-content:center;
 	}
+		#booking_overview{
+			display:flex;
+			justify-content:space-around;
+		}
+		.element_details{
+			text-align:right;
+		}
+		.add-comment .button {
+		    width: 50%;
+		    margin-top:30px;
+		}
+	@media (min-width: 991px){
+		#time, #guest, #price{
+			width:20%;
+		}
+		.summary{
+			width:80%;
+		}
+	}
+	@media (max-width: 991px){
+		#booking_overview{
+			flex-direction:column;
+			align-items:center;
+		}
+		#time, #guest, #price{
+			width:100%;
+		}
+		.summary{
+			width:100%;
+		}
+		.ratings-container{
+			display: flex;
+			flex-direction: column;
+		}
+		.add-sub-rating{
+			width: 100%;
+		}
+		.add-comment .button {
+		    width: 100%;
+		}
+	}
 </style>
 @endpush
 
@@ -32,16 +73,16 @@
     		</div>
     	</div>
     	<h3 class="margin-top-55 margin-bottom-30">レビューをする</h3>
-    	<div class="boxed-widget opening-hours summary margin-top-0" style="width:80%;">
-    		<div id="booking_overview" style="display:flex; justify-content:space-around">
-				<div id="time" class="booking_elements" style="width:20%;">
+    	<div class="boxed-widget opening-hours summary margin-top-0">
+    		<div id="booking_overview">
+				<div id="time" class="booking_elements">
 					<div id="total_time">
 						<h4>時間：{{$total_time}}</h4>
 					</div>
-					<h4 class="element_details" style="text-align:left; margin-bottom:0;" >{{$date}}</h4>
+					<h4 class="element_details" style="margin-bottom:0;" >{{$date}}</h4>
 					<h5 class="element_details">{{$from_to}}</h5>
 				</div>
-				<div id="guest" class="booking_elements" style="width:20%;">
+				<div id="guest" class="booking_elements">
 					<div id="guest_details">
 					<h4 name="number_of_users">人数：{{$number_of_users}}名</h4>
 					</div>
@@ -49,7 +90,7 @@
     				<h5 name="number_of_women" class="element_details">女性 {{$number_of_women}}名</h5>
     				<h5 name="number_of_others" class="element_details">その他 {{$number_of_others}}名</h5>
 				</div>
-				<div id="price" class="booking_elements" style="width:20%;">
+				<div id="price" class="booking_elements">
 					<h4 name="total_price" value="${total_price}" >総計：{{$total_price}}円</h4>
     				<h5 name="gym_price"  value="gym_price" class="element_details">ジム使用料 {{$gym_price}}円</h5>
     				<h5 name="service_price"  value="service_price" class="element_details">サービス料 {{$service_price}}円</h5>
@@ -71,7 +112,7 @@
 					<div class="ratings-container">
 						 <!--Totalrating #1 -->
 						<div class="add-sub-rating" style="width: 100%; margin-bottom:36px;">
-							<div class="sub-rating-title">Total <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></div>
+							<div class="sub-rating-title">Total <i class="tip" data-tip-content="総合評価をしてください"></i></div>
 							<div class="sub-rating-stars">
 								 <!--Leave Rating -->
 								<div class="clearfix"></div>
@@ -96,7 +137,7 @@
 	
 						<!-- Subrating #1 -->
 						<div class="add-sub-rating">
-							<div class="sub-rating-title">Equipment <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></div>
+							<div class="sub-rating-title">Equipment <i class="tip" data-tip-content="掲載されている設備の質に関する評価です"></i></div>
 							<div class="sub-rating-stars">
 								<!-- Leave Rating -->
 								<div class="clearfix"></div>
@@ -117,7 +158,7 @@
 	
 						<!-- Subrating #2 -->
 						<div class="add-sub-rating">
-							<div class="sub-rating-title">Cleanliness <i class="tip" data-tip-content="Overall experience received for the amount spent"></i></div>
+							<div class="sub-rating-title">Cleanliness <i class="tip" data-tip-content="清潔さに関する評価です"></i></div>
 							<div class="sub-rating-stars">
 								<!-- Leave Rating -->
 								<div class="clearfix"></div>
@@ -138,7 +179,7 @@
 	
 						<!-- Subrating #3 -->
 						<div class="add-sub-rating">
-							<div class="sub-rating-title">Accuracy <i class="tip" data-tip-content="Visibility, commute or nearby parking spots"></i></div>
+							<div class="sub-rating-title">Accuracy <i class="tip" data-tip-content="情報の正確さに関する評価です"></i></div>
 							<div class="sub-rating-stars">
 								<!-- Leave Rating -->
 								<div class="clearfix"></div>
@@ -159,7 +200,7 @@
 						
 						<!-- Subrating #4 -->
 						<div class="add-sub-rating">
-							<div class="sub-rating-title">Communication <i class="tip" data-tip-content="The physical condition of the business"></i></div>
+							<div class="sub-rating-title">Communication <i class="tip" data-tip-content="ホストとのコミュニケーションに関する評価です"></i></div>
 							<div class="sub-rating-stars">
 								<!-- Leave Rating -->
 								<div class="clearfix"></div>
@@ -184,10 +225,10 @@
 					
 	
 					<!-- Review Comment -->
-					<div id="add-comment" class="add-comment">
+					<div id="add-comment" class="add-comment" style="margin-top:30px; text-align:center;">
 						<fieldset>
 							<div>
-								<label>Review:</label>
+								<div class="sub-rating-title">Review <i class="tip" data-tip-content="感想やホストへのメッセージを書いてください"></i></div>
 								<textarea name="note" cols="40" rows="3"></textarea>
 							</div>
 	
