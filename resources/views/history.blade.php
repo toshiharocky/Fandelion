@@ -333,7 +333,7 @@ $(document).ready(function(){
                     		                if(now < booking_to_time_2[$i]){
                                     		    $(check_in_out_id).append(
                                         			`
-                                        			<h5>トレーニング開始時間を超過しています。<h5>
+                                        			<h5>トレーニング開始時間を<br>超過しています。<h5>
                                         			<form id="check_in" method="put" action="check_in">
                                         		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                                         		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
@@ -501,27 +501,6 @@ $(document).ready(function(){
                     	
                 		}
                 		
-                		
-                		<!--// 「トレーニング開始」ボタンを押したら、「トレーニングを開始しますか？（この処理は取り消すことができません）」というconfirmを出した上で、-->
-                		<!--    check_in.blade.phpに遷移し、bookingsテーブルのbookingstatus_idを「20」に変更する（ルーティングが必要）-->
-                		$("#check_in").submit(function(){
-                		    if(window.confirm('トレーニングを開始しますか？（この処理は取り消すことができません）')){ // 確認ダイアログを表示
-                        		return true; // 「OK」時は送信を実行
-                        	}else{ // 「キャンセル」時の処理
-                        		return false; // 送信を中止
-            		        }
-                		});
-                		
-                		
-                		<!--// 「トレーニング終了」ボタンを押したら、「トレーニングを終了しますか？（この処理は取り消すことができません）」というconfirmを出した上で、-->
-                		<!--    checked_out.blade.phpに遷移し、bookingsテーブルのbookingstatus_idを「25」に変更する（ルーティングが必要）-->
-                		$("#check_out").submit(function(){
-                		    if(window.confirm('トレーニングを終了しますか？（この処理は取り消すことができません）')){ // 確認ダイアログを表示
-                        		return true; // 「OK」時は送信を実行
-                        	}else{ // 「キャンセル」時の処理
-                        		return false; // 送信を中止
-            		        }
-                		});
                 
                     }
                     
@@ -544,6 +523,28 @@ $(document).ready(function(){
 
 
 <script>
+    
+                		
+	<!--// 「トレーニング開始」ボタンを押したら、「トレーニングを開始しますか？（この処理は取り消すことができません）」というconfirmを出した上で、-->
+	<!--    check_in.blade.phpに遷移し、bookingsテーブルのbookingstatus_idを「20」に変更する（ルーティングが必要）-->
+	$("#check_in").submit(function(){
+	    if(window.confirm('トレーニングを開始しますか？（この処理は取り消すことができません）')){ // 確認ダイアログを表示
+    		return true; // 「OK」時は送信を実行
+    	}else{ // 「キャンセル」時の処理
+    		return false; // 送信を中止
+        }
+	});
+	
+	
+	<!--// 「トレーニング終了」ボタンを押したら、「トレーニングを終了しますか？（この処理は取り消すことができません）」というconfirmを出した上で、-->
+	<!--    checked_out.blade.phpに遷移し、bookingsテーブルのbookingstatus_idを「25」に変更する（ルーティングが必要）-->
+	$("#check_out").submit(function(){
+	    if(window.confirm('トレーニングを終了しますか？（この処理は取り消すことができません）')){ // 確認ダイアログを表示
+    		return true; // 「OK」時は送信を実行
+    	}else{ // 「キャンセル」時の処理
+    		return false; // 送信を中止
+        }
+	});
 
     // 「過去の予約」をクリックすると、#future_bookingsのactiveクラスが覗かれ、#past_bookingsにactiveクラスがつく
     $("#history-nav1").on('click',function(){
@@ -553,6 +554,8 @@ $(document).ready(function(){
         console.log($("#past_bookings").hasClass("active"));
         past();
     });
+    
+    
     // 「現在の予約」をクリックすると、#past_bookingsのactiveクラスが覗かれ、#future_bookingsにactiveクラスがつく
     $("#history-nav2").on("click",function(){
         $("#future_bookings").addClass("active");
