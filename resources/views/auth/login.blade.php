@@ -8,9 +8,16 @@
             display:flex; 
             align-items:center;
         }
-        .col-md-4 {
-            width: 20%;
+        .text-md-right{
+            text-align:right;
         }
+        .button_wrapper{
+            width: 100%;
+            text-align: center;
+        }
+		.button{
+		    width:30%;
+		}
     }
 	@media (max-width: 991px){
 		.button{
@@ -74,7 +81,7 @@
                         <!--</div>-->
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-8 offset-md-4 button_wrapper">
                                 <button type="submit" class="button btn-primary">
                                     {{ __('Login') }}
                                 </button>

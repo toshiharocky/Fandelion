@@ -14,8 +14,8 @@
 			<div class="booking-confirmation-page">
 				<i class="fa fa-check-circle"></i>
 				<h2 class="margin-top-30">チェックインが完了しました！</h2>
-				<h3 class="margin-top-30">{{$user_name}}さん、良いトレーニングを!!</h3>
-				<p>You'll receive a confirmation email at mail@example.com</p>
+				<h3 class="margin-top-30">{{$user_name}}さん、<br>良いトレーニングを!!</h3>
+				<!--<p>You'll receive a confirmation email at mail@example.com</p>-->
 				<a href="history" class="button margin-top-30">チェックアウトする</a>
 			</div>
 

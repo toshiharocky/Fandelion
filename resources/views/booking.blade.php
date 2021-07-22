@@ -74,7 +74,7 @@
 @section('content')
 <!-- Content
 ================================================== -->
-<div class="container">
+<div class="container" style="overflow:hidden;">
 	<div id="booking_header">
 		<!-- Titlebar -->
 			<div id="titlebar" class="listing-titlebar" >
@@ -167,7 +167,7 @@
 					<div id="select_time_range">
 						<div class="col-lg-4">
 							<h4 style="text-align:center;">日付を選択</h4>
-							<input type="text" id="date-picker" placeholder="Date" readonly="readonly">
+							<input type="text" id="date-picker" placeholder="Date" readonly="readonly" style="text-align:center;">
 						
 							<h4 style="text-align:center;">表示時間を選択</h4>
 							<div class="row" style="display:flex; justify-content:center; align-items:middle;">
