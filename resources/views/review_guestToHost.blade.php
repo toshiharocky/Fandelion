@@ -24,6 +24,9 @@
 		    width: 50%;
 		    margin-top:30px;
 		}
+    	textarea {
+    		font-size:16px !important;
+    	}
 	@media (min-width: 991px){
 		#time, #guest, #price{
 			width:20%;
