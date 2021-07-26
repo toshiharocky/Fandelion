@@ -21,6 +21,12 @@
     		display:flex;
     		width:100%;
     	}
+    	input {
+    		font-size:16px !important;
+    	}
+    	textarea {
+    		font-size:16px !important;
+    	}
 	@media (min-width: 991px){
 	    	.down_arrow{
 	    		display:none;
