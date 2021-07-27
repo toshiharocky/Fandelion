@@ -24,6 +24,9 @@
     	input {
     		font-size:16px !important;
     	}
+    	select {
+    		font-size:16px !important;
+    	}
     	textarea {
     		font-size:16px !important;
     	}
