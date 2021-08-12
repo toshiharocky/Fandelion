@@ -17,7 +17,7 @@ class GuestGenderTableSeeder extends Seeder
         \DB::table('guest_genders')->insert([
         [
             'id' => 1,
-            'guest_gender' => '特になし',
+            'guest_gender' => '性別指定なし',
          ],
         [
             'id' => 2,

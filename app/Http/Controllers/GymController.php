@@ -933,6 +933,21 @@ class GymController extends Controller
         
     
         if ( !empty($images) ) {
+            
+            $mon_price = $request->monday_price;
+            $tue_price = $request->tuesday_price;
+            $wed_price = $request->wednesday_price;
+            $thu_price = $request->thursday_price;
+            $fri_price = $request->friday_price;
+            $sat_price = $request->saturday_price;
+            $sun_price = $request->sunday_price;
+            
+            $price_list = array($mon_price, $tue_price, $wed_price, $thu_price, $fri_price, $sat_price, $sun_price);
+            $max_price = max($price_list);
+            $min_price = min($price_list);
+            
+            
+    
     
             // Eloquent モデルでジム情報をgymsテーブルに登録
              $gyms = new Gym;
@@ -950,6 +965,8 @@ class GymController extends Controller
              $gyms->area = $request->area;
              $gyms->guest_gender = $request->guest_gender;
              $gyms->guest_limit = $request->guest_limit;
+             $gyms->max_price = $max_price;
+             $gyms->min_price = $min_price;
              $gyms->gymstatus_id = 1;
              $gyms->superHost_flg = 0;
              $gyms->save(); 

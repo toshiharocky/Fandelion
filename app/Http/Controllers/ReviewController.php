@@ -166,10 +166,71 @@ class ReviewController extends Controller
         $g2h_review->save();
         
         
+        // innerjoinでbooking_id経由でtotal_starsを取得する
+        $reviews[] =  DB::table('bookings')
+                        ->join('gyms', 'gyms.id', '=', 'bookings.gym_id')
+                        ->join('guest_to_host_reviews', 'booking_id', '=', 'bookings.id')
+                        ->join('users', 'users.id', '=', 'bookings.user_id')
+                        ->select('booking_id', 'total_stars', 'equipment_stars', 'cleanliness_stars', 'accuracy_stars', 'communication_stars', 'note', 'booking_from_time', 'bookings.user_id', 'users.name')
+                        ->where('gyms.id',$gym_id)
+                        ->get();
+        
+        // gymsテーブルのreview_amount数を取得する
+        $review_amount = count($reviews[0]);
+        
+        // dd($reviews[0]);
+        // dd($review_amount);
+        
+        // レビュー実績を取得する
+        $total_review = 0;
+        $equipment_stars = 0;
+        $cleanliness_stars = 0;
+        $accuracy_stars = 0;
+        $communication_stars = 0;
+        
+        if($review_amount > 0){
+            for($i=0; $i<$review_amount; $i++){
+             $total_review += $reviews[0][$i]->total_stars;
+             $equipment_stars += $reviews[0][$i]->equipment_stars;
+             $cleanliness_stars += $reviews[0][$i]->cleanliness_stars;
+             $accuracy_stars += $reviews[0][$i]->accuracy_stars;
+             $communication_stars += $reviews[0][$i]->communication_stars;
+            }
+            
+            $review_average  = round($total_review / $review_amount, 3);
+            $equipment_stars_average  = round($equipment_stars / $review_amount, 3);
+            $cleanliness_stars_average  = round($cleanliness_stars / $review_amount, 3);
+            $accuracy_stars_average  = round($accuracy_stars / $review_amount, 3);
+            $communication_stars_average  = round($communication_stars / $review_amount, 3);
+            $review_check = array($review_average, $equipment_stars_average, $cleanliness_stars_average, $accuracy_stars_average, $communication_stars_average);
+            // dd($total_review);
+            // dd($review_average);
+            // dd($review_check);
+        }else {
+            $review_average  = 0;
+            $equipment_stars_average  = 0;
+            $cleanliness_stars_average  = 0;
+            $accuracy_stars_average  = 0;
+            $communication_stars_average  = 0;
+            $review_check = "";
+        }
+        
+        
+        
+        // gymsテーブルのreview_amountとreview_averageを更新する
+        // dd($gym_id);
+        $gym = Gym::find($gym_id);
+        $gym->review_amount = $review_amount;
+        $gym->review_average = $review_average;
+        $gym -> save();
+        
+        
         // Bookingテーブルのbookingstatus_idが25なら、bookingstatus_idを30にする
         // Bookingテーブルのbookingstatus_idが30なら、bookingstatus_idを35にする
         $booking = Booking::find($booking_id);
         $bookingstatus_id = Booking::find($booking_id)->bookingstatus_id;
+        
+        
         
         if($bookingstatus_id == '25'){
             $booking->bookingstatus_id = '30';

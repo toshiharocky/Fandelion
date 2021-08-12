@@ -76,6 +76,8 @@ class SearchController extends Controller
             ->get();
         
         
+        // dd($gyms[0]);
+        
         
         
         $search_amount = count($gyms);
@@ -136,17 +138,32 @@ class SearchController extends Controller
                 
                 
                 
-                $gym_image_url[] = DB::table('gyms')
+                $gym_info[] = DB::table('gyms')
                             ->join('gym_images', 'gyms.id', '=', 'gym_id')
-                            ->select('img_url')
+                            ->join('gym_types', 'gymType_id', '=', 'gym_types.id')
+                            ->join('gym_areas', 'area', "=", 'gym_areas.id')
+                            ->join('guest_genders', 'gyms.guest_gender', "=", 'guest_genders.id')
                             ->where('gyms.id',$gym->id)
-                            ->get()[0]->img_url;
+                            ->get()[0];
+                
+                
+                
                 // ジムのスケジュールを取得する
                 $gym_schedule = DB::table('gyms')
                             ->join('gym_schedules', 'gyms.id', '=', 'gym_id')
                             ->select('gym_id','from_time', 'to_time', 'price', 'status', 'day', 'booking_id')
                             ->where('gyms.id',$gym->id)
                             ->get();
+                            
+                // ジムの設備を取得する
+                $gym_equipment = DB::table('gyms')
+                            ->join('equipment', 'gyms.id', '=', 'gym_id')
+                            ->select('gyms.id', 'equipment_name', 'max_weight', 'min_weight', 'review_average', 'guest_limit', 'area')
+                            ->where('gyms.id',$gym->id)
+                            ->get();
+                            
+                
+                
                 // ジムの最低価格と最高価格を取得する
                 $max_price = $gym_schedule   -> max('price');
                 $min_price = $gym_schedule -> min('price');
@@ -159,6 +176,8 @@ class SearchController extends Controller
                 }
                 
             }
+            
+            // dd($gym_info);
             
             // dd($reviews);
             // 各ジムのレビュー数をカウントする
@@ -211,6 +230,8 @@ class SearchController extends Controller
             
             
             return view('search_results',[
+                'gyms'=>$gyms,
+                'gym_info'=>$gym_info,
                 'user_name'=>$user_name,
                 'status_name'=>$status_name,
                 'gym_id'=>$gym_id,
@@ -218,30 +239,44 @@ class SearchController extends Controller
                 'gym_addr'=>$gym_addr,
                 'review_amount' => $review_count,
                 'review_average'=>$review_average,
-                'gym_image_url'=>$gym_image_url,
+                // 'gym_image_url'=>$gym_image_url,
                 'search_amount' => $search_amount,
                 'guest_gender' => $guest_gender,
+                'city2' => $city2,
                 'cityLat' => $cityLat,
                 'cityLng' => $cityLng,
                 'gym_latitude' => $gym_latitude,
                 'gym_longitude' => $gym_longitude,
+                'gym_equipment' => $gym_equipment,
+                'men' => $men,
+                'women' => $women,
+                'total_guest' => $total_guest,
+                'others' => $others,
                 // 'gym_schedule'=>$gym_schedule,
                 // 'price_range'=>$price_range,
                 ]);
             } else{
             return view('search_results',[
+                'gyms'=>$gyms,
+                'gym_info'=>$gym_info,
                 'gym_id'=>$gym_id,
                 'gym_titles'=>$gym_titles,
                 'gym_addr'=>$gym_addr,
                 'review_amount' => $review_count,
                 'review_average'=>$review_average,
-                'gym_image_url'=>$gym_image_url,
+                // 'gym_image_url'=>$gym_image_url,
                 'search_amount' => $search_amount,
                 'guest_gender' => $guest_gender,
+                'city2' => $city2,
                 'cityLat' => $cityLat,
                 'cityLng' => $cityLng,
                 'gym_latitude' => $gym_latitude,
                 'gym_longitude' => $gym_longitude,
+                'gym_equipment' => $gym_equipment,
+                'men' => $men,
+                'women' => $women,
+                'total_guest' => $total_guest,
+                'others' => $others,
                 // 'gym_schedule'=>$gym_schedule,
                 // 'price_range'=>$price_range,
                 ]);

@@ -137,17 +137,17 @@
 									<select  name="area" class="chosen-select-no-single" value="選択してください"   required>
 										<option value="" style="display:none;">使用可能なエリアの面積を選んでください</option>	
 										// heroku用
-										<option value="5" >〜10㎡</option>
-										<option value="15" >10〜20㎡</option>
-										<option value="25" >30〜40㎡</option>
-										<option value="35" >40〜50㎡</option>
-										<option value="45" >50㎡以上</option>
+										<!--<option value="5" >〜10㎡</option>-->
+										<!--<option value="15" >10〜20㎡</option>-->
+										<!--<option value="25" >30〜40㎡</option>-->
+										<!--<option value="35" >40〜50㎡</option>-->
+										<!--<option value="45" >50㎡以上</option>-->
 										// cloud9用
-										<!--<option value="1" >〜10㎡</option>-->
-										<!--<option value="2" >10〜20㎡</option>-->
-										<!--<option value="3" >30〜40㎡</option>-->
-										<!--<option value="4" >40〜50㎡</option>-->
-										<!--<option value="5" >50㎡以上</option>-->
+										<option value="1" >〜10㎡</option>
+										<option value="2" >10〜20㎡</option>
+										<option value="3" >30〜40㎡</option>
+										<option value="4" >40〜50㎡</option>
+										<option value="5" >50㎡以上</option>
 									</select>
 								</div>
 								<div class="col-md-6">

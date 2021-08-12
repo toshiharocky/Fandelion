@@ -30,9 +30,11 @@ class CreateGymsTable extends Migration
             $table->integer('area');
             $table->integer('guest_gender');
             $table->integer('superHost_flg'); //->default(0);
-            // $table->integer('review_amount')->default(0);
-            // $table->float('review_average')->default(0);
+            $table->integer('review_amount')->default(0);
+            $table->float('review_average')->default(0);
             $table->integer('guest_limit');
+            $table->integer('min_price');
+            $table->integer('max_price');
             $table->timestamps();
         });
     }
