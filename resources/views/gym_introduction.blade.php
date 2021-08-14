@@ -59,38 +59,56 @@
 	<div class="row sticky-wrapper">
 		<div class="col-lg-8 col-md-8 padding-right-30">
 			
-			<!-- Share / Like -->
 			
-			<!--	<div class="listing-share margin-top-20 no-border" style="text-align:right;">-->
-			<!--		<a href="/bookmark" class="button" style="line-height:30px; bottom:1px; width:30px; height:30px; background-color:#f3103c;">-->
-			<!--			<i class="fas fa-heart"></i>-->
-			<!--		</a>-->
-			<!--		<div class="clearfix"></div>-->
-			<!--	</div>-->
 			<!-- Titlebar -->
-			<div id="titlebar" class="listing-titlebar" style="display:flex; flex-direction:row; justify-content:space-between;">
-				<div class="listing-titlebar-title">
-					<h2>{{$gym_title}} </h2>
-					<h5>
-						<a href="#listing-location" class="listing-address">
-							<i class="fa fa-map-marker"></i>
-							{{$addr}}
+			<div id="titlebar" class="listing-titlebar">
+				<!-- Share / Like -->
+				<div class="listing-share margin-top-20 no-border" style="text-align:right;">
+					@if($bookmark_check != null && $bookmark_check != "hidden")
+					<div style="display:flex; justify-content: flex-end;">
+						<a href="/bookmark">
+							<i class="fas fa-heart" style="color:#f91942;"></i>
 						</a>
-					</h5>
-					<div id=gym_tags></div>
-					<div class="star-rating" data-rating="5">
-						<div class="rating-counter"><a href="#listing-reviews">({{$review_amount}} reviews)</a></div>
+						<a href="/bookmark">
+							<p style="padding-left:5px;">お気に入り登録済み</p>
+						</a>
 					</div>
-				</div>
-				<div class="listing-titlebar-title price_range" style="text-align:right;">
-					<h2>{{$price_range}} 
-						<!--<span class="listing-tag">Eat & Drink</span>-->
-					</h2>
-					<span>
-						<a href="#listing-location" class="listing-address">
-							(15分あたり)
+					@else
+					<div style="display:flex; justify-content: flex-end;">
+						<a href="/bookmark">
+							<i class="fas fa-heart" style="color:#666666;"></i>
 						</a>
-					</span>
+						<a href="/bookmark">
+							<p style="padding-left:5px;">お気に入りに登録</p>
+						</a>
+					</div>
+					@endif
+					<div class="clearfix"></div>
+				</div>
+				<div style="display:flex; flex-direction:row; justify-content:space-between;">
+					<div class="listing-titlebar-title">
+						<h2>{{$gym_title}} </h2>
+						<h5>
+							<a href="#listing-location" class="listing-address">
+								<i class="fa fa-map-marker"></i>
+								{{$addr}}
+							</a>
+						</h5>
+						<div id=gym_tags></div>
+						<div class="star-rating" data-rating="5">
+							<div class="rating-counter"><a href="#listing-reviews">({{$review_amount}} reviews)</a></div>
+						</div>
+					</div>
+					<div class="listing-titlebar-title price_range" style="text-align:right;">
+						<h2>{{$price_range}} 
+							<!--<span class="listing-tag">Eat & Drink</span>-->
+						</h2>
+						<span>
+							<a href="#listing-location" class="listing-address">
+								(15分あたり)
+							</a>
+						</span>
+					</div>
 				</div>
 			</div>
 			

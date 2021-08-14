@@ -19,7 +19,8 @@
 ================================================== -->
 <style>
 	.mobile-nav{
-		padding-bottom:20px;	
+		padding-bottom:20px;
+		z-index: 1000;
 	}
 	
 	#logo_mark{
@@ -487,9 +488,9 @@
 
 
 <!-- Copyrights -->
-<div class="col-md-12">
-	<div class="copyrights">© 2021 Fandelion. All Rights Reserved.</div>
-</div>
+<!--<div class="col-md-12">-->
+<!--	<div class="copyrights">© 2021 Fandelion. All Rights Reserved.</div>-->
+<!--</div>-->
 
 <!-- Copyrights / End-->
 

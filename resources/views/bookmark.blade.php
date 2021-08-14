@@ -17,9 +17,16 @@
 	    top: -6px;
 	    display: inline-block;
 	}
-	.fs-inner-container.content{
-		padding-top:0px !important;
-	}
+	@media (min-width: 991px){
+    	.fs-inner-container.content{
+    		padding-top:0px !important;
+    		width: 80% !important;
+    	}
+    	.fs-container {
+            display: flex;
+            justify-content: space-around;
+        }
+    }
 	@media (max-width: 991px){
 		.search{
 			padding: 45px 30px !important;
@@ -41,12 +48,8 @@
 			<section class="search">
 
 				<div>
-					<h3>検索条件</h3>
-					<h4>場所：{{$city2}} 周辺</h4>
-					<div style="display:flex; align-items: flex-end;">
-						<h4>人数：{{$total_guest}}名</h4>
-						<h5 style="padding-left:5px;">(男性：{{$men}}名 女性：{{$women}}名 その他{{$others}}名)</h5>
-					</div>
+					<h3>お気に入り</h3>
+					
 				</div>
 				<div class="row">
 					<div class="col-md-12">
@@ -54,26 +57,7 @@
 							<!-- Row With Forms -->
 							<div class="row with-forms">
 
-								<!-- Main Search Input -->
-								<!--<div class="col-fs-6">-->
-								<!--	<div class="input-with-icon">-->
-								<!--		<i class="sl sl-icon-magnifier"></i>-->
-								<!--		<input type="text" placeholder="What are you looking for?" value=""/>-->
-								<!--	</div>-->
-								<!--</div>-->
-
-								<!-- Main Search Input -->
-								<!--<div class="col-fs-6">-->
-								<!--	<div class="input-with-icon location">-->
-							
-								<!--		<div id="autocomplete-container">-->
-								<!--			<input id="autocomplete-input" type="text" placeholder="Location">-->
-								<!--		</div>-->
-								<!--		<a href="#"><i class="fa fa-map-marker"></i></a>-->
-								<!--	</div>-->
-								<!--</div>-->
-						
-
+								
 								<!-- Filters -->
 								<div class="col-fs-12">
 
@@ -194,62 +178,14 @@
 
 			
 			
-			@if($search_amount > 1)
-				<div id="gym_list"></div>
-				
-					
-			@else
-				<!-- Listings-->
-				<div id="gym_list_0"></div>
-				
-				<!--
-				<!-- Listings Container / End -->
-			@endif
+			
+			<div id="gym_list"></div>
 
 
-			<!-- Pagination Container -->
-			<!--<div class="row fs-listings">-->
-			<!--	<div class="col-md-12">-->
-
-					<!-- Pagination -->
-			<!--		<div class="clearfix"></div>-->
-			<!--		<div class="row">-->
-			<!--			<div class="col-md-12">-->
-							<!-- Pagination -->
-			<!--				<div class="pagination-container margin-top-15 margin-bottom-40">-->
-			<!--					<nav class="pagination">-->
-			<!--						<ul>-->
-			<!--							<li><a href="#" class="current-page">1</a></li>-->
-			<!--							<li><a href="#">2</a></li>-->
-			<!--							<li><a href="#">3</a></li>-->
-			<!--							<li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>-->
-			<!--						</ul>-->
-			<!--					</nav>-->
-			<!--				</div>-->
-			<!--			</div>-->
-			<!--		</div>-->
-			<!--		<div class="clearfix"></div>-->
-					<!-- Pagination / End -->
-					
-					<!-- Copyrights -->
-			<!--		<div class="copyrights margin-top-0">© 2021 Listeo. All Rights Reserved.</div>-->
-
-			<!--	</div>-->
-			<!--</div>-->
-			<!-- Pagination Container / End -->
+			
 		</section>
 
 		</div>
-	</div>
-	<div class="fs-inner-container map-fixed" style="padding-top: 0px;">
-
-		<!-- Map -->
-		<div id="map-container">
-		    <div id="map" data-map-zoom="9" data-map-scroll="true">
-		        <!-- map goes here -->
-		    </div>
-		</div>
-
 	</div>
 </div>
 
@@ -309,23 +245,9 @@
 <script>
 	
 		
-	let map;
-	  let mainMarker;
-	  let marker =[];
-	  let infoWindow = [];
 	
-	
-    let cityLat = {{$cityLat}};
-    let cityLng = {{$cityLng}};
 	let search_amount = {{$search_amount}};
-	let men = {{$men}};
-	let women = {{$women}};
-	let total_guest = {{$total_guest}};
-	let others = {{$others}};
-	// let gym_titles = {{$gym_titles[0]}};
-	let gym_latitude =  @json($gym_latitude);
-	let gym_longitude =  @json($gym_longitude);
-	let gym_titles = @json($gym_titles);
+	
 	
 	let gym_info = @json($gym_info);
 	let sort_filter = @json($gym_info);
@@ -339,20 +261,18 @@
 		$("#results").empty();
 		$("#gym_list").empty();
 		$("#gym_list_0").empty();
-		console.log(sort_filter);
-		console.log(search_amount);
-		console.log(typeof (search_amount));
 		$("#results").append(
 			`<p class="showing-results">${search_amount} Results Found </p>`
 		);
 		let id_gym = 0;
 		let onclick = 0;
 		if(search_amount == 0){
+		    console.log(search_amount);
 		    $("#results").append(
-    			`<p class="showing-results">該当するジムはありません </p>`
+    			`<p class="showing-results">お気に入りの登録はありません </p>`
     		);
 		}else if(search_amount == 1){
-			$("#gym_list").append(
+		 $("#gym_list").append(
 			`
 			<form method="get" name="gym_select" action="gym_introduction">
 			@csrf
@@ -386,9 +306,10 @@
 				</div>
 			</form>`
 			
-		);
-		}else{
-			for ($i = 0; $i < search_amount; $i++) {
+		);   
+		}
+		else {
+		for ($i = 0; $i < search_amount; $i++) {
 			id_gym = $i + "_gym";
 			onclick = "document:gym_select[" + $i + "].submit(); return false";
 			console.log(id_gym);
@@ -431,6 +352,9 @@
 				`
 		)}
 		};
+		
+		
+		
 		
 	}
 </script>
@@ -616,105 +540,45 @@
 		gymtype_filter();
 		search_amount = Object.keys(sort_filter).length;
 		gym_sort();
-		initMap();
 	});
 	
 	$('.sort-apply').click(function() {
 		gymtype_filter();
 		search_amount = Object.keys(sort_filter).length;
 		gym_sort();
-		initMap();
 	});
 </script>
 
 <script>
-	function asyncFunction() {
-	 return new Promise(function (resolve, reject){
-		try{
-			sort_filter.sort(function(a, b) {
-				   if (a.review_average > b.review_average) {
-				       return -1;
-				   } else {
-				       return 1;
-				   }
-				});
-			
-			resolve();
-		}catch (e) {
-			reject();
-		}
-	}
-	)};
 	
-	
-	asyncFunction().then(() => {
-	  list_append();
-	})
 		
-	
-	
-	function initMap(){
-	  //let markerData = gon.places;
-	  let latlng = {lat: cityLat, lng: cityLng};
-	  // 初期位置の指定
-	  map = new google.maps.Map(document.getElementById('map'), {
-	  center: latlng,
-	  zoom: 16
-	  });
-	
-	  // 初期位置にマーカーを立てる
-	  mainMarker = new google.maps.Marker({
-	    map: map,
-	    position: latlng
-	  });
-	
-	  // 近隣店舗にマーカーを立てる
-	  
-	  for ($i = 0; $i < search_amount; $i++) {
-	    const image = "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
-	    // 緯度経度のデータを作成
-	    
-	    let markerLatLng = new google.maps.LatLng({lat: sort_filter[$i].latitude, lng: sort_filter[$i].longitude});
-	    let id = "#"+$i+"_gym";
-	    <!--console.log(id);-->
-	    <!--console.log(markerLatLng);-->
-	    // マーカーの追加
-	    marker[$i] = new google.maps.Marker({
-	      position: markerLatLng,
-	      map: map,
-	      icon: image,
-	    });
-	
-	    // 吹き出しの追加
-	    infoWindow[$i] = new google.maps.InfoWindow({
-	    // 吹き出しに店舗詳細ページへのリンクを追加
-	    content: `<a href=${id}>${sort_filter[$i].gym_title}</a>`
-	    });
-	
-	    markerEvent($i); 
-	  }
-	
-	  // マーカークリック時に吹き出しを表示する
-	  function markerEvent($i) {
-	    marker[$i].addListener('click', function() {
-	      infoWindow[$i].open(map, marker[$i]);
-	    });
-	  }
+	if(search_amount != 0){
+	    function asyncFunction() {
+    	 return new Promise(function (resolve, reject){
+    		try{
+    			sort_filter.sort(function(a, b) {
+    				   if (a.review_average > b.review_average) {
+    				       return -1;
+    				   } else {
+    				       return 1;
+    				   }
+    				});
+    			
+    			resolve();
+    		}catch (e) {
+    			reject();
+    		}
+    	}
+    	)};
+    	
+    	
+    	asyncFunction().then(() => {
+    	  list_append();
+    	})
+	}else{
+	    list_append();
 	}
 	
-	initMap();
-	
-	<!--document.addEventListener('turbolinks:load', function(){-->
-	<!--  initMap();-->
-	<!--});-->
-    
-	<!--var LatLng = new google.maps.LatLng(cityLat, cityLng);-->
-	<!--var mapOptions = {-->
-	<!-- zoom: 16,      //地図の縮尺値-->
-	<!-- center: LatLng,    //地図の中心座標-->
-	<!-- mapTypeId: 'roadmap'   //地図の種類-->
-	<!--};-->
- <!--   map = new google.maps.Map(document.getElementById('map'), mapOptions);-->
 	
 	
 	

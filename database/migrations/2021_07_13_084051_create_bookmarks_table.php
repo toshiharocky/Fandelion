@@ -14,6 +14,7 @@ class CreateBookmarksTable extends Migration
     public function up()
     {
         Schema::create('bookmarks', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->Integer('user_id');
             $table->Integer('gym_id');
             $table->timestamps();

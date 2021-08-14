@@ -17,8 +17,8 @@ class GuestToHostReviewTableSeeder extends Seeder
     public function run()
     {
         //
-        // for($i=5; $i<3005; $i+=10){ //heroku用
-        for($i=1; $i<601; $i++){ //cloud9用
+        for($i=5; $i<3005; $i+=10){ //heroku用
+        // for($i=1; $i<601; $i++){ //cloud9用
             $booking_id = $i;
             $equipment_stars = rand(3,5);
             $cleanliness_stars = rand(3,5);
@@ -47,8 +47,8 @@ class GuestToHostReviewTableSeeder extends Seeder
         
         
         
-        // for($i=5; $i<1005; $i+=10){ //heroku用
-        for($k=1; $k<201; $k++){ // cloud9用
+        for($i=5; $i<1005; $i+=10){ //heroku用
+        // for($k=1; $k<201; $k++){ // cloud9用
             $reviews = [];
             // innerjoinでbooking_id経由でtotal_starsを取得する
             $reviews[] =  DB::table('bookings')
@@ -73,7 +73,7 @@ class GuestToHostReviewTableSeeder extends Seeder
                  $total_review += $reviews[0][$j]->total_stars;
                 }
                 
-                $review_average  = round($total_review / $review_amount, 3);
+                $review_average  = round($total_review / $review_amount, 1);
                 // dd($total_review);
                 // dd($review_average);
                 // dd($review_check);

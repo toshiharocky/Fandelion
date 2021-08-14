@@ -197,7 +197,7 @@ class ReviewController extends Controller
              $communication_stars += $reviews[0][$i]->communication_stars;
             }
             
-            $review_average  = round($total_review / $review_amount, 3);
+            $review_average  = round($total_review / $review_amount, 1);
             $equipment_stars_average  = round($equipment_stars / $review_amount, 3);
             $cleanliness_stars_average  = round($cleanliness_stars / $review_amount, 3);
             $accuracy_stars_average  = round($accuracy_stars / $review_amount, 3);

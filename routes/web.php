@@ -74,7 +74,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 // ログインユーザーのみ、お気に入り画面を表示する
 Route::group(['middleware' => 'auth'], function() {
-   Route::get('/bookmarks','BookmarksController@index');
+   Route::get('/bookmarks','BookmarkController@index');
 });
 
 // ログインユーザーのみ、予約したジム情報の画面を表示する
@@ -107,6 +107,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 // ログインユーザーのみ、ブックマークを登録 or 削除する
 Route::group(['middleware' => 'auth'], function() {
+   Route::get('/bookmark','BookmarkController@store'); 
    Route::post('/bookmark','BookmarkController@store'); 
 });
 
@@ -133,9 +134,9 @@ Route::group(['middleware' => 'auth'], function() {
 
 
 // ログインユーザーのみ、お気に入りを表示する
-Route::group(['middleware' => 'auth'], function() {
-   Route::get('/bookmarks','MainController@does_not_exist'); // page404へ
-});
+// Route::group(['middleware' => 'auth'], function() {
+//    Route::get('/bookmarks','MainController@does_not_exist'); // page404へ
+// });
 
 
 

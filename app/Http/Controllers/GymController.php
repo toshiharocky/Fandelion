@@ -15,6 +15,7 @@ use App\Equipment;
 use App\GymSchedule;
 use Illuminate\Support\Str;
 use DateTime;
+use App\Bookmark;
 
 class GymController extends Controller
 {
@@ -26,6 +27,9 @@ class GymController extends Controller
     public function index(Request $request)
     {
         //
+        // セッションIDの再発行
+        $request->session()->regenerate();
+
         // dd($request->all());
         $request->session()->put('gym_id', $request->gym_id);
         // dd($request->session()->get('gym_id'));
@@ -250,6 +254,7 @@ class GymController extends Controller
         $gym_equipment_count = count($gym_equipment);
         // dd($gym_equipment[0]->equipment_name);
         
+        
         if (Auth::check()){
             $user = Auth::user()->id;
             // dd($user);
@@ -292,6 +297,11 @@ class GymController extends Controller
             // dd($booking_check);
             
             
+            // ブックマークの有無を確認する
+            $bookmark_check = Bookmark::where('user_id', $user)
+                    ->where('gym_id', $gym_id)
+                    ->first();
+            // dd($bookmark_check == null);
             
             return view('gym_introduction',[
                 'user_name'=>$user_name,
@@ -337,6 +347,7 @@ class GymController extends Controller
                 'gym_equipment' => $gym_equipment,
                 'gym_equipment_count' => $gym_equipment_count,
                 'gym_open_times' => $gym_open_times,
+                'bookmark_check' => $bookmark_check,
                 ]);
         }
             
@@ -382,6 +393,7 @@ class GymController extends Controller
                 'gym_equipment' => $gym_equipment,
                 'gym_equipment_count' => $gym_equipment_count,
                 'gym_open_times' => $gym_open_times,
+                'bookmark_check' => "hidden",
                 ]);
             }
     }

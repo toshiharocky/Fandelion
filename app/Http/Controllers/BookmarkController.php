@@ -26,7 +26,50 @@ class BookmarkController extends Controller
      */
     public function index()
     {
-        //
+        //user_idを取得する
+        $user = Auth::user()->id;
+        $user_name =  Auth::user()->name;
+        $status_names = DB::table('users')
+                            ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
+                            ->select('name', 'status_name')
+                            ->get();
+        $status_name = $status_names[1]->status_name;
+        
+        // bookmarksテーブルのuser_idが$userであるテーブルのgym_idを取得し、gymsテーブルから当該gym_idがidとなるテーブルを取得する
+        $gyms = DB::table('bookmarks')
+                ->join('users', 'users.id', '=', 'bookmarks.user_id')
+                ->join('gyms', 'gyms.id', '=', 'bookmarks.gym_id')
+                ->get();
+        // dd($gyms);
+        $search_amount = count($gyms);
+        
+        if($search_amount == 0){
+            $gym_info = 0;
+        }else{
+           foreach($gyms as $gym){
+                $gym_info[] = DB::table('gyms')
+                                ->join('gym_images', 'gyms.id', '=', 'gym_id')
+                                ->join('gym_types', 'gymType_id', '=', 'gym_types.id')
+                                ->join('gym_areas', 'area', "=", 'gym_areas.id')
+                                ->join('guest_genders', 'gyms.guest_gender', "=", 'guest_genders.id')
+                                ->where('gyms.id',$gym->id)
+                                ->get()[0];
+                
+                   
+           }
+        }
+       
+    //   dd($gym_info);
+       
+       return view('bookmark',[
+                'gyms'=>$gyms,
+                'gym_info'=>$gym_info,
+                'user_name'=>$user_name,
+                'status_name'=>$status_name,
+                'search_amount' => $search_amount,
+                ]);
+
+        
     }
 
     /**
@@ -48,17 +91,39 @@ class BookmarkController extends Controller
     public function store(Request $request)
     {
         //
-        //
-        $user_id =  Auth::user();
         
-                
+        //user_idを取得
+        $user_id = Auth::user()->id;
+        // dd($user_id);
+        
+        // セッションIDの再発行
+        $request->session()->regenerate();
+        
+        
+        //gym_idを取得        
+        // dd($request->session()->get('gym_id'));
         $gym_id = $request->session()->get('gym_id');
         // dd($gym_id);
         
-        $bookmark = Bookmark::where('user_id', $user_id)
-                ->where('gym_id', $gym_id)
-                ->get();
         
+        $bookmark_check = Bookmark::where('user_id', $user_id)
+                ->where('gym_id', $gym_id)
+                ->first();
+        
+        if($bookmark_check == null){
+            $bookmarks = new Bookmark;
+            $bookmarks -> user_id = $user_id;
+            $bookmarks -> gym_id = $gym_id;
+            $bookmarks -> save();
+        }else{
+            Bookmark::where('user_id', $user_id)
+                ->where('gym_id', $gym_id)
+                -> delete();
+        }
+        
+        
+        
+        return back();
         
     }
 
