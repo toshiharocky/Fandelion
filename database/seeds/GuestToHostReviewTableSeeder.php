@@ -47,7 +47,7 @@ class GuestToHostReviewTableSeeder extends Seeder
         
         
         
-        for($i=5; $i<1005; $i+=10){ //heroku用
+        for($k=5; $k<1005; $k+=10){ //heroku用
         // for($k=1; $k<201; $k++){ // cloud9用
             $reviews = [];
             // innerjoinでbooking_id経由でtotal_starsを取得する
