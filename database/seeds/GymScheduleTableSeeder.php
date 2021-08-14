@@ -34,10 +34,10 @@ class GymScheduleTableSeeder extends Seeder
         
         for($i=5; $i<2000; $i+=10){ //heroku用
         // for($i=1; $i<201; $i++){ //cloud9用
-            $day_start_time = "2021-08-11 10:00";
+            $day_start_time = "2021-08-15 10:00";
             $from_time = $day_start_time;
             $to_time = date("Y-m-d H:i", strtotime('+15 minute',strtotime($from_time)));
-            $day_end_time = "2021-08-11 23:00";
+            $day_end_time = "2021-08-15 23:00";
             
             
             while (strtotime($day_start_time) < strtotime("2021-08-14 10:00")){
