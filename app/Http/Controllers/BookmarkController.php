@@ -39,9 +39,11 @@ class BookmarkController extends Controller
         $gyms = DB::table('bookmarks')
                 ->join('users', 'users.id', '=', 'bookmarks.user_id')
                 ->join('gyms', 'gyms.id', '=', 'bookmarks.gym_id')
+                ->where('users.id',$user)
                 ->get();
-        // dd($gyms);
+        
         $search_amount = count($gyms);
+        // dd($search_amount);
         
         if($search_amount == 0){
             $gym_info = 0;
@@ -52,6 +54,7 @@ class BookmarkController extends Controller
                                 ->join('gym_types', 'gymType_id', '=', 'gym_types.id')
                                 ->join('gym_areas', 'area', "=", 'gym_areas.id')
                                 ->join('guest_genders', 'gyms.guest_gender', "=", 'guest_genders.id')
+                                // ->join('bookmarks', 'gyms.id',  "=", 'bookmarks.gym_id')
                                 ->where('gyms.id',$gym->id)
                                 ->get()[0];
                 
