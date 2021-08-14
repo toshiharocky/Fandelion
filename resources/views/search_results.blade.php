@@ -24,6 +24,9 @@
 		.search{
 			padding: 45px 30px !important;
 		}
+		#map-container{
+			height:80% !important;
+		}
 	}
 </style>
 @endpush
