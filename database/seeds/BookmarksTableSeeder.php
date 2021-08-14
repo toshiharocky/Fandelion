@@ -14,7 +14,7 @@ class BookmarksTableSeeder extends Seeder
     public function run()
     {
         //
-        for ($i=1; $i<1501; $i++){ 
+        for ($i=1; $i<1501; $i++){
             
             // user_idはUser::all()ランダム
             $user = User::all()->random()->id;

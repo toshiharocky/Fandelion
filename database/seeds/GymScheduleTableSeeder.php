@@ -40,7 +40,7 @@ class GymScheduleTableSeeder extends Seeder
             $day_end_time = "2021-08-15 23:00";
             
             
-            while (strtotime($day_start_time) < strtotime("2021-08-14 10:00")){
+            while (strtotime($day_start_time) < strtotime("2021-08-17 10:00")){
                 // 今日に日付から30日間、from_time00:00からto_time00:15まで、15分ずつのpriceとstatusを作成
                 while (strtotime($from_time) < strtotime($day_end_time)){
                     $price_array = array(50,100,150,200);
