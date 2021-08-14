@@ -19,7 +19,8 @@
 ================================================== -->
 <style>
 	.mobile-nav{
-		padding-bottom:20px;	
+		padding-bottom:20px;
+		z-index: 1000;
 	}
 	
 	#logo_mark{

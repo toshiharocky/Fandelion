@@ -1,4 +1,4 @@
-@extends('layouts.menu_mobnav')
+@extends('layouts.menu_mobnav_2')
 
 @push('css')
     <!--<link href="{{ asset('css/〇〇.css') }}" rel="stylesheet">-->
@@ -191,50 +191,6 @@
 
 
 </div>
-<!-- Mobile Navigation -->
-<nav class="mobile-nav mmenu-trigger">
-	<div class="mmenu_icon">
-		<a href="#" class="mmenus">
-			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: black; font-weight: bold;">
-				search
-			</span>
-			<p class="icon-disc" style="color: black; font-weight: bold;">さがす</p>
-		</a>
-	</div>
-	<div class="mmenu_icon">
-		<a href="#" class="mmenus">
-			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
-				favorite_border
-			</span>
-			<p class="icon-disc">お気に入り</p>
-		</a>
-	</div>
-	<div class="mmenu_icon">
-		<a href="#" class="mmenus">
-			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
-				fitness_center
-			</span>
-			<p class="icon-disc">トレーニング</p>
-		</a>
-	</div>
-	<div class="mmenu_icon">
-		<a href="#" class="mmenus">
-			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
-				chat_bubble_outline
-			</span>
-			<p class="icon-disc">メッセージ</p>
-		</a>
-	</div>
-	<div class="mmenu_icon">
-		<a href="#" class="mmenus">
-			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
-				account_circle
-			</span>
-			<p class="icon-disc">プロフィール</p>
-		</a>
-	</div>
-</nav>
-<!-- Mobile Navigation End-->
 
 
 
