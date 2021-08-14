@@ -15,7 +15,7 @@ class BookingTableSeeder extends Seeder
     public function run()
     {
         //
-        for ($i=5; $i<10005; $i+=10){ //heroku用
+        for ($i=5; $i<50005; $i+=10){ //heroku用
         // for ($i=1; $i<1001; $i++){ //cloud9用
             
             // user_idはUser::all()ランダム
@@ -35,7 +35,7 @@ class BookingTableSeeder extends Seeder
             $status_check_to = 2;
             while($status_check_from != 1 || $status_check_to != 1){
                 // 96スロットのうち、1~80のどれか1つを選択する（翌日分に行くのを防ぐため）⇨$r
-                $r = rand(1,150);
+                $r = rand(1,80);
                 $q = $r + 1;
                 $status_check_from = $gym_schedule[$r]->status;
                 $status_check_to = $gym_schedule[$q]->status;
