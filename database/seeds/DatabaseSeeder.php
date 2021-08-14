@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call(GymTableSeeder::class);
         $this->call(GymImageTableSeeder::class);
         $this->call(EquipmentTableSeeder::class);
+        $this->call(BookmarksTableSeeder::class);
         $this->call(GymScheduleTableSeeder::class);
         $this->call(BookingTableSeeder::class);
         $this->call(GuestToHostReviewTableSeeder::class);
-        $this->call(BookmarksTableSeeder::class);
     }
 }
