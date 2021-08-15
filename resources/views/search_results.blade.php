@@ -197,12 +197,12 @@
 
 			
 			
-			@if($search_amount > 1)
-				<div id="gym_list"></div>
+			
+			<div id="gym_list"></div>
 				
 					
 			
-			@endif
+			
 
 
 			<!-- Pagination Container -->
