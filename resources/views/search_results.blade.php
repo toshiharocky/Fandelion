@@ -88,13 +88,13 @@
 											 <!--Checkboxes -->
 											<div class="row">
 												<div class="col-md-6">
-													<input id="check-1" type="checkbox" name="check" class="gymtype-check" value="room">
+													<input id="check-1" type="checkbox" name="check" class="gymtype-check" value="room" checked>
 													<label for="check-1">個室</label>
 
-													<input id="check-2" type="checkbox" name="check" class="gymtype-check" value="home">
+													<input id="check-2" type="checkbox" name="check" class="gymtype-check" value="home" checked>
 													<label for="check-2">住宅全体</label>
 
-													<input id="check-3" type="checkbox" name="check" class="gymtype-check" value="share_space">
+													<input id="check-3" type="checkbox" name="check" class="gymtype-check" value="share_space" checked>
 													<label for="check-3">シェアスペース</label>
 												</div>	
 
