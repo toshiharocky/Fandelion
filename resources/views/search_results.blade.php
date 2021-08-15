@@ -201,12 +201,7 @@
 				<div id="gym_list"></div>
 				
 					
-			@else
-				<!-- Listings-->
-				<div id="gym_list_0"></div>
-				
-				<!--
-				<!-- Listings Container / End -->
+			
 			@endif
 
 
@@ -341,7 +336,6 @@
 	function list_append(){
 		$("#results").empty();
 		$("#gym_list").empty();
-		$("#gym_list_0").empty();
 		console.log(sort_filter);
 		console.log(search_amount);
 		console.log(typeof (search_amount));
