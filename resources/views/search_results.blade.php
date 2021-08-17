@@ -357,7 +357,8 @@
 					<a id="gym" onclick="document:gym_select.submit(); return false;" class="listing-item-container" data-marker-id="0">
 						<input type="hidden" name="gym_id" value=${sort_filter[0].gym_id}>
 						<div class="listing-item">
-							<img src="images/gym_images/${sort_filter[0].img_url}" alt="">
+						    <img src="{{ Storage::disk('s3')->url(${sort_filter[0].img_url}) }}" alt="">
+							
 							<div class="listing-item-content">
 								<h3>${sort_filter[0].gym_title}<i class="verified-icon"></i></h3>
 								<span>${sort_filter[0].addr}</span>
@@ -398,7 +399,8 @@
 						<a id=${id_gym} onclick=${onclick} class="listing-item-container" data-marker-id=$i>
 							<input type="hidden" name="gym_id" value=${sort_filter[$i].gym_id}>
 							<div class="listing-item">
-								<img src="images/gym_images/${sort_filter[$i].img_url}" alt="">
+								<img src="{{ Storage::disk('s3')->url(${sort_filter[0].img_url}) }}" alt="">
+								
 								<div class="listing-item-content">
 									<h3>${sort_filter[$i].gym_title}<i class="verified-icon"></i></h3>
 									<span>${sort_filter[$i].addr}</span>
