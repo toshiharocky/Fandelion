@@ -271,7 +271,7 @@
 	
 							<!-- Dropzone -->
 							<div class="submit-section">
-								<input type="file" class="dropzone" name="images[]" multiple>
+								<input type="file" class="dropzone" name="images[]" accept=".png, .jpeg, .jpg" multiple>
 							</div>
 	
 						</div>
