@@ -6,6 +6,9 @@
 	.booking-sticky-footer{
 		background-color:#f6f6f6;
 	}
+	.custom-zoom-in, .custom-zoom-out{
+		display:none;
+	}
 	@media (min-width: 991px){
 		.listing-titlebar-title{
 			max-width:70%;
