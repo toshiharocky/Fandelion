@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\MemStatus;
 use Illuminate\Http\Request;
 use App\User;//この行を上に追加
@@ -1009,7 +1010,8 @@ class GymController extends Controller
                     // ファイルの拡張子取得
                     $ext = $image->guessExtension();
                     //ファイル名を生成
-                    $imgName= Str::random(32).'.'.$ext;
+                    // $imgName= Str::random(32).'.'.$ext; //cloud9用
+                    $imgName = Storage::disk('s3')->put('/images/gym_images/',$image, 'public'); //heroku
                     
                     // Eloquent モデルで画像情報をgymImagesテーブルに登録
                     $gym_image = new GymImage;
@@ -1018,10 +1020,12 @@ class GymController extends Controller
                     $gym_image->save();
             
                     //public/uploadフォルダを作成
-                    $target_path = public_path('/images/gym_images/');
+                    // $target_path = public_path('/images/gym_images/'); //cloud9用 heroku用(検索用)
+                    
             
                     //ファイルをpublic/uploadフォルダに移動
-                    $image->move($target_path,$imgName);
+                    // $image->move($target_path,$imgName); //cloud9用 heroku用(検索用)
+                    
                     
                     
                     // $image->move('image',$name);
