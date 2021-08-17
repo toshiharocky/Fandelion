@@ -350,7 +350,7 @@
     			`<p class="showing-results">該当するジムはありません </p>`
     		);
 		}else if(search_amount == 1){
-			img_src = {{ Storage::disk('s3')->url(${sort_filter[0].img_url}) }};
+			img_src = {{ Storage::disk('s3')->url(sort_filter[0].img_url) }};
 			$("#gym_list").append(
 			`
 			<form method="get" name="gym_select" action="gym_introduction">
@@ -390,7 +390,7 @@
 		}else{
 			for ($i = 0; $i < search_amount; $i++) {
 			id_gym = $i + "_gym";
-			img_src = {{ Storage::disk('s3')->url(${sort_filter[$i].img_url}) }};
+			img_src = {{ Storage::disk('s3')->url(sort_filter[$i].img_url) }};
 			onclick = "document:gym_select[" + $i + "].submit(); return false";
 			console.log(id_gym);
 			$("#gym_list").append(
