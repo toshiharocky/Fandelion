@@ -9,6 +9,18 @@
 	.custom-zoom-in, .custom-zoom-out{
 		display:none;
 	}
+	.marker-container {
+	    width: 60px;
+	    height: 60px;
+	}
+	.face i {
+	    font-size: 30px;
+	}
+	.face.front {
+		display: flex;
+	    justify-content: space-around;
+	    align-items: center;
+	}
 	@media (min-width: 991px){
 		.listing-titlebar-title{
 			max-width:70%;
