@@ -45,7 +45,7 @@
 ================================================== -->
 <div class="listing-slider mfp-gallery-container margin-bottom-0">
     @for ($i = 0; $i < $gym_images_count; $i++)
-	<a href="images/gym_images/{{$gym_image_url[$i]->img_url}}" data-background-image="images/gym_images/{{$gym_image_url[$i]->img_url}}" class="item mfp-gallery" title="Title 1"></a>
+	<a href="https://s3-ap-northeast-1.amazonaws.com/fandelion/{{$gym_image_url[$i]->img_url}}" data-background-image="https://s3-ap-northeast-1.amazonaws.com/fandelion/{{$gym_image_url[$i]->img_url}}" class="item mfp-gallery" title="Title 1"></a>
 	@endfor
 </div>
 
