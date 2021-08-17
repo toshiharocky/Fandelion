@@ -344,11 +344,13 @@
 		);
 		let id_gym = 0;
 		let onclick = 0;
+		let img_src = 0;
 		if(search_amount == 0){
 		    $("#results").append(
     			`<p class="showing-results">該当するジムはありません </p>`
     		);
 		}else if(search_amount == 1){
+			img_src = {{ Storage::disk('s3')->url(${sort_filter[0].img_url}) }};
 			$("#gym_list").append(
 			`
 			<form method="get" name="gym_select" action="gym_introduction">
@@ -357,7 +359,7 @@
 					<a id="gym" onclick="document:gym_select.submit(); return false;" class="listing-item-container" data-marker-id="0">
 						<input type="hidden" name="gym_id" value=${sort_filter[0].gym_id}>
 						<div class="listing-item">
-						    <img src="{{ Storage::disk('s3')->url(${sort_filter[0].img_url}) }}" alt="">
+						    <img src=${img_src} alt="">
 							
 							<div class="listing-item-content">
 								<h3>${sort_filter[0].gym_title}<i class="verified-icon"></i></h3>
@@ -388,6 +390,7 @@
 		}else{
 			for ($i = 0; $i < search_amount; $i++) {
 			id_gym = $i + "_gym";
+			img_src = {{ Storage::disk('s3')->url(${sort_filter[$i].img_url}) }};
 			onclick = "document:gym_select[" + $i + "].submit(); return false";
 			console.log(id_gym);
 			$("#gym_list").append(
@@ -399,7 +402,7 @@
 						<a id=${id_gym} onclick=${onclick} class="listing-item-container" data-marker-id=$i>
 							<input type="hidden" name="gym_id" value=${sort_filter[$i].gym_id}>
 							<div class="listing-item">
-								<img src="{{ Storage::disk('s3')->url(${sort_filter[0].img_url}) }}" alt="">
+								<img src=${img_src} alt="">
 								
 								<div class="listing-item-content">
 									<h3>${sort_filter[$i].gym_title}<i class="verified-icon"></i></h3>
