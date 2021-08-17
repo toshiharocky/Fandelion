@@ -924,7 +924,7 @@ class GymController extends Controller
             'area' => 'required|integer',
             'guest_gender' => 'required|integer',
             'guest_limit' =>  'required|integer|max:255',
-            'images.*' => 'required|file|image|max:2048', 
+            'images.*' => 'required|file|image', //|max:2048 
             'equipment_name.*' => 'required|string',
             'min_weight.*' => 'nullable|numeric',
             'max_weight.*' => 'nullable|numeric',
