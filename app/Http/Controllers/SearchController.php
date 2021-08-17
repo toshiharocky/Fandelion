@@ -145,7 +145,7 @@ class SearchController extends Controller
                             ->join('guest_genders', 'gyms.guest_gender', "=", 'guest_genders.id')
                             ->where('gyms.id',$gym->id)
                             ->get()[0];
-                
+                // dd($gym_info);
                 
                 
                 // ジムのスケジュールを取得する

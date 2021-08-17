@@ -42,7 +42,7 @@ class GymController extends Controller
         // session()-> put('gym_infos', Gym::where('id', $gym_id));
         // $gym_infos = $req->session()->get('gym_infos');
         $gym_infos = Gym::where('id', $gym_id)->get();
-        // dd($gym_infos);
+        dd($gym_infos);
         
         $gym_title = $gym_infos[0]->gym_title;
         $host_user_id  = $gym_infos[0]->user_id;

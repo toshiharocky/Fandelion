@@ -344,13 +344,14 @@
 		);
 		let id_gym = 0;
 		let onclick = 0;
-		let img_src = 0;
 		if(search_amount == 0){
 		    $("#results").append(
     			`<p class="showing-results">該当するジムはありません </p>`
     		);
 		}else if(search_amount == 1){
-			img_src = {{ Storage::disk('s3')->url(sort_filter[0].img_url) }};
+			console.log(sort_filter);
+			let img_src = "https://s3-ap-northeast-1.amazonaws.com/fandelion/" + sort_filter[0].img_url;
+			console.log(img_src);
 			$("#gym_list").append(
 			`
 			<form method="get" name="gym_select" action="gym_introduction">
@@ -390,7 +391,9 @@
 		}else{
 			for ($i = 0; $i < search_amount; $i++) {
 			id_gym = $i + "_gym";
-			img_src = {{ Storage::disk('s3')->url(sort_filter[$i].img_url) }};
+			console.log(sort_filter);
+			let img_src = "https://s3-ap-northeast-1.amazonaws.com/fandelion/" + sort_filter[0].img_url;
+			console.log(img_src);
 			onclick = "document:gym_select[" + $i + "].submit(); return false";
 			console.log(id_gym);
 			$("#gym_list").append(
