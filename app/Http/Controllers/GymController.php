@@ -955,8 +955,10 @@ class GymController extends Controller
             $sun_price = $request->sunday_price;
             
             $price_list = array($mon_price, $tue_price, $wed_price, $thu_price, $fri_price, $sat_price, $sun_price);
+            $price_list = array_diff($price_list, array(null));
             $max_price = max($price_list);
             $min_price = min($price_list);
+            // dd($min_price);
             
             
     
