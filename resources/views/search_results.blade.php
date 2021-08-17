@@ -392,7 +392,7 @@
 			for ($i = 0; $i < search_amount; $i++) {
 			id_gym = $i + "_gym";
 			console.log(sort_filter);
-			let img_src = "https://s3-ap-northeast-1.amazonaws.com/fandelion/" + sort_filter[0].img_url;
+			let img_src = "https://s3-ap-northeast-1.amazonaws.com/fandelion/" + sort_filter[$i].img_url;
 			console.log(img_src);
 			onclick = "document:gym_select[" + $i + "].submit(); return false";
 			console.log(id_gym);
