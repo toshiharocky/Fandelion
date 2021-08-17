@@ -55,6 +55,7 @@ class MainController extends Controller
             // dd($area_gym_id);
             // dd($review_average[0]);
             // dd($gym_image_url[0]);
+            // dd($area_gym_image_url);
     
     
     //ジム情報の入手（住宅まるごと）

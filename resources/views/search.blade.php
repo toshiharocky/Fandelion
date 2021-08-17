@@ -172,7 +172,7 @@
 						<a onclick="document:area_gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact" >
 							<input type="hidden" name="gym_id" value={{$area_gym_id[$i]}}>
 							<div class="listing-item">
-								<img src="images/gym_images/{{$area_gym_image_url[$i]}}" alt="">
+								<img src="https://s3-ap-northeast-1.amazonaws.com/fandelion/{{$area_gym_image_url[$i]}}" alt="">
 								<!--<div class="listing-item-details">-->
 								<!--	<ul>-->
 								<!--		<li>Friday, August 10</li>-->
@@ -204,7 +204,7 @@
 						<a onclick="document:area_gym_select.submit(); return false;" class="listing-item-container compact" >
 							<input type="hidden" name="gym_id" value="{{$area_gym_id[0]}}">
 							<div class="listing-item">
-								<img src="images/gym_images/{{$area_gym_image_url[0]}}" alt="">
+								<img src="https://s3-ap-northeast-1.amazonaws.com/fandelion/{{$area_gym_image_url[0]}}" alt="">
 								<div class="listing-item-content">
 									<div class="numerical-rating" data-rating={{$area_review_average[0]}}></div>
 									<h3 class="gym_title_select">{{$area_gym_titles[0]}}</h3>
@@ -253,7 +253,7 @@
 						<a onclick="document:whole_gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact" >
 							<input type="hidden" name="gym_id" value="{{$whole_gym_id[$i]}}">
 							<div class="listing-item">
-								<img src="images/gym_images/{{$whole_gym_image_url[$i]}}" alt="">
+								<img src="https://s3-ap-northeast-1.amazonaws.com/fandelion/{{$whole_gym_image_url[$i]}}" alt="">
 								<!--<div class="listing-item-details">-->
 								<!--	<ul>-->
 								<!--		<li>Friday, August 10</li>-->
@@ -285,7 +285,7 @@
 						<a onclick="document:whole_gym_select.submit(); return false;" class="listing-item-container compact" >
 							<input type="hidden" name="gym_id" value="{{$whole_gym_id[0]}}">
 							<div class="listing-item">
-								<img src="images/gym_images/{{$whole_gym_image_url[0]}}" alt="">
+								<img src="https://s3-ap-northeast-1.amazonaws.com/fandelion/{{$whole_gym_image_url[0]}}" alt="">
 								<div class="listing-item-content">
 									<div class="numerical-rating" data-rating={{$whole_review_average[0]}}></div>
 									<h3 class="gym_title_select">{{$whole_gym_titles[0]}}</h3>

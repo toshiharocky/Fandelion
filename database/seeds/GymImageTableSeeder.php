@@ -17,8 +17,8 @@ class GymImageTableSeeder extends Seeder
         
             // $gym_images = factory(App\GymImage::class, 600)->create();
             $img_array = array(
-                            "sample_images/homegym00.jpg","sample_images/homegym01.jpg","sample_images/homegym02.jpg","sample_images/homegym03.jpg",
-                            "sample_images/homegym04.jpg","sample_images/homegym05.jpg","sample_images/homegym06.jpg",
+                            "images/gym_images/homegym00.jpg","images/gym_images/homegym01.jpg","images/gym_images/homegym02.jpg","images/gym_images/homegym03.jpg",
+                        "images/gym_images/homegym04.jpg","images/gym_images/homegym05.jpg","images/gym_images/homegym06.jpg",
                         );
             for($j=0; $j<4; $j++){
                 $r = array_rand($img_array);
