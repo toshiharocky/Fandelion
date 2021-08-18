@@ -848,13 +848,10 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			
 			
 			// 過去の日時を選択している場合は、#slot_cautionに「過去の日時での予約はできません」と表示する。
-			let now_y = new Date().getFullYear();
-			let now_m = "0"+(new Date().getMonth() + 1);
-			let now_d = new Date().getDate();
-			let now_h = ("0"+new Date().getHours()).slice(-2);
-			let now_i = ("0"+new Date().getMinutes()).slice(-2);
+			
 			let time_check = date + " " + first_from_time;
-			let now = now_m+ "/" +  now_d + "/" + now_y + " " + now_h + ":" + now_i;
+			
+			now = @json($now);
 			console.log(now);
 			console.log(time_check);
 			if(now > time_check){

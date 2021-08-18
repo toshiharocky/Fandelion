@@ -115,6 +115,7 @@ class BookController extends Controller
         
         $gym_schedule_count = count($gym_schedule);
         $today = date('Y-m-d H:i', strtotime("today"));
+        $now = date('m/d/Y H:i', strtotime('+9 hours',strtotime("now")));
         $min_from_time = date('Y-m-d H:i', strtotime($gym_schedule -> min('from_time')));
         // dd(gettype($gym_schedule));
         $max_from_time = date('Y-m-d H:i', strtotime($gym_schedule -> max('from_time')));
@@ -201,6 +202,7 @@ class BookController extends Controller
             'guest_limit' => $guest_limit,
             'gym_type' => $gym_type,
             'area' => $area,
+            'now' =>$now,
             ]);
 
         
