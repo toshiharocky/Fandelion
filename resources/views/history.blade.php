@@ -540,7 +540,7 @@ $(document).ready(function(){
         $('#future_bookings').removeClass('active');
         console.log($("#future_bookings").hasClass("active"));
         console.log($("#past_bookings").hasClass("active"));
-        past();
+        
     });
     
     
@@ -550,7 +550,7 @@ $(document).ready(function(){
         $("#past_bookings").removeClass("active");
         console.log($("#future_bookings").hasClass("active"));
         console.log($("#past_bookings").hasClass("active"));
-        future();
+        
     });
 </script>
 
