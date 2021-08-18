@@ -219,7 +219,7 @@ $(document).ready(function(){
             		        <h3>${date}　   ${from_time}〜${to_time}</h3>
                     		<div class="list-box-listing">
                     		    <div class="list-box-listing-img" style="display:flex;flex-direction:column;justify-content: center;">
-                    			    <img src="images/gym_images/${gym_image_url[$i]}" alt="">
+                    			    <img src="https://s3-ap-northeast-1.amazonaws.com/fandelion/${gym_image_url[$i]}" alt="">
                 			    </div>
                     			<div class="list-box-listing-content">
                     				<div class="inner">
@@ -438,7 +438,7 @@ $(document).ready(function(){
             		        <h3>${date}　   ${from_time}〜${to_time}</h3>
                     		<div class="list-box-listing">
                     		    <div class="list-box-listing-img" style="display:flex;flex-direction:column;justify-content: center;">
-                    			    <img src="images/gym_images/${gym_image_url[$i]}" alt="">
+                    			    <img src="https://s3-ap-northeast-1.amazonaws.com/fandelion/${gym_image_url[$i]}" alt="">
                 			    </div>
                     			<div class="list-box-listing-content">
                     				<div class="inner">

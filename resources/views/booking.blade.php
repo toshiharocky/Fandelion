@@ -595,6 +595,17 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 </script>	
 	
 <script>
+	// console.log(gym_open_times.length);
+	// console.log(gym_open_times.length == 0);
+	if(gym_open_times.length == 0){
+		$("#action_suggest").empty();
+		$("#action_suggest").append(
+			`<h4 style="text-align:center;">利用可能な時間帯はありません</h4>`
+		);
+		$("#select_time_range").css(
+			"display","none"
+		);
+	}
 	// date-pickerが変わったらslot-changer()を発火
 	$('#display_slots').on("click",function(){
 		
@@ -834,6 +845,25 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			let last_to_time = $("#selected_slot").children("div").eq(-1).children("p").attr("value");
 			let first_from_time_2 = $("#selected_slot_2").children("div").eq(0).children("h4").attr("value");
 			let last_to_time_2 = $("#selected_slot_2").children("div").eq(-1).children("p").attr("value");
+			
+			
+			// 過去の日時を選択している場合は、#slot_cautionに「過去の日時での予約はできません」と表示する。
+			let now_y = new Date().getFullYear();
+			let now_m = "0"+(new Date().getMonth() + 1);
+			let now_d = new Date().getDate();
+			let now_h = ("0"+new Date().getHours()).slice(-2);
+			let now_i = ("0"+new Date().getMinutes()).slice(-2);
+			let time_check = date + " " + first_from_time;
+			let now = now_m+ "/" +  now_d + "/" + now_y + " " + now_h + ":" + now_i;
+			console.log(now);
+			console.log(time_check);
+			if(now > time_check){
+				$("#slot_caution").append(
+					`<h5 style="color:#f91942;">過去の日時での予約はできません</h5>`
+					
+				)
+			};
+			
 			
 			// 飛び石で選択している場合は、#slot_cautionに「連続したスロットを選択してください」と表示する。
 			if(labels*10 != dev_class_amount){ //heroku用

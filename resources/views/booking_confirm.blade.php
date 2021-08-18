@@ -39,7 +39,7 @@
         <!-- Booking Summary -->
     	<div class="listing-item-container compact order-summary-widget">
     		<div class="listing-item">
-    			<img src="images/gym_images/{{$gym_image_url[1]->img_url}}" alt="">
+    			<img src="https://s3-ap-northeast-1.amazonaws.com/fandelion/{{$gym_image_url[1]->img_url}}" alt="">
     
     			<div class="listing-item-content">
     				<h3>{{$gym_title}}</h3>

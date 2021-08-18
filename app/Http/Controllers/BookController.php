@@ -138,7 +138,11 @@ class BookController extends Controller
         // dd($max_from_time);
         
         $from_time = $today;
-            
+        
+        if($from_time > $max_from_time_plus){
+            $gym_open_times = [];
+        }
+        
         while($from_time <= $max_from_time_plus){
             
             // $from_timeが配列$gym_from_time_listの'from_time'に含まれている場合は、$gym_from_times_str、$gym_to_times_str、$gym_status 、$priceを記入する
@@ -170,10 +174,11 @@ class BookController extends Controller
                 $price = "-";
             }
             
-            
+            // dd($gym_id);
             
             $gym_open_times[] = array('gym_id' => $gym_id, 'gym_schedule_id' => $gym_schedule_id, 'date' => date("m/d/Y", strtotime($gym_from_times_str)), 'from_time' => date("m/d/Y H:i", strtotime($gym_from_times_str))
             , 'to_time' => date("m/d/Y H:i", strtotime('+15 minute',strtotime($gym_from_times_str))), 'status' => $gym_status,  'price' => $price);
+            
             
             
             $from_time = date("Y-m-d H:i", strtotime('+15 minute',strtotime($from_time)));
