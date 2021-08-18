@@ -37,6 +37,11 @@
             height:180px;
             align-items:center;
         }
+        .gym_his_img{
+            object-fit: cover;
+            width: 150px !important;
+            height: 120px !important;
+        }
         
         @media (max-width: 991px){
             .list-box-listing{
@@ -219,7 +224,7 @@ $(document).ready(function(){
             		        <h3>${date}　   ${from_time}〜${to_time}</h3>
                     		<div class="list-box-listing">
                     		    <div class="list-box-listing-img" style="display:flex;flex-direction:column;justify-content: center;">
-                    			    <img src="https://s3-ap-northeast-1.amazonaws.com/fandelion/${gym_image_url[$i]}" alt="">
+                    			    <img class="gym_his_img" src="https://s3-ap-northeast-1.amazonaws.com/fandelion/${gym_image_url[$i]}" alt="">
                 			    </div>
                     			<div class="list-box-listing-content">
                     				<div class="inner">
@@ -438,7 +443,7 @@ $(document).ready(function(){
             		        <h3>${date}　   ${from_time}〜${to_time}</h3>
                     		<div class="list-box-listing">
                     		    <div class="list-box-listing-img" style="display:flex;flex-direction:column;justify-content: center;">
-                    			    <img src="https://s3-ap-northeast-1.amazonaws.com/fandelion/${gym_image_url[$i]}" alt="">
+                    			    <img class="gym_his_img" src="https://s3-ap-northeast-1.amazonaws.com/fandelion/${gym_image_url[$i]}" alt="">
                 			    </div>
                     			<div class="list-box-listing-content">
                     				<div class="inner">
