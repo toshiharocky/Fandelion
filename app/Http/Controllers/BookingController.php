@@ -337,7 +337,9 @@ class BookingController extends Controller
         
         $user_name =  Auth::user()->name;
         
-        $gym_id = $request->session()->get('gym_id');
+        // $gym_id = $request->session()->get('gym_id');
+        $gym_id = $request->gym_id;
+        // dd($gym_id);
         
         // bookingsテーブルのbookingstatus_idを「25」に変更する（ルーティングが必要
         $booking_id = $request->booking_id;
