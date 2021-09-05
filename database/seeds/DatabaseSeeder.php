@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GymScheduleTableSeeder::class);
         $this->call(BookingTableSeeder::class);
         $this->call(GuestToHostReviewTableSeeder::class);
+        $this->call(MessageTableSeeder::class);
     }
 }

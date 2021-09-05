@@ -127,11 +127,15 @@ Route::group(['middleware' => 'auth'], function() {
    Route::post('/review','MainController@does_not_exist'); // page404へ
 });
 
-// ログインユーザーのみ、メッセージを表示する
+// ログインユーザーのみ、メッセージ一覧を表示する
 Route::group(['middleware' => 'auth'], function() {
-   Route::get('/messages','MainController@does_not_exist'); // page404へ
+   Route::get('/messages','MessageController@index_messages'); // page404へ
 });
 
+// ログインユーザーのみ、メッセージを表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/messages_conversation','MessageController@index_conversation'); // page404へ
+});
 
 // ログインユーザーのみ、お気に入りを表示する
 // Route::group(['middleware' => 'auth'], function() {
