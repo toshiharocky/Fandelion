@@ -137,6 +137,11 @@ Route::group(['middleware' => 'auth'], function() {
    Route::get('/messages_conversation','MessageController@index_conversation'); // page404へ
 });
 
+// ログインユーザーのみ、メッセージを送信する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/send_messages','MessageController@store'); // page404へ
+});
+
 // ログインユーザーのみ、お気に入りを表示する
 // Route::group(['middleware' => 'auth'], function() {
 //    Route::get('/bookmarks','MainController@does_not_exist'); // page404へ
