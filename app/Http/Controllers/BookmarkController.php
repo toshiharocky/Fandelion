@@ -29,6 +29,7 @@ class BookmarkController extends Controller
         //user_idを取得する
         $user = Auth::user()->id;
         $user_name =  Auth::user()->name;
+        $user_icon =  Auth::user()->user_icon;
         $status_names = DB::table('users')
                             ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
                             ->select('name', 'status_name')
@@ -68,6 +69,7 @@ class BookmarkController extends Controller
                 'gyms'=>$gyms,
                 'gym_info'=>$gym_info,
                 'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                 'status_name'=>$status_name,
                 'search_amount' => $search_amount,
                 ]);

@@ -56,7 +56,8 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone_num' => ['required', 'string', 'max:255', 'unique:users'],
             'birthday' =>  ['required', 'date'],
-            'gender' => ['required', 'string']
+            'gender' => ['required', 'string'],
+            'user_icon' => ['required', 'string']
         ]);
     }
 
@@ -68,8 +69,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // dd($data['user_icon']);
         return User::create([
             'memstatus_id' => $data['memstatus_id'],
+            'user_icon' => $data['user_icon'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),

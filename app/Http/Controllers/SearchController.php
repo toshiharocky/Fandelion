@@ -87,6 +87,7 @@ class SearchController extends Controller
             if (Auth::check()){
                 $user = Auth::user()->id;
                 $user_name =  Auth::user()->name;
+                $user_icon =  Auth::user()->user_icon;
                 $status_names = DB::table('users')
                                     ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
                                     ->select('name', 'status_name')
@@ -94,6 +95,7 @@ class SearchController extends Controller
                 $status_name = $status_names[1]->status_name;
                 return view('no_results',[
                     'user_name'=>$user_name,
+                    'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                     'status_name'=>$status_name,
                     ]);
             }else {
@@ -219,6 +221,7 @@ class SearchController extends Controller
             //                 ->first()->email;
             // dd($gym_title);
             $user_name =  Auth::user()->name;
+            $user_icon =  Auth::user()->user_icon;
             // $user_memstatus_id = Auth::user()->memstatus_id;
             $status_names = DB::table('users')
                                 ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
@@ -233,6 +236,7 @@ class SearchController extends Controller
                 'gyms'=>$gyms,
                 'gym_info'=>$gym_info,
                 'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                 'status_name'=>$status_name,
                 'gym_id'=>$gym_id,
                 'gym_titles'=>$gym_titles,

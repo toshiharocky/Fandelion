@@ -6,6 +6,39 @@
 	.booking-sticky-footer{
 		background-color:#f6f6f6;
 	}
+	.hosted-by-avatar{
+		width:56px;
+		height:56px;
+	}
+	.host_icon{
+	    width: 100%;
+	    height: 100%;
+	    object-fit: contain;
+	    border: 3px solid #fff;
+	    box-shadow: 0 2px 3px rgb(0 0 0 / 10%);
+	    box-sizing: content-box;
+	    display: inline-block;
+	    border-radius: 50%;
+	    image-rendering: -webkit-optimize-contrast;
+	}
+	.to_message_box{
+		text-align: center;
+		border-color: #f91942;
+    	height:70px;
+    	display:flex;
+    	flex-direction:column;
+    	background-color:#fbdee3;
+    	justify-content: space-around;
+    	border-radius: 10px;
+	}
+	.to_message_box h4{
+		color: #f91942;
+		margin-bottom:0;
+	}
+	.to_message_box h5{
+		<!--color: #f91942;-->
+		margin-top:0;
+	}
 	@media (min-width: 991px){
 		.listing-titlebar-title{
 			max-width:70%;
@@ -30,7 +63,15 @@
 		.equipment_weight{
 			font-size:14px !important;
 		}
-		
+		#contact{
+			margin-bottom:150px;
+		}
+		.to_message_box h4{
+			font-size: 16px;
+		}
+		.to_message_box h5{
+			font-size: 12px;
+		}
 	}
 </style>
 @endpush
@@ -329,38 +370,7 @@
 			<!-- Opening Hours / End -->
 
 
-			<!-- Contact -->
-			<div class="boxed-widget margin-top-35">
-				<div class="hosted-by-title">
-					<h4><span>Hosted by</span> {{$host_name}}</h4>
-					<a href="pages-user-profile.html" class="hosted-by-avatar"><img src="images/dashboard-avatar.jpg" alt=""></a>
-				</div>
-				<!--<ul class="listing-details-sidebar">-->
-				<!--	<li><i class="sl sl-icon-phone"></i> (123) 123-456</li>-->
-					<!-- <li><i class="sl sl-icon-globe"></i> <a href="#">https://example.com</a></li> -->
-				<!--	<li><i class="fa fa-envelope-o"></i> <a href="#">tom@example.com</a></li>-->
-				<!--</ul>-->
-
-				<!--<ul class="listing-details-sidebar social-profiles">-->
-				<!--	<li><a href="#" class="facebook-profile"><i class="fa fa-facebook-square"></i> Facebook</a></li>-->
-				<!--	<li><a href="#" class="twitter-profile"><i class="fa fa-twitter"></i> Twitter</a></li>-->
-					<!-- <li><a href="#" class="gplus-profile"><i class="fa fa-google-plus"></i> Google Plus</a></li> -->
-				<!--</ul>-->
-
-				<!-- Reply to review popup -->
-				<div id="small-dialog" class="zoom-anim-dialog mfp-hide">
-					<div class="small-dialog-header">
-						<h3>Send Message</h3>
-					</div>
-					<div class="message-reply margin-top-0">
-						<textarea cols="40" rows="3" placeholder="Your message to Tom"></textarea>
-						<a href="messages" class="button">Send Message</a>
-					</div>
-				</div>
-
-				<a href="#small-dialog" class="send-message-to-owner button popup-with-zoom-anim"><i class="sl sl-icon-envelope-open"></i> Send Message</a>
-			</div>
-			<!-- Contact / End-->
+			<div id="contact"></div>
 
 
 			<!-- Share / Like -->
@@ -434,6 +444,92 @@
 				`<span class="listing-tag" style="margin:10px 10px 0 0; font-size:14px;">〜{{$guest_limit}}名</span>`)
 		});
 		
+	}
+</script>
+
+<script>
+	if({{$message_list_count}} != 0){
+		$("#contact").append(
+			`<!-- Contact -->
+				<div class="boxed-widget margin-top-35">
+					<div class="hosted-by-title">
+						<h4><span>Hosted by</span> {{$host_name}}</h4>
+						<a href="pages-user-profile.html" class="hosted-by-avatar"><img class="host_icon" src={{$host_user_icon}} alt=""></a>
+						
+					</div>
+					
+	
+					<!-- Reply to review popup -->
+					<div class="clearfix"></div>
+					
+					<div id="small-dialog" class="zoom-anim-dialog mfp-hide">
+						<div class="small-dialog-header">
+							<h3>Send Message</h3>
+						</div>
+						<form method="get" name="message_select" action="messages_conversation">
+						@csrf
+							<a onclick="document:message_select.submit();"  class="listing-item-container" style="cursor:pointer">
+								<div class="to_message_box">
+									<h4>メッセージの履歴を確認する</h4>
+									<h5>あなたは以前に{{$host_name}}さんと<br>このジムに関するメッセージのやりとりをしています。</h5>
+									<input type="hidden" name="gym_id" value={{$gym_id}}>
+								</div>
+							</a>
+						</form>
+						<form method="get" name="send_direct_messages" action="send_direct_messages">
+						@csrf
+							<input type="hidden" name="gym_id" value={{$gym_id}}></input>
+							<input type="hidden" name="guest_id" value={{$user_id}}></input>
+							<input type="hidden" name="host_id" value={{$host_user_id}}></input>
+							<div class="message-reply">
+								<textarea cols="40" rows="3" placeholder="Your Message to {{$host_name}}" name="message" onkeydown="if(event.shiftKey&&event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
+								<input id="submit" type="submit" class="button" value="Send Message"></input>
+							</div>
+						</form>
+					</div>
+					
+					
+	
+					<a href="#small-dialog" class="send-message-to-owner button popup-with-zoom-anim"><i class="sl sl-icon-envelope-open"></i> Send Message</a>
+				</div>
+				<!-- Contact / End-->`
+		);
+	}else{
+		$("#contact").append(
+			`<!-- Contact -->
+				<div class="boxed-widget margin-top-35">
+					<div class="hosted-by-title">
+						<h4><span>Hosted by</span> {{$host_name}}</h4>
+						<a href="pages-user-profile.html" class="hosted-by-avatar"><img class="host_icon" src={{$host_user_icon}} alt=""></a>
+						
+					</div>
+					
+	
+					<!-- Reply to review popup -->
+					<div class="clearfix"></div>
+					
+					<div id="small-dialog" class="zoom-anim-dialog mfp-hide">
+						<form method="get" name="send_direct_messages" action="send_direct_messages">
+						@csrf
+							<input type="hidden" name="gym_id" value={{$gym_id}}></input>
+							<input type="hidden" name="guest_id" value={{$user_id}}></input>
+							<input type="hidden" name="host_id" value={{$host_user_id}}></input>
+							<div class="small-dialog-header">
+								<h3>Send Message</h3>
+							</div>
+							<div class="message-reply">
+								<textarea cols="40" rows="3" placeholder="Your Message to {{$host_name}}" name="message" onkeydown="if(event.shiftKey&&event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
+								<input id="submit" type="submit" class="button" value="Send Message"></input>
+							</div>
+						</form>
+					</div>
+					
+					
+	
+					<a href="#small-dialog" class="send-message-to-owner button popup-with-zoom-anim"><i class="sl sl-icon-envelope-open"></i> Send Message</a>
+				</div>
+				<!-- Contact / End-->`
+		);
 	}
 </script>
 

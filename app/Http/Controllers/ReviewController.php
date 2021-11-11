@@ -42,6 +42,7 @@ class ReviewController extends Controller
         $user = Auth::user()->id;
         
         $user_name =  Auth::user()->name;
+        $user_icon =  Auth::user()->user_icon;
         
         $request->session()->put('gym_id', $request->gym_id);
         $request->session()->put('booking_id', $request->booking_id);
@@ -110,6 +111,7 @@ class ReviewController extends Controller
         return view('review_guestToHost',[
                 'user'=>$user,
                 'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                 'gym_id'=>$gym_id,
                 'booking_id'=>$booking_id,
                 'gym_title'=>$gym_title,

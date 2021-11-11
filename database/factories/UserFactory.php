@@ -29,5 +29,10 @@ $factory->define(User::class, function (Faker $faker) {
             return rand(1,3);
         },
         'remember_token' => Str::random(10),
+        'user_icon' => function(){
+            $icons = array ('images/user_images/user_icon.jpg', 'images/user_images/woman_1.jpg', 'images/user_images/woman_2.jpg', 'images/user_images/woman_3.jpg', 'images/user_images/woman_4.jpg', 'images/user_images/woman_5.jpg', 'images/user_images/woman_6.jpg', 'images/user_images/woman_7.jpg', 'images/user_images/woman_8.jpg', 'images/user_images/woman_9.jpg', 'images/user_images/man_1.jpg', 'images/user_images/man_2.jpg', 'images/user_images/man_3.jpg');
+            $r = array_rand($icons);
+            return $icons[$r];
+        }
     ];
 });

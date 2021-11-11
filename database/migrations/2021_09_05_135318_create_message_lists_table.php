@@ -20,7 +20,8 @@ class CreateMessageListsTable extends Migration
             $table->integer('host_id');
             $table->integer('sender'); //送信者のuser_id。guest_idかhost_idのいずれかが入る
             $table->text('last_message');
-            $table->timestamps();
+            $table->timestamp('updated_at')->useCurrent()->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
         });
     }
 

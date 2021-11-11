@@ -20,18 +20,48 @@
 <style>
 	.mobile-nav{
 		padding-bottom:20px;
-		z-index: 1000;	
+		z-index: 1000;
 	}
 	
-	#logo_mark{
-			font-size: 4vw;
-		}
 		
 	.user-name span img {
 	    width: 100%;
 	    height: 100%;
 	    object-fit: contain;
 	    }
+    
+    /*ホストモード仕様 start*/
+    #logo_mark{
+		font-size: 4vw;
+		color: #FED85D; 
+	}
+		
+    #header{
+    	background-color: #2B4393 !important; 
+    }
+    
+    .user-name{
+    	color:white; 
+    }
+    
+    .user-menu .user-name:after {
+    	color:white;
+    }
+    
+    /*ホストモード仕様  end*/
+    
+    .material-icons-outlined{
+    	font-size: 42px; 
+    	margin: auto; 
+    	color: #BFBFBF;
+    }
+	
+	.emphasize_icon span, .emphasize_icon p{
+		color:black !important;
+		font-weight:bold !important;
+	}
+	
+	
 
 	@media (max-width: 991px){
 		#header{
@@ -107,7 +137,7 @@
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a id="logo_mark" href="/" style="color: #2B4393;">Fandelion</a>
+					<a id="logo_mark" href="/hosting" >Fandelion</a> <!--ホストモード仕様-->
 				</div>
 
 				<!-- Mobile Navigation -->
@@ -257,12 +287,13 @@
 							<ul>
 								<!--<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>-->
 								<!--<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>-->
-								<li class="pc_menu"><a href="/history"><i class="fas fa-dumbbell"></i>予約一覧</a></li>
-								<li class="pc_menu"><a href="/bookmarks"><i class="fas fa-heart"></i>お気に入り</a></li>
-								<li class="pc_menu"><a href="/messages"><i class="fas fa-comment-alt"></i>メッセージ</a></li>
-								<li class="pc_menu"><a href="/guest_profile"><i class="fas fa-user"></i>プロフィール</a></li>
-								<li><a href="/hosting"><i class="fas fa-h-square"></i>ホストモードへ</a></li>
-								<!--<li class="pc_menu"><a href="/add_gym"><i class="fas fa-plus"></i>ジムの追加</a></li>-->
+								<li class="pc_menu"><a href="/hosting"><i class="far fa-calendar-alt"></i>予約一覧</a></li>
+								<li class="pc_menu"><a href="/host_messages"><i class="fas fa-comment-alt"></i>メッセージ</a></li>
+								<li class="pc_menu"><a href="/manage_gyms"><i class="fas fa-warehouse"></i>ジム管理</a></li>
+								<li class="pc_menu"><a href="/earnings"><i class="fas fa-chart-line"></i>実績</a></li>
+								<li class="pc_menu"><a href="/host_profile"><i class="fas fa-user"></i>プロフィール</a></li>
+								<li><a href="/add_gym"><i class="fas fa-plus"></i>ジムの追加</a></li>
+								<li><a href="/"><i class="fas fa-running"></i>ゲストモードへ</a></li>
 								<li><a href="{{ route('logout') }}"
 	                                   onclick="event.preventDefault();
 	                                                 document.getElementById('logout-form').submit();">
@@ -499,9 +530,9 @@
 
 
 <!-- Copyrights -->
-<div class="col-md-12">
-	<div class="copyrights">© 2021 Fandelion. All Rights Reserved.</div>
-</div>
+<!--<div class="col-md-12">-->
+<!--	<div class="copyrights">© 2021 Fandelion. All Rights Reserved.</div>-->
+<!--</div>-->
 
 <!-- Copyrights / End-->
 
@@ -514,50 +545,45 @@
 <!-- Mobile Navigation -->
 <nav class="mobile-nav mmenu-trigger" style="height:80px;">
 	<div class="mmenu_icon">
-		<a href="/" class="mmenus">
-			<span class="material-icons-outlined " style="font-size: 42px; margin: auto; color: #BFBFBF;">
-				search
-			</span>
-			<p class="icon-disc">さがす</p>
-		</a>
-	</div>
-	<div class="mmenu_icon">
-		<a href="/bookmarks" class="mmenus">
-			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
-				favorite_border
-			</span>
-			<p class="icon-disc">お気に入り</p>
-		</a>
-	</div>
-	<div class="mmenu_icon">
-		<a href="/history" class="mmenus">
-			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
-				fitness_center
+		<a href="/hosting" class="mmenus">
+			<span class="material-icons-outlined">
+				<i class="far fa-calendar-alt"></i>
 			</span>
 			<p class="icon-disc">予約一覧</p>
 		</a>
 	</div>
 	<div class="mmenu_icon">
-		<a href="/messages" class="mmenus">
-			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
+		<a href="/host_messages" class="mmenus">
+			<span class="material-icons-outlined">
 				chat_bubble_outline
 			</span>
 			<p class="icon-disc">メッセージ</p>
 		</a>
 	</div>
 	<div class="mmenu_icon">
-		<a href="/guest_profile" class="mmenus">
-			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
+		<a href="/manage_gyms" class="mmenus">
+			<span class="material-icons-outlined">
+				<i class="fas fa-warehouse"></i>
+			</span>
+			<p class="icon-disc">ジム管理</p>
+		</a>
+	</div>
+	<div class="mmenu_icon">
+		<a href="/earnings" class="mmenus emphasize_icon">
+			<span class="material-icons-outlined">
+				<i class="fas fa-chart-line"></i>
+			</span>
+			<p class="icon-disc">実績</p>
+		</a>
+	</div>
+	
+	<div class="mmenu_icon">
+		<a href="/host_profile" class="mmenus">
+			<span class="material-icons-outlined">
 				<i class="fas fa-user"></i>
 			</span>
 			<p class="icon-disc">プロフィール</p>
 		</a>
-		<!--<a href="/add_gym" class="mmenus">-->
-		<!--	<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: black; font-weight: bold;">-->
-		<!--		<i class="fas fa-plus"></i>-->
-		<!--	</span>-->
-		<!--	<p class="icon-disc" style="color: black; font-weight: bold;">ジムの追加</p>-->
-		<!--</a>-->
 	</div>
 </nav>
 <!-- Mobile Navigation End-->

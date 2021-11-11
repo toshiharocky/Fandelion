@@ -93,6 +93,7 @@ class MainController extends Controller
             //                 ->first()->email;
             // dd($gym_title);
             $user_name =  Auth::user()->name;
+            $user_icon =  Auth::user()->user_icon;
             // $user_memstatus_id = Auth::user()->memstatus_id;
             $status_names = DB::table('users')
                                 ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
@@ -105,6 +106,7 @@ class MainController extends Controller
             
             return view('search',[
                 'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                 'status_name'=>$status_name,
                 // 'gym_id'=>$gym_id,
                 // 'gym_titles'=>$gym_titles,
@@ -236,6 +238,7 @@ class MainController extends Controller
             //                 ->first()->email;
             // dd($gym_title);
             $user_name =  Auth::user()->name;
+            $user_icon =  Auth::user()->user_icon;
             // $user_memstatus_id = Auth::user()->memstatus_id;
             $status_names = DB::table('users')
                                 ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
@@ -248,10 +251,49 @@ class MainController extends Controller
             
             return view('pages-404',[
                 'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                 'status_name'=>$status_name,
                 ]);
             } else{
             return view('pages-404');
+            }
+        
+        
+        
+    }
+    
+    public function does_not_exist_host()
+    {
+        //
+        if (Auth::check()){
+            $user = Auth::user()->id;
+            // dd($user);
+            // $gym_title = Gym::where('user_id',$user)->first()->title;
+            // $gym_title = DB::table('gyms')
+            //                 ->join('users', 'gyms.user_id', '=', 'users.id')
+            //                 // ->select('user_id','email','title', 'gym_desc')
+            //                 ->where('user_id', $user)
+            //                 ->first()->email;
+            // dd($gym_title);
+            $user_name =  Auth::user()->name;
+            $user_icon =  Auth::user()->user_icon;
+            // $user_memstatus_id = Auth::user()->memstatus_id;
+            $status_names = DB::table('users')
+                                ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
+                                ->select('name', 'status_name')
+                                ->get();
+            $status_name = $status_names[1]->status_name;
+            
+            // dd($status_name);
+            
+            
+            return view('pages-404-host',[
+                'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
+                'status_name'=>$status_name,
+                ]);
+            } else{
+            return view('pages-404-host');
             }
         
         

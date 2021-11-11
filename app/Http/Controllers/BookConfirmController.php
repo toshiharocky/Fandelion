@@ -51,6 +51,7 @@ class BookConfirmController extends Controller
         $user = Auth::user()->id;
         
         $user_name =  Auth::user()->name;
+        $user_icon =  Auth::user()->user_icon;
         
         $gym_id = $request->session()->get('gym_id');
         // dd($gym_id);
@@ -123,6 +124,7 @@ class BookConfirmController extends Controller
         
         return view('booking_confirm',[
             'user_name'=>$user_name,
+            'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
             'gym_id' => $gym_id,
             'addr' => $addr,
             'gym_title' => $gym_title,

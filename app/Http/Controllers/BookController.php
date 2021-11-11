@@ -49,7 +49,7 @@ class BookController extends Controller
     {
         //
         $user_name =  Auth::user()->name;
-        
+        $user_icon =  Auth::user()->user_icon;
                 
         $gym_id = $request->session()->get('gym_id');
         // dd($gym_id);
@@ -191,6 +191,7 @@ class BookController extends Controller
         
         return view('booking',[
             'user_name'=>$user_name,
+            'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
             'gym_id' => $gym_id,
             'addr' => $addr,
             'gym_infos' => $gym_infos,

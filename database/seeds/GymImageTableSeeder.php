@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;//この行を上に追加
+use App\Gym;
+use App\GymSchedule;
 
 class GymImageTableSeeder extends Seeder
 {
@@ -28,6 +31,13 @@ class GymImageTableSeeder extends Seeder
                             'img_url' => $img_array[$r],
                         ]);
             }
+            $s = array_rand($img_array);
+            $thumbnail = $img_array[$s];
+            
+            // ジムのサムネイルを設定する。
+            $gym_image = Gym::find($i);
+            $gym_image->thumbnail = $thumbnail;
+            $gym_image->save();
         }
     }
 }

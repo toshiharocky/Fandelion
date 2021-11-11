@@ -26,6 +26,12 @@
 	#logo_mark{
 			font-size: 4vw;
 		}
+		
+	.user-name span img {
+	    width: 100%;
+	    height: 100%;
+	    object-fit: contain;
+	    }
 
 	@media (max-width: 991px){
 		#header{
@@ -73,6 +79,9 @@
 			margin-left:0;
 			margin-right:0;
 		}
+		.py-4{
+	        margin-bottom: 100px;
+	    }
 		
 	}
 	
@@ -244,14 +253,16 @@
 					<div class="header-widget">
 					<!-- User Menu -->
 						<div class="user-menu">
-							<div class="user-name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>{{$user_name}}  </div>
+							<div class="user-name"><span><img src={{$user_icon}} alt=""></span>{{$user_name}}  </div>
 							<ul>
 								<!--<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>-->
 								<!--<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>-->
 								<li class="pc_menu"><a href="/history"><i class="fas fa-dumbbell"></i>予約一覧</a></li>
 								<li class="pc_menu"><a href="/bookmarks"><i class="fas fa-heart"></i>お気に入り</a></li>
-								<li class="pc_menu"><a href="/messages"><i class="fas fa-envelope"></i>メッセージ</a></li>
-								<li class="pc_menu"><a href="/add_gym"><i class="fas fa-plus"></i>ジムの追加</a></li>
+								<li class="pc_menu"><a href="/messages"><i class="fas fa-comment-alt"></i>メッセージ</a></li>
+								<li class="pc_menu"><a href="/guest_profile"><i class="fas fa-user"></i>プロフィール</a></li>
+								<li><a href="/hosting"><i class="fas fa-h-square"></i>ホストモードへ</a></li>
+								<!--<li class="pc_menu"><a href="/add_gym"><i class="fas fa-plus"></i>ジムの追加</a></li>-->
 								<li><a href="{{ route('logout') }}"
 	                                   onclick="event.preventDefault();
 	                                                 document.getElementById('logout-form').submit();">
@@ -370,7 +381,7 @@
                         		@csrf
 								
 								<input id="memstatus_id" type="hidden" name="memstatus_id" value="1">
-								
+								<!--<input id="user_icon" type="hidden" name="user_icon" value="images/user_images/user_icon.jpg">-->
 								<p class="form-row form-row-wide">
 									<label for="name">{{ __('Name') }}
 										<i class="im im-icon-Male"></i>
@@ -535,12 +546,18 @@
 		</a>
 	</div>
 	<div class="mmenu_icon">
-		<a href="/add_gym" class="mmenus">
+		<a href="/guest_profile" class="mmenus">
 			<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">
-				<i class="fas fa-plus"></i>
+				<i class="fas fa-user"></i>
 			</span>
-			<p class="icon-disc">ジムの追加</p>
+			<p class="icon-disc">プロフィール</p>
 		</a>
+		<!--<a href="/add_gym" class="mmenus">-->
+		<!--	<span class="material-icons-outlined" style="font-size: 42px; margin: auto; color: #BFBFBF;">-->
+		<!--		<i class="fas fa-plus"></i>-->
+		<!--	</span>-->
+		<!--	<p class="icon-disc">ジムの追加</p>-->
+		<!--</a>-->
 	</div>
 </nav>
 <!-- Mobile Navigation End-->

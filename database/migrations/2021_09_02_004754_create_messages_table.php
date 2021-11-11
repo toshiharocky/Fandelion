@@ -21,7 +21,8 @@ class CreateMessagesTable extends Migration
             $table->integer('sender'); //送信者のuser_id。guest_idかhost_idのいずれかが入る
             $table->text('message');
             $table->integer('status_flg'); //0：未読、1：既読
-            $table->timestamps();
+            $table->timestamp('updated_at')->useCurrent()->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
         });
     }
 

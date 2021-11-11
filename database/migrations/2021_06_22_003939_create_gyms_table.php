@@ -35,6 +35,7 @@ class CreateGymsTable extends Migration
             $table->integer('guest_limit');
             $table->integer('min_price');
             $table->integer('max_price');
+            $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
     }

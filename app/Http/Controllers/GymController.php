@@ -17,6 +17,7 @@ use App\GymSchedule;
 use Illuminate\Support\Str;
 use DateTime;
 use App\Bookmark;
+use App\MessageList;
 
 class GymController extends Controller
 {
@@ -35,6 +36,9 @@ class GymController extends Controller
         $request->session()->put('gym_id', $request->gym_id);
         // dd($request->session()->get('gym_id'));
         $gym_id = $request->session()->get('gym_id');
+        if($gym_id == ""){
+            $gym_id = $request->gym_id;
+        };
         // dd($gym_id);
         $booking_id = $request->booking_id;
         // dd($booking_id);
@@ -46,6 +50,9 @@ class GymController extends Controller
         
         $gym_title = $gym_infos[0]->gym_title;
         $host_user_id  = $gym_infos[0]->user_id;
+        $host_user_icon = User::where('id', $host_user_id)
+                        ->get();
+        
         // inner joinでホスト名を取得
         $host_name_array = DB::table('gyms')
                     ->join('users', 'gyms.user_id', '=', 'users.id')
@@ -267,6 +274,7 @@ class GymController extends Controller
             //                 ->first()->email;
             // dd($gym_title);
             $user_name =  Auth::user()->name;
+            $user_icon =  Auth::user()->user_icon;
             // $user_memstatus_id = Auth::user()->memstatus_id;
             $status_names = DB::table('users')
                                 ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
@@ -296,7 +304,11 @@ class GymController extends Controller
             $booking_check = in_array($booking_id, $user_booking_id);
             
             // dd($booking_check);
-            
+            $message_list = MessageList::where('guest_id', $user)
+                        ->where('gym_id', $gym_id)
+                        ->get();
+            $message_list_count = count($message_list);
+            // dd($message_list);
             
             // ブックマークの有無を確認する
             $bookmark_check = Bookmark::where('user_id', $user)
@@ -306,11 +318,14 @@ class GymController extends Controller
             
             return view('gym_introduction',[
                 'user_name'=>$user_name,
+                'user_id'=>$user,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                 'status_name'=>$status_name,
                 'gym_id'=>$gym_id,
                 'gym_infos'=>$gym_infos,
                 'gym_title' => $gym_title,
-                'host_user_id,' => $host_user_id,
+                'host_user_id' => $host_user_id,
+                'host_user_icon' =>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$host_user_icon[0]->user_icon,
                 'host_name' => $host_name,
                 'cancel_policy' => $cancel_policy,
                 'gymstatus_id' => $gymstatus_id,
@@ -349,17 +364,23 @@ class GymController extends Controller
                 'gym_equipment_count' => $gym_equipment_count,
                 'gym_open_times' => $gym_open_times,
                 'bookmark_check' => $bookmark_check,
+                'message_list_count' => $message_list_count,
                 ]);
         }
             
             else{
+            $message_list_count = 0;
             
+            // dd($user_id);
+            // dd($message_list_count);
             return view('gym_introduction',[
+                'user_id'=> 0.1,
                 'gym_id'=>$gym_id,
                 'gym_infos'=>$gym_infos,
                 'gym_title' => $gym_title,
-                'host_user_id,' => $host_user_id,
+                'host_user_id' => $host_user_id,
                 'host_name' => $host_name,
+                'host_user_icon' =>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$host_user_icon[0]->user_icon,
                 'cancel_policy' => $cancel_policy,
                 'gymstatus_id' => $gymstatus_id,
                 'gym_desc' => $gym_desc,
@@ -395,6 +416,7 @@ class GymController extends Controller
                 'gym_equipment_count' => $gym_equipment_count,
                 'gym_open_times' => $gym_open_times,
                 'bookmark_check' => "hidden",
+                'message_list_count' => $message_list_count,
                 ]);
             }
     }
@@ -421,6 +443,8 @@ class GymController extends Controller
         
         $gym_title = $gym_infos[0]->gym_title;
         $host_user_id  = $gym_infos[0]->user_id;
+        $host_user_icon = User::where('id', $host_user_id)
+                        ->get();
         // inner joinでホスト名を取得
         $host_name_array = DB::table('gyms')
                     ->join('users', 'gyms.user_id', '=', 'users.id')
@@ -641,6 +665,7 @@ class GymController extends Controller
             //                 ->first()->email;
             // dd($gym_title);
             $user_name =  Auth::user()->name;
+            $user_icon =  Auth::user()->user_icon;
             // $user_memstatus_id = Auth::user()->memstatus_id;
             $status_names = DB::table('users')
                                 ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
@@ -670,19 +695,25 @@ class GymController extends Controller
             $booking_check = in_array($booking_id, $user_booking_id);
             
             // dd($booking_check);
-            
+            $message_list = MessageList::where('guest_id', $user)
+                        ->where('gym_id', $gym_id)
+                        ->get();
+            $message_list_count = count($message_list);
             
             
             // $booking_checkがtrue（user_idとgym_idに紐づいたbooking_idがある）場合はbooked_gym_introduction.blade.phpを表示
             if($booking_check){
                 return view('booked_gym_introduction',[
                     'user_name'=>$user_name,
+                    'user_id'=>$user,
+                    'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                     'status_name'=>$status_name,
                     'gym_id'=>$gym_id,
                     'gym_infos'=>$gym_infos,
                     'gym_title' => $gym_title,
-                    'host_user_id,' => $host_user_id,
+                    'host_user_id' => $host_user_id,
                     'host_name' => $host_name,
+                    'host_user_icon' =>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$host_user_icon[0]->user_icon,
                     'cancel_policy' => $cancel_policy,
                     'gymstatus_id' => $gymstatus_id,
                     'gym_desc' => $gym_desc,
@@ -719,17 +750,21 @@ class GymController extends Controller
                     'gym_equipment' => $gym_equipment,
                     'gym_equipment_count' => $gym_equipment_count,
                     'gym_open_times' => $gym_open_times,
+                    'message_list_count' => $message_list_count,
                     ]);
             }else{
                 
                 return view('gym_introduction',[
                     'user_name'=>$user_name,
+                    'user_id'=>$user,
+                    'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                     'status_name'=>$status_name,
                     'gym_id'=>$gym_id,
                     'gym_infos'=>$gym_infos,
                     'gym_title' => $gym_title,
-                    'host_user_id,' => $host_user_id,
+                    'host_user_id' => $host_user_id,
                     'host_name' => $host_name,
+                    'host_user_icon' =>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$host_user_icon[0]->user_icon,
                     'cancel_policy' => $cancel_policy,
                     'gymstatus_id' => $gymstatus_id,
                     'gym_desc' => $gym_desc,
@@ -765,6 +800,7 @@ class GymController extends Controller
                     'gym_equipment' => $gym_equipment,
                     'gym_equipment_count' => $gym_equipment_count,
                     'gym_open_times' => $gym_open_times,
+                    'message_list_count' => $message_list_count,
                     ]);
                 
             }
@@ -776,8 +812,9 @@ class GymController extends Controller
                 'gym_id'=>$gym_id,
                 'gym_infos'=>$gym_infos,
                 'gym_title' => $gym_title,
-                'host_user_id,' => $host_user_id,
+                'host_user_id' => $host_user_id,
                 'host_name' => $host_name,
+                'host_user_icon' =>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$host_user_icon[0]->user_icon,
                 'cancel_policy' => $cancel_policy,
                 'gymstatus_id' => $gymstatus_id,
                 'gym_desc' => $gym_desc,
@@ -812,6 +849,7 @@ class GymController extends Controller
                 'gym_equipment' => $gym_equipment,
                 'gym_equipment_count' => $gym_equipment_count,
                 'gym_open_times' => $gym_open_times,
+                'message_list_count' => $message_list_count,
                 ]);
             }
     }
@@ -842,6 +880,7 @@ class GymController extends Controller
         // ログインユーザー取得
         $user = Auth::user()->id;
         $user_name = Auth::user()->name;
+        $user_icon =  Auth::user()->user_icon;
         // dd($user);
         
         $all = $request->all();
@@ -1391,6 +1430,7 @@ class GymController extends Controller
     
         return view('/gym_register_completed',[
                 'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                 
             ]);
         }

@@ -16,11 +16,6 @@ Route::get('/', 'MainController@index');
 
 
 
-// ログインユーザーのみadd_gym.blade.phpを表示
-Route::group(['middleware' => 'auth'], function() {
-   Route::get('/add_gym', 'AddGymController@index');
-});
-
         
 // ログインユーザーのみgym登録確認画面を表示
 Route::group(['middleware' => 'auth'], function() {
@@ -66,6 +61,22 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['middleware' => 'auth'], function() {
    Route::get('/booking_completed','BookingController@store');
 });
+
+// ログインユーザーのみ、ゲストプロフィール画面を表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/guest_profile','ProfileController@index_guest_mode'); 
+});
+
+// ログインユーザーのみ、会員情報変更画面を表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/profile_update','MainController@does_not_exist'); // page404へ
+});
+
+// ログインユーザーのみ、支払情報変更画面を表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/payment_update','MainController@does_not_exist'); // page404へ
+});
+
 
 // ログインユーザーのみ、履歴画面を表示する
 Route::group(['middleware' => 'auth'], function() {
@@ -134,13 +145,21 @@ Route::group(['middleware' => 'auth'], function() {
 
 // ログインユーザーのみ、メッセージを表示する
 Route::group(['middleware' => 'auth'], function() {
-   Route::get('/messages_conversation','MessageController@index_conversation'); // page404へ
+   Route::get('/messages_conversation','MessageController@index_conversation')->name('messages_conversation');
 });
 
 // ログインユーザーのみ、メッセージを送信する
 Route::group(['middleware' => 'auth'], function() {
-   Route::get('/send_messages','MessageController@store'); // page404へ
+   Route::get('/send_messages','MessageController@store');
 });
+
+// ログインユーザーのみ、introduction画面から直接メッセージを送信する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/send_direct_messages','MessageController@direct_messages'); 
+});
+
+// メッセージデータをjsonで取得する
+Route::get('/result/ajax', 'MessageController@getData');
 
 // ログインユーザーのみ、お気に入りを表示する
 // Route::group(['middleware' => 'auth'], function() {
@@ -152,4 +171,47 @@ Route::group(['middleware' => 'auth'], function() {
 // ログインユーザーのみ、お気に入りを表示する
 Route::group(['middleware' => 'auth'], function() {
    Route::get('/profile','MainController@does_not_exist'); // page404へ
+});
+
+
+
+// ホストモード
+// ログインユーザーのみ、ホスト予約一覧画面を表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/hosting','BookingController@hosting_history');
+});
+
+// ログインユーザーのみ、ホストメッセージ画面を表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/host_messages','MainController@does_not_exist_host'); // page404（ホスト）へ
+});
+
+// ログインユーザーのみ、ジム管理画面を表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/manage_gyms','HostController@index');
+});
+
+// ログインユーザーのみ、ジムスケジュール画面を表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/gym_schedule','MainController@does_not_exist_host'); // page404（ホスト）へ
+});
+
+// ログインユーザーのみ、ジム編集画面を表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/gym_edit','MainController@does_not_exist_host'); // page404（ホスト）へ
+});
+
+// ログインユーザーのみ、ジム実績画面を表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/earnings','MainController@does_not_exist_host'); // page404（ホスト）へ
+});
+
+// ログインユーザーのみ、ホストプロフィール画面を表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/host_profile','MainController@does_not_exist_host'); // page404（ホスト）へ
+});
+
+// ログインユーザーのみadd_gym.blade.phpを表示
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/add_gym', 'AddGymController@index');
 });

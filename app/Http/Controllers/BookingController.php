@@ -31,7 +31,7 @@ class BookingController extends Controller
         $user = Auth::user()->id;
         
         $user_name =  Auth::user()->name;
-        
+        $user_icon =  Auth::user()->user_icon;
         
         // Bookingsテーブルから$userの予約を抽出する
         // 当該予約の日時情報（booking_from_timeとbooking_to time）とgym_id、bookingstatus_idを抽出する
@@ -121,6 +121,7 @@ class BookingController extends Controller
                 'booking_check'=>0,
                 'user_id'=>$user,
                 'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                 'booking_id'=>$booking_id,
                 'gym_title'=>$gym_title,
                 'addr'=>$addr,
@@ -145,6 +146,154 @@ class BookingController extends Controller
                 'booking_check'=>1,
                 'user_id'=>$user,
                 'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
+                'gym_title'=>"none",
+                'addr'=>"none",
+                'booking_id'=>"none",
+                'booking_from_time'=>"none",
+                'booking_to_time'=>"none",
+                'booking_from_time_2'=>"none",
+                'booking_to_time_2'=>"none",
+                'gym_id'=>"none",
+                'bookingstatus_id'=>"none",
+                'cancel_policy_id'=>"none",
+                'cancel_limit_time'=>"none",
+                'cancel_policy'=>"none",
+                'checkin_open'=>"none",
+                'gym_image_url'=>"none",
+                'future_bookings_flg' => 0,
+                'past_bookings_flg' => 0,
+                'now' =>$now,
+                ]
+                );   
+        }
+    }
+    
+    
+    
+    public function hosting_history(Request $request){
+        // ログインユーザー取得
+        $user = Auth::user()->id;
+        
+        $user_name =  Auth::user()->name;
+        $user_icon =  Auth::user()->user_icon;
+        
+        // Bookingsテーブルから$userの予約を抽出する
+        // 当該予約の日時情報（booking_from_timeとbooking_to time）とgym_id、bookingstatus_idを抽出する
+        $host_histories = DB::table('gyms')
+                    // user_idに紐づくgym_idを取得する
+                    ->join('users', 'gyms.user_id', '=','users.id')
+                    // ->join('users', 'bookings.user_id', '=','users.id')
+                    // $userの予約に表示されているgym_idから、cancel_policy_id、gym_title、img_url[1]を抽出する
+                    ->join('bookings', 'gyms.id', '=','bookings.gym_id')
+                    // ->join('gym_images', 'bookings.gym_id', '=','gym_images.gym_id')
+                    ->select('bookings.id','bookings.user_id','gym_title','addr','booking_from_time', 'booking_to_time', 'bookings.gym_id', 'bookingstatus_id', 'cancel_policy_id')
+                    ->where('users.id',$user)
+                    ->orderBy('booking_from_time', 'asc')
+                    ->get();
+        
+        // dd($host_histories);
+        
+        foreach($host_histories as $host_history){
+                $booking_id[] = $host_history->id;
+                $booking_from_time[] = $host_history->booking_from_time;
+                $booking_from_time_2[] = date("m/d/Y H:i:s",strtotime($host_history->booking_from_time));
+                $booking_to_time[] = $host_history->booking_to_time;
+                $booking_to_time_2[] = date("m/d/Y H:i:s",strtotime($host_history->booking_to_time));
+                $gym_id[] = $host_history->gym_id;
+                $gym_title[] = $host_history->gym_title;
+                $addr[] = $host_history->addr;
+                $bookingstatus_id[] = $host_history->bookingstatus_id;
+                $cancel_policy_id[] = $host_history->cancel_policy_id;
+                switch($host_history->cancel_policy_id){
+                        case "1":{
+                            $cancel_limit_time[] = date("m/d/Y H:i:s", strtotime('-1 hours',strtotime($host_history->booking_from_time)));
+                            
+                            break;
+                            }
+                        case "2":{
+                            $cancel_limit_time[] = date("m/d/Y H:i:s", strtotime('-24 hours',strtotime($host_history->booking_from_time)));
+                            
+                            break;
+                            }
+                        case "3":{
+                            $cancel_limit_time[] = date("m/d/Y H:i:s", strtotime('-72 hours',strtotime($host_history->booking_from_time)));
+                            
+                            break;
+                            }
+                        case "4":{
+                            $cancel_limit_time[] = date("m/d/Y H:i:s", strtotime('-168 hours',strtotime($host_history->booking_from_time)));
+                            
+                            break;
+                            }
+                    }
+                // dd($cancel_limit_time);
+                $checkin_open[] = date("m/d/Y H:i:s", strtotime('-15 minute',strtotime($host_history->booking_from_time)));
+                $cancel_policy = DB::table('cancel_policies')
+                            ->join('gyms', 'cancel_policies.id', '=', 'gyms.cancel_policy_id')
+                            ->select('policy_name', 'policy_desc')
+                            ->where('gyms.id',$host_history->gym_id)
+                            ->get();
+                $gym_image_url[] = DB::table('gyms')
+                            ->join('gym_images', 'gyms.id', '=', 'gym_id')
+                            ->select('img_url')
+                            ->where('gym_id',$host_history->gym_id)
+                            ->get()[0]->img_url;
+                            
+            }
+        // dd($bookingstatus_id);
+        
+        if(isset($bookingstatus_id)){
+            if(in_array(1, $bookingstatus_id) || in_array(5, $bookingstatus_id) || in_array(20, $bookingstatus_id)){
+                $future_bookings_flg = 1; 
+            }else {
+                $future_bookings_flg = 0;
+            }
+            
+            if(in_array(25, $bookingstatus_id) || in_array(30, $bookingstatus_id) || in_array(35, $bookingstatus_id)){
+                $past_bookings_flg = 1;
+            }else{
+                $past_bookings_flg = 0;
+            };
+        }
+        date_default_timezone_set('Asia/Tokyo');
+        $now = date("m/d/Y H:i:s");
+        
+        
+        
+        //$booking_idが存在しない（＝予約がゼロ）かどうかによって、history.blade.phpに渡す値を変える
+        if(isset($booking_id)){
+        return view('hosting_history',[
+            
+                'booking_check'=>0,
+                'user_id'=>$user,
+                'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
+                'booking_id'=>$booking_id,
+                'gym_title'=>$gym_title,
+                'addr'=>$addr,
+                'booking_from_time'=>$booking_from_time,
+                'booking_from_time_2'=>$booking_from_time_2,
+                'booking_to_time'=>$booking_to_time,
+                'booking_to_time_2'=>$booking_to_time_2,
+                'gym_id'=>$gym_id,
+                'bookingstatus_id'=>$bookingstatus_id,
+                'cancel_policy_id'=>$cancel_policy_id,
+                'cancel_limit_time'=>$cancel_limit_time,
+                'cancel_policy'=>$cancel_policy,
+                'checkin_open'=>$checkin_open,
+                'gym_image_url'=>$gym_image_url,
+                'future_bookings_flg' => $future_bookings_flg,
+                'past_bookings_flg' => $past_bookings_flg,
+                'now' =>$now,
+                ]
+                );
+        } else {
+         return view('hosting_history',[
+                'booking_check'=>1,
+                'user_id'=>$user,
+                'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                 'gym_title'=>"none",
                 'addr'=>"none",
                 'booking_id'=>"none",
@@ -189,7 +338,7 @@ class BookingController extends Controller
         $user = Auth::user()->id;
         
         $user_name =  Auth::user()->name;
-        
+        $user_icon =  Auth::user()->user_icon;
         $gym_id = $request->session()->get('gym_id');
         
         // $request->session()->put('total_time', $request->total_time);
@@ -260,7 +409,8 @@ class BookingController extends Controller
             }
         
         return view('booking_completed',[
-                'user_name'=>$user_name,]
+                'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,]
                 );
     }
 
@@ -314,6 +464,7 @@ class BookingController extends Controller
         $user = Auth::user()->id;
         
         $user_name =  Auth::user()->name;
+        $user_icon =  Auth::user()->user_icon;
         
         $gym_id = $request->session()->get('gym_id');
         
@@ -325,6 +476,7 @@ class BookingController extends Controller
         
         return view('check_in',[
                 'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                 'gym_id' => $gym_id,
                 'booking_id' => $booking_id
                 ]
@@ -336,6 +488,7 @@ class BookingController extends Controller
         $user = Auth::user()->id;
         
         $user_name =  Auth::user()->name;
+        $user_icon =  Auth::user()->user_icon;
         
         // $gym_id = $request->session()->get('gym_id');
         $gym_id = $request->gym_id;
@@ -349,10 +502,12 @@ class BookingController extends Controller
         
         return view('check_out',[
                 'user_name'=>$user_name,
+                'user_icon'=>"https://s3-ap-northeast-1.amazonaws.com/fandelion/".$user_icon,
                 'gym_id' => $gym_id,
                 'booking_id' => $booking_id
                 
                 ]
                 );
     }
+    
 }

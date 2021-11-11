@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->date('birthday');
             $table->string('gender');
+            $table->string('user_icon')->default("images/user_images/user_icon.jpg");
             $table->rememberToken();
             $table->timestamps();
         });
