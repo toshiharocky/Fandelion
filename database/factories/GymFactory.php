@@ -39,8 +39,8 @@ $factory->define(App\Gym::class, function (Faker $faker) {
         'area' => function() {
             $gym_area = array(5, 15, 25, 35, 45);
             $r = rand(0,4);
-            // return $gym_area[$r]; //heroku用
-            return rand(1,5); //clooud9用
+            return $gym_area[$r]; //heroku用
+            // return rand(1,5); //clooud9用
         },
         'guest_gender' => function() {
             return rand(1,5); 
