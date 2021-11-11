@@ -34,13 +34,13 @@ class GymScheduleTableSeeder extends Seeder
         
         for($i=5; $i<2000; $i+=10){ //heroku用
         // for($i=1; $i<201; $i++){ //cloud9用
-            $day_start_time = "2021-10-21 10:00";
+            $day_start_time = "2021-11-14 10:00";
             $from_time = $day_start_time;
             $to_time = date("Y-m-d H:i", strtotime('+15 minute',strtotime($from_time)));
-            $day_end_time = "2021-10-21 23:00";
+            $day_end_time = "2021-11-14 23:00";
             
             
-            while (strtotime($day_start_time) < strtotime("2021-11-21 10:00")){
+            while (strtotime($day_start_time) < strtotime("2021-11-18 10:00")){
                 // 今日に日付から30日間、from_time00:00からto_time00:15まで、15分ずつのpriceとstatusを作成
                 while (strtotime($from_time) < strtotime($day_end_time)){
                     $price_array = array(50,100,150,200);
