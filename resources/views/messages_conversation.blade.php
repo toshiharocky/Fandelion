@@ -394,7 +394,7 @@ function conversation(){
 		
 	function get_data() {
 	    $.ajax({
-	        url: "result/ajax/",
+	        url: "result/ajax",
 	        dataType: "json",
 	        success: data => {
             	// 成功時の処理
