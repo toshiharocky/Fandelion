@@ -15,7 +15,7 @@ class GymImageTableSeeder extends Seeder
     public function run()
     {
         //
-        for($i=5; $i<2005; $i+=10){ //heroku用 
+        for($i=5; $i<2005; $i+=10){ //heroku用
         // for($i=1; $i<201; $i++){ //cloud9用
         
             // $gym_images = factory(App\GymImage::class, 600)->create();
