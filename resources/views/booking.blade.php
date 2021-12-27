@@ -867,7 +867,7 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			
 			// 飛び石で選択している場合は、#slot_cautionに「連続したスロットを選択してください」と表示する。
 			if(labels*10 != dev_class_amount){ //heroku用
-			if(labels != dev_class_amount){ // cloud9用
+			// if(labels != dev_class_amount){ // cloud9用
 				if($("#selected_slot > div > h5").length){
 					$("#slot_caution").append(
 						`<h5 style="color:#f91942;">連続したスロットを選択してください</h5>`
