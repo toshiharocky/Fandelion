@@ -17,7 +17,7 @@ class GuestToHostReviewTableSeeder extends Seeder
     public function run()
     {
         //
-        for($i=5; $i<6005; $i+=10){ //heroku用
+        for($i=5; $i<6005; $i+=10){ //heroku用 
         // for($i=1; $i<601; $i++){ //cloud9用
             $booking_id = $i;
             $equipment_stars = rand(3,5);

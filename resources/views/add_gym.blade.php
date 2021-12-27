@@ -136,7 +136,7 @@
 									<h5>広さ</h5>
 									<select  name="area" class="chosen-select-no-single" value="選択してください"   required>
 										<option value="" style="display:none;">使用可能なエリアの面積を選んでください</option>	
-										// heroku用
+										// heroku用 
 										<option value="5" >〜10㎡</option>
 										<option value="15" >10〜20㎡</option>
 										<option value="25" >30〜40㎡</option>

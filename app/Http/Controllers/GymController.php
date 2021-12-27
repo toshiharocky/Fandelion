@@ -1050,7 +1050,7 @@ class GymController extends Controller
                     $ext = $image->guessExtension();
                     //ファイル名を生成
                     // $imgName= Str::random(32).'.'.$ext; //cloud9用
-                    $imgName = Storage::disk('s3')->put('/images/gym_images', $image, 'public'); //heroku用です
+                    $imgName = Storage::disk('s3')->put('/images/gym_images', $image, 'public'); //heroku用です 
                     
                     // Eloquent モデルで画像情報をgymImagesテーブルに登録
                     $gym_image = new GymImage;
