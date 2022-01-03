@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -47,9 +48,10 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    // protected function validator(array $data)
+    protected function validator(array $request)
     {
-        return Validator::make($data, [
+        return Validator::make($request, [
             'memstatus_id' => ['required', 'integer', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -67,18 +69,42 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    
+    
+    // protected function create(array $data)
+    protected function create(Request $request)
     {
-        // dd($data['user_icon']);
-        return User::create([
-            'memstatus_id' => $data['memstatus_id'],
-            'user_icon' => $data['user_icon'],
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'phone_num'=> $data['phone_num'],
-            'birthday' => $data['birthday'],
-            'gender' => $data['gender'],
+        // dd($request);
+        
+        // $this -> validator($request->all())->validate();
+        // event(new Registered($user = $this->create($request->all())));
+        // $this->guard()->login($user);
+        // return redirect();
+        // return $this->registered($request, $user)
+        //                   ?: redirect($this->redirectPath());
+        
+        User::create([
+            
+            
+            'memstatus_id' => $request['memstatus_id'],
+            'user_icon' => $request['user_icon'],
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'phone_num'=> $request['phone_num'],
+            'birthday' => $request['birthday'],
+            'gender' => $request['gender'],
+            
+            // 'memstatus_id' => $data['memstatus_id'],
+            // 'user_icon' => $data['user_icon'],
+            // 'name' => $data['name'],
+            // 'email' => $data['email'],
+            // 'password' => Hash::make($data['password']),
+            // 'phone_num'=> $data['phone_num'],
+            // 'birthday' => $data['birthday'],
+            // 'gender' => $data['gender'],
         ]);
+        
+        return view('auth/login');
     }
 }

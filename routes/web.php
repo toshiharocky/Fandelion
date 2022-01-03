@@ -34,7 +34,7 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 // ユーザー登録
-Route::post('auth/register','Auth\RegisterController@create');
+Route::post('/register','Auth\RegisterController@create');
 
 // ジム登録
 Route::post('/add_gym','GymController@store');
