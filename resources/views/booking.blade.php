@@ -835,7 +835,7 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			
 			// cloud9用
 			// let dev_class_amount = last_dev_class - first_dev_class + 1;
-			// let dev_class_amount_2 = last_dev_class_2 - first_dev_class_2 + 1;
+			let dev_class_amount_2 = last_dev_class_2 - first_dev_class_2 + 1;
 			
 			
 			
@@ -850,13 +850,14 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			// 過去の日時を選択している場合は、#slot_cautionに「過去の日時での予約はできません」と表示する。
 			let now_y = new Date().getFullYear();
 			let now_m = "0"+(new Date().getMonth() + 1);
-			let now_d = new Date().getDate();
+			let now_d = "0"+new Date().getDate();
 			let now_h = ("0"+new Date().getHours()).slice(-2);
 			let now_i = ("0"+new Date().getMinutes()).slice(-2);
 			let time_check = date + " " + first_from_time;
 			let now = now_m+ "/" +  now_d + "/" + now_y + " " + now_h + ":" + now_i;
-			console.log(now);
-			console.log(time_check);
+			// console.log(now);
+			// console.log(time_check);
+			// console.log(now > time_check);
 			if(now > time_check){
 				$("#slot_caution").append(
 					`<h5 style="color:#f91942;">過去の日時での予約はできません</h5>`
