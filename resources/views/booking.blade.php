@@ -609,6 +609,7 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 	// date-pickerが変わったらslot-changer()を発火
 	$('#display_slots').on("click",function(){
 		
+		// console.log("push");
 		if($("#selected_slot > div > h5").length>0){
 			let date_check = window.confirm('これまでの内容はクリアされます。よろしいですか？');
 				if(date_check){
@@ -835,7 +836,7 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			
 			// cloud9用
 			// let dev_class_amount = last_dev_class - first_dev_class + 1;
-			let dev_class_amount_2 = last_dev_class_2 - first_dev_class_2 + 1;
+			// let dev_class_amount_2 = last_dev_class_2 - first_dev_class_2 + 1;
 			
 			
 			
